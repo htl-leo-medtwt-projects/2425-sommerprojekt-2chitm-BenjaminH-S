@@ -18,6 +18,10 @@ body {
     background-size: cover;
 }
 
+#pl{
+    display: none;
+}
+
 ul {
     font-family: 'Jost';
     font-size: 2vw;
