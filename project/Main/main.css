@@ -18,10 +18,6 @@ body {
     background-size: cover;
 }
 
-#pl{
-    display: none;
-}
-
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -60,13 +56,69 @@ li a:hover:not(#header) {
     font-family: 'JJK';
 }
 
+#rad a:hover {
+    background-color: transparent !important;
+}
+
+ul li:nth-child(1) {
+    border-left: 4px solid #000000;
+    position: relative;
+    z-index: 1;
+}
+
 #rad {
     position: absolute;
     right: 0px;
     top: 50%;
     transform: translateY(-45%);
+    border: none;
 }
 
 #rad.fixed {
     position: fixed;
 }
+
+.hidden {
+    display: none;
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #772b0e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    text-align: center;
+}
+
+.popup-content {
+    font-family: 'Jost', sans-serif;
+    color: black;
+}
+
+#trademark{
+    font-family: 'JJK';
+    font-size: 1.5vw;
+    display: block;
+    margin-right: 16.5vw;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.flag-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+

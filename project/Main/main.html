@@ -9,14 +9,38 @@
 </head>
 <body>
     <ul>
-        <li><a href="#placeholder" id="pl">placeholder</a></li>
-        <li><a href="#media">Media</a></li>
-        <li><a href="#news">World</a></li>
+        <li><a href="#media" id="mediales">Mediales</a></li>
+        <li><a href="#news" id="welt">Welt</a></li>
         <li><a id="header">Jujutsu Kognien</a></li>
-        <li><a href="#quiz">Quiz</a></li>
-        <li><a href="#story">Story</a></li>
+        <li><a href="#quiz" id="quiz">Quiz</a></li>
+        <li><a href="#story" id="geschichte">Geschichte</a></li>
 
-        <li style="float:right" id="rad"><a href="#about"><img src="../Img/Nav/rad.png" alt="Rad" width="50px" height="50px"></a></li>
-      </ul>
+       
+<li style="float:right" id="rad">
+    <a href="#about">
+        <img src="../Img/Nav/rad.png" alt="Rad" width="50px" height="50px">
+    </a>
+</li>
+
+<div id="popup" class="hidden">
+    <div class="popup-content">
+        <span class="close" onclick="closeOptions()">X</span>
+        <h2 id="settings-title">Einstellungen</h2>
+        <div>
+            <p id="contrast-label">Kontrast <input type="checkbox"></p>
+            <p id="language-label">Sprache 
+                <button class="flag-btn" id="flag-de">
+                    <img src="../Img/Flags/deutsch.png" alt="Deutsch" width="100px" height="50px">
+                </button>
+                <button class="flag-btn" id="flag-en">
+                    <img src="../Img/Flags/englisch.png" alt="English" width="100px" height="50px">
+                </button>
+            </p>
+        </div>
+        <div id="trademark">Jujutsu Kognien</div>
+    </div>
+</div>
+
+</ul>
 </body>
 </html>
