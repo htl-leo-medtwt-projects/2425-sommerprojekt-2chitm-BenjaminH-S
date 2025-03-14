@@ -23,7 +23,7 @@
 - **Interaktive Story-Aufklärung**
   - 📜 Darstellung der Hintergrundgeschichte, z. B. **den Clans**
 - **Quiz-System** 📝
-  - **Weitaus komplexer und dynamischer** als in der vorherigen Version 💡
+  - **Weitaus komplexer und dynamischer** als in der vorherigen Version 
 
 ### 📺 **Unterhaltung**
 - **Alle anschaubaren Medien** davon **auf der Webseite** abrufbar🎬 *(nur für das Sommerprojekt in Betracht gezogen!)*
