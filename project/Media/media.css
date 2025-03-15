@@ -18,7 +18,6 @@ body {
     background-size: cover;
 }
 
-/* Navigation */
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -48,7 +47,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover:not(#header) {
+li a:hover {
     background-color: #000000;
     color: #b82f10;
 }

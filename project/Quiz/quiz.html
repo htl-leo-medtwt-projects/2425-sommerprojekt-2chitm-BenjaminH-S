@@ -1,11 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Jujutsu Kognien | Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+    <script src="quiz.js" defer></script>
 </head>
 <body>
-    
+    <ul>
+        <li><a href="../Media/media.html" id="mediales">Mediales</a></li>
+        <li><a href="../World/world.html" id="welt">Welt</a></li>
+        <li><a id="header" href="../Main/main.html">Jujutsu Kaisen</a></li>
+        <li><a href="../Quiz/quiz.html" id="quiz">Quiz</a></li>
+        <li><a href="../Story/story.html" id="geschichte">Geschichte</a></li>
+       
+        <li style="float:right" id="rad">
+            <a href="#about">
+                <img src="../Img/Nav/rad.png" alt="Rad" width="50px" height="50px">
+            </a>
+        </li>
+    </ul>
+
+    <div id="popup" class="hidden">
+
+    <div class="popup-content">
+    <span class="close" onclick="closeOptions()">X</span>
+    <h2 id="settings-title">Einstellungen</h2>
+
+    <div id="contrast-container">
+    <p id="contrast-label">Kontrast</p>
+    <label class="switch">
+        <input type="checkbox" id="contrast-toggle">
+        <span class="slider"></span> 
+    </label>
+    </div>
+
+
+    <p id="language-label">Sprache</p>
+    <button class="flag-btn" data-lang="de">
+    <img src="../Img/Flags/deutsch.png" alt="Deutsch" width="100px" height="50px">
+    </button>
+    <button class="flag-btn" data-lang="en">
+    <img src="../Img/Flags/englisch.png" alt="English" width="100px" height="50px">
+    </button>
+
+    <div id="trademark">Jujutsu Kaisen</div>
+    </div>
+
+    </div>
 </body>
 </html>
+
+
+
+
