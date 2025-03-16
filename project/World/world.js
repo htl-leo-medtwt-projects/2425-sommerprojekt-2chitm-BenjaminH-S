@@ -2,22 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let popup = document.getElementById("popup");
     let contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
-    const savedLang = sessionStorage.getItem("language") || "de";
-    const contrastMode = sessionStorage.getItem("contrastMode") || "dark";
 
-    updateText(savedLang);
-    document.documentElement.lang = savedLang;
-
-    if (contrastMode === "light") {
-        document.body.classList.add("light-mode");
-        if (contrastToggle) contrastToggle.checked = true;
-    } else {
-        document.body.classList.remove("light-mode");
-        if (contrastToggle) contrastToggle.checked = false;
-    }
-
+    const currentLang = sessionStorage.getItem("language") || "de";
+    
     function setLanguage(lang) {
-        sessionStorage.setItem("language", lang);
+        sessionStorage.setItem("language", lang); 
         updateText(lang);
     }
 
@@ -27,17 +16,28 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("settings-title").textContent = "Einstellungen";
             document.getElementById("contrast-label").textContent = "Kontrast";
             document.getElementById("language-label").textContent = "Sprache";
+            document.getElementById("mediales").textContent = "Mediales";
+            document.getElementById("welt").textContent = "Welt";
+            document.getElementById("quiz").textContent = "Quiz";
+            document.getElementById("geschichte").textContent = "Geschichte";
         } else if (lang === "en") {
             document.documentElement.lang = "en";
             document.getElementById("settings-title").textContent = "Settings";
             document.getElementById("contrast-label").textContent = "Contrast";
             document.getElementById("language-label").textContent = "Language";
+            document.getElementById("mediales").textContent = "Media";
+            document.getElementById("welt").textContent = "World";
+            document.getElementById("quiz").textContent = "Quiz";
+            document.getElementById("geschichte").textContent = "Story";
         }
     }
 
+    updateText(currentLang);
+
     langButtons.forEach(button => {
         button.addEventListener("click", function () {
-            setLanguage(this.getAttribute("data-lang"));
+            const selectedLang = this.getAttribute("data-lang");
+            setLanguage(selectedLang);
         });
     });
 
@@ -51,9 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    if (contrastToggle) contrastToggle.addEventListener("change", toggleContrast);
+    if (sessionStorage.getItem("contrastMode") === "light") {
+        document.body.classList.add("light-mode");
+        contrastToggle.checked = true;
+    }
 
-    function openOptions() {
+    contrastToggle.addEventListener("change", toggleContrast);
+
+    function Options() {
         popup.style.display = "block";
     }
 
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("rad").addEventListener("click", function (event) {
         event.preventDefault();
-        openOptions();
+        Options();
     });
 
     document.querySelector(".close").addEventListener("click", closeOptions);

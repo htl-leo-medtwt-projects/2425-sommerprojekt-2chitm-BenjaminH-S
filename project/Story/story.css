@@ -48,7 +48,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+li a:hover:not(#header) {
     background-color: #000000;
     color: #b82f10;
 }
