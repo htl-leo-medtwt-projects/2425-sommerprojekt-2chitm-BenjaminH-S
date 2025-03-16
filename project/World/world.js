@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     let popup = document.getElementById("popup");
     let contrastToggle = document.getElementById("contrast-toggle");
-
     const langButtons = document.querySelectorAll(".flag-btn");
-    const currentLang = localStorage.getItem("language") || "de";
 
+    const currentLang = sessionStorage.getItem("language") || "de";
+    
     function setLanguage(lang) {
-        localStorage.setItem("language", lang);
+        sessionStorage.setItem("language", lang); 
         updateText(lang);
     }
 
     function updateText(lang) {
-        if (lang == "de") {
+        if (lang === "de") {
             document.documentElement.lang = "de";
             document.getElementById("settings-title").textContent = "Einstellungen";
             document.getElementById("contrast-label").textContent = "Kontrast";
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("welt").textContent = "Welt";
             document.getElementById("quiz").textContent = "Quiz";
             document.getElementById("geschichte").textContent = "Geschichte";
-        } else if (lang == "en") {
+        } else if (lang === "en") {
             document.documentElement.lang = "en";
             document.getElementById("settings-title").textContent = "Settings";
             document.getElementById("contrast-label").textContent = "Contrast";
@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    updateText(currentLang);
+
     langButtons.forEach(button => {
         button.addEventListener("click", function () {
             const selectedLang = this.getAttribute("data-lang");
@@ -39,27 +41,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    updateText(currentLang);
-
-
     function toggleContrast() {
         if (document.body.classList.contains("light-mode")) {
             document.body.classList.remove("light-mode");
-            localStorage.setItem("contrastMode", "dark");
+            sessionStorage.setItem("contrastMode", "dark");
         } else {
             document.body.classList.add("light-mode");
-            localStorage.setItem("contrastMode", "light");
+            sessionStorage.setItem("contrastMode", "light");
         }
     }
 
-    if (localStorage.getItem("contrastMode") === "light") {
+    if (sessionStorage.getItem("contrastMode") === "light") {
         document.body.classList.add("light-mode");
         contrastToggle.checked = true;
     }
 
     contrastToggle.addEventListener("change", toggleContrast);
 
-    
     function Options() {
         popup.style.display = "block";
     }
