@@ -5,26 +5,25 @@ document.addEventListener("DOMContentLoaded", function () {
     let contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
 
-    // 🔹 BroadcastChannel für ALLE Seiten erstellen
     const channel = new BroadcastChannel("settings_channel");
 
-    // 🔹 SPRACHE LADEN
+ 
     function loadLanguage() {
         const storedLang = localStorage.getItem("language") || "de"; 
-        console.log(`Geladene Sprache aus localStorage: ${storedLang}`);  // Debugging
+        console.log(`Geladene Sprache aus localStorage: ${storedLang}`); 
         updateText(storedLang);
         document.documentElement.lang = storedLang;
     }
 
     function setLanguage(lang) {
         localStorage.setItem("language", lang);
-        console.log(`Sprache gespeichert: ${lang}`); // Debugging
+        console.log(`Sprache gespeichert: ${lang}`); 
         updateText(lang);
         channel.postMessage({ type: "language", value: lang });
     }
 
     function updateText(lang) {
-        console.log(`Text wird auf Sprache ${lang} aktualisiert...`); // Debugging
+        console.log(`Text wird auf Sprache ${lang} aktualisiert...`); 
         const translations = {
             "de": {
                 "settings-title": "Einstellungen",
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🔹 KONTRASTMODUS LADEN
+
     function loadContrast() {
         const storedContrast = localStorage.getItem("contrastMode") || "dark";
         if (storedContrast === "light") {
@@ -83,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         console.log(`Neuer Kontrastmodus: ${localStorage.getItem("contrastMode")}`);
 
-        // 🔥 ÄNDERUNG AN ALLE SEITEN SENDEN
+      
         channel.postMessage({ type: "contrast", value: localStorage.getItem("contrastMode") });
     }
 
@@ -91,13 +90,12 @@ document.addEventListener("DOMContentLoaded", function () {
         contrastToggle.addEventListener("change", toggleContrast);
     }
 
-    // 🔹 SPRACHE & KONTRASTMODUS DIREKT LADEN
+ 
     loadLanguage();
     loadContrast();
 
-    // 🔥 ÄNDERUNGEN IN ECHTZEIT AN ALLE SEITEN SENDEN
     channel.onmessage = function (event) {
-        console.log("Nachricht empfangen:", event.data); // Debugging
+        console.log("Nachricht empfangen:", event.data); 
         if (event.data.type === "language") {
             console.log(`Sprache geändert auf ${event.data.value}, Update auf dieser Seite!`);
             updateText(event.data.value);
@@ -109,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // 🔹 POPUP-STEUERUNG
+
     function showOptions() {
         if (popup) popup.style.display = "block";
     }
