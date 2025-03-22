@@ -1,29 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("script.js wurde geladen!");
+    console.log("script.js loaded!");
 
     let popup = document.getElementById("popup");
     let contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
 
-    const channel = new BroadcastChannel("settings_channel");
-
- 
-    function loadLanguage() {
-        const storedLang = localStorage.getItem("language") || "de"; 
-        console.log(`Geladene Sprache aus localStorage: ${storedLang}`); 
-        updateText(storedLang);
-        document.documentElement.lang = storedLang;
+    // Initialize BroadcastChannel
+    let channel;
+    try {
+        channel = new BroadcastChannel("settings_channel");
+        console.log("BroadcastChannel initialized.");
+    } catch (error) {
+        console.error("BroadcastChannel not supported:", error);
     }
 
+    // Load language from localStorage and apply it
+    function loadLanguage() {
+        const storedLang = localStorage.getItem("language") || "de";
+        console.log(`Loaded language from localStorage: ${storedLang}`);
+        applyLanguage(storedLang);
+    }
+
+    // Save language to localStorage and notify other pages
     function setLanguage(lang) {
         localStorage.setItem("language", lang);
-        console.log(`Sprache gespeichert: ${lang}`); 
-        updateText(lang);
-        channel.postMessage({ type: "language", value: lang });
+        console.log(`Language saved: ${lang}`);
+        applyLanguage(lang);
+        if (channel) {
+            channel.postMessage({ type: "language", value: lang });
+        }
     }
 
-    function updateText(lang) {
-        console.log(`Text wird auf Sprache ${lang} aktualisiert...`); 
+    // Apply language settings
+    function applyLanguage(lang) {
         const translations = {
             "de": {
                 "settings-title": "Einstellungen",
@@ -51,81 +60,73 @@ document.addEventListener("DOMContentLoaded", function () {
                 element.textContent = translations[lang][id];
             }
         });
+
+        document.documentElement.lang = lang;
     }
 
+    // Add event listeners to language buttons
     langButtons.forEach(button => {
         button.addEventListener("click", function () {
             const selectedLang = this.getAttribute("data-lang");
+            console.log(`Language button clicked: ${selectedLang}`);
             setLanguage(selectedLang);
         });
     });
 
-
+    // Load contrast mode from localStorage and apply it
     function loadContrast() {
         const storedContrast = localStorage.getItem("contrastMode") || "dark";
-        if (storedContrast === "light") {
+        console.log(`Loaded contrast mode from localStorage: ${storedContrast}`);
+        applyContrast(storedContrast);
+    }
+
+    // Save contrast mode to localStorage and notify other pages
+    function toggleContrast() {
+        const newContrast = document.body.classList.contains("light-mode") ? "dark" : "light";
+        localStorage.setItem("contrastMode", newContrast);
+        console.log(`Contrast mode saved: ${newContrast}`);
+        applyContrast(newContrast);
+
+        if (channel) {
+            channel.postMessage({ type: "contrast", value: newContrast });
+        }
+    }
+
+    // Apply contrast settings
+    function applyContrast(mode) {
+        if (mode === "light") {
             document.body.classList.add("light-mode");
             if (contrastToggle) contrastToggle.checked = true;
         } else {
             document.body.classList.remove("light-mode");
+            if (contrastToggle) contrastToggle.checked = false;
         }
-        console.log(`Gespeicherter Kontrastmodus: ${storedContrast}`);
     }
 
-    function toggleContrast() {
-        if (document.body.classList.contains("light-mode")) {
-            document.body.classList.remove("light-mode");
-            localStorage.setItem("contrastMode", "dark");
-        } else {
-            document.body.classList.add("light-mode");
-            localStorage.setItem("contrastMode", "light");
-        }
-        console.log(`Neuer Kontrastmodus: ${localStorage.getItem("contrastMode")}`);
-
-      
-        channel.postMessage({ type: "contrast", value: localStorage.getItem("contrastMode") });
-    }
-
+    // Add event listener to contrast toggle
     if (contrastToggle) {
-        contrastToggle.addEventListener("change", toggleContrast);
-    }
-
- 
-    loadLanguage();
-    loadContrast();
-
-    channel.onmessage = function (event) {
-        console.log("Nachricht empfangen:", event.data); 
-        if (event.data.type === "language") {
-            console.log(`Sprache geändert auf ${event.data.value}, Update auf dieser Seite!`);
-            updateText(event.data.value);
-            document.documentElement.lang = event.data.value;
-        }
-        if (event.data.type === "contrast") {
-            console.log(`Kontrastmodus geändert auf ${event.data.value}, Update auf dieser Seite!`);
-            loadContrast();
-        }
-    };
-
-
-    function showOptions() {
-        if (popup) popup.style.display = "block";
-    }
-
-    function closeOptions() {
-        if (popup) popup.style.display = "none";
-    }
-
-    const settingsButton = document.getElementById("rad");
-    if (settingsButton) {
-        settingsButton.addEventListener("click", function (event) {
-            event.preventDefault();
-            showOptions();
+        contrastToggle.addEventListener("change", function () {
+            console.log("Contrast toggle changed!");
+            toggleContrast();
         });
     }
 
-    const closeButton = document.querySelector(".close");
-    if (closeButton) {
-        closeButton.addEventListener("click", closeOptions);
+    // Load initial settings
+    loadLanguage();
+    loadContrast();
+
+    // Listen for messages from other pages
+    if (channel) {
+        channel.onmessage = function (event) {
+            console.log("Message received:", event.data);
+            if (event.data.type === "language") {
+                console.log(`Language changed to: ${event.data.value}`);
+                applyLanguage(event.data.value);
+            }
+            if (event.data.type === "contrast") {
+                console.log(`Contrast mode changed to: ${event.data.value}`);
+                applyContrast(event.data.value);
+            }
+        };
     }
 });

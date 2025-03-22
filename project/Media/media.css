@@ -18,7 +18,21 @@ body {
     background-size: cover;
 }
 
-/* Navigation */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 60%; 
+    min-height: 100%;
+    z-index: 0;
+}
+
+#center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -188,7 +202,6 @@ body {
     border-radius: 50%;
 }
 
-
 input:checked + .slider {
     background-color: #222;
 }
@@ -196,4 +209,3 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
-

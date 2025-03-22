@@ -10,10 +10,10 @@
 </head>
 <body>
     <div id="center">
-    <video autoplay muted loop id="myVideo">
-        <source src="../Video/Home/Home.mp4" type="video/mp4">
-        Dein Browser unterstützt HTML5-Videos leider nicht.
-    </video>
+        <video autoplay muted loop id="myVideo">
+            <source src="../Video/Home/Home.mp4" type="video/mp4">
+            Dein Browser unterstützt HTML5-Videos leider nicht.
+        </video>
     </div>
     
     <ul>
@@ -31,35 +31,28 @@
     </ul>
 
     <div id="popup" class="hidden">
+        <div class="popup-content">
+            <span class="close" onclick="closeOptions()">X</span>
+            <h2 id="settings-title">Einstellungen</h2>
 
-    <div class="popup-content">
-    <span class="close" onclick="closeOptions()">X</span>
-    <h2 id="settings-title">Einstellungen</h2>
+            <div id="contrast-container">
+                <p id="contrast-label">Kontrast</p>
+                <label class="switch">
+                    <input type="checkbox" id="contrast-toggle">
+                    <span class="slider"></span> 
+                </label>
+            </div>
 
-    <div id="contrast-container">
-    <p id="contrast-label">Kontrast</p>
-    <label class="switch">
-        <input type="checkbox" id="contrast-toggle">
-        <span class="slider"></span> 
-    </label>
-    </div>
+            <p id="language-label">Sprache</p>
+            <button class="flag-btn" data-lang="de">
+                <img src="../Img/Flags/deutsch.png" alt="Deutsch" width="100px" height="50px">
+            </button>
+            <button class="flag-btn" data-lang="en">
+                <img src="../Img/Flags/englisch.png" alt="English" width="100px" height="50px">
+            </button>
 
-
-    <p id="language-label">Sprache</p>
-    <button class="flag-btn" data-lang="de">
-    <img src="../Img/Flags/deutsch.png" alt="Deutsch" width="100px" height="50px">
-    </button>
-    <button class="flag-btn" data-lang="en">
-    <img src="../Img/Flags/englisch.png" alt="English" width="100px" height="50px">
-    </button>
-
-    <div id="trademark">Jujutsu Kaisen</div>
-    </div>
-
+            <div id="trademark">Jujutsu Kaisen</div>
+        </div>
     </div>
 </body>
 </html>
-
-
-
-
