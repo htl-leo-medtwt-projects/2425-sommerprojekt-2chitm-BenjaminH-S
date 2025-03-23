@@ -6,28 +6,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
 
-    // Load settings from URL parameters
-    function loadSettingsFromURL() {
-        const params = new URLSearchParams(window.location.search);
-        const language = params.get("lang") || "de"; // Default to German
-        const contrastMode = params.get("contrast") || "dark"; // Default to dark mode
-
-        console.log(`Loaded settings from URL: lang=${language}, contrast=${contrastMode}`);
-        applyLanguage(language);
-        applyContrast(contrastMode);
+    // Utility functions for cookies
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
     }
 
-    // Update all links with current settings
-    function updateLinks() {
-        const language = document.documentElement.lang || "de";
-        const contrastMode = document.body.classList.contains("light-mode") ? "light" : "dark";
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+        return null;
+    }
 
-        document.querySelectorAll("a").forEach(link => {
-            const url = new URL(link.href, window.location.origin);
-            url.searchParams.set("lang", language);
-            url.searchParams.set("contrast", contrastMode);
-            link.href = url.toString();
-        });
+    // Load settings from cookies
+    function loadSettings() {
+        const language = getCookie("language") || "de"; // Default to German
+        const contrastMode = getCookie("contrastMode") || "dark"; // Default to dark mode
+
+        console.log(`Loaded settings from cookies: lang=${language}, contrast=${contrastMode}`);
+        applyLanguage(language);
+        applyContrast(contrastMode);
     }
 
     // Apply language settings
@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         document.documentElement.lang = lang; // Update the <html> lang attribute
-        updateLinks(); // Update links with the new language
     }
 
     // Apply contrast settings
@@ -75,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.remove("light-mode");
             if (contrastToggle) contrastToggle.checked = false;
         }
-        updateLinks(); // Update links with the new contrast mode
     }
 
     // Add event listeners to language buttons
@@ -84,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const selectedLang = this.getAttribute("data-lang");
             console.log(`Language button clicked: ${selectedLang}`);
             applyLanguage(selectedLang);
+            setCookie("language", selectedLang, 7); // Save to cookies
         });
     });
 
@@ -93,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const newContrast = contrastToggle.checked ? "light" : "dark";
             console.log(`Contrast toggle changed: ${newContrast}`);
             applyContrast(newContrast);
+            setCookie("contrastMode", newContrast, 7); // Save to cookies
         });
     }
 
@@ -120,6 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
         closeButton.addEventListener("click", closeOptions);
     }
 
-    // Load settings from URL and apply them
-    loadSettingsFromURL();
+    // Load settings on page load
+    loadSettings();
 });
