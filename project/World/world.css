@@ -1,3 +1,4 @@
+/* Fonts */
 @font-face {
     font-family: 'JJK';
     src: url(../Font/jujutsu-kaisen.ttf);
@@ -8,6 +9,7 @@
     src: url(../Font/Jost-Medium.ttf);
 }
 
+
 body {
     margin: 0;
     padding: 0;
@@ -17,7 +19,23 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-image: url(../Img/Backgrounds/World.jpg);
+    font-family: 'Jost', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
+
+
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: black;
+}
+
+.light-mode {
+    --bg-color: #5c2e14;
+    --text-color: black;
+}
+
 
 ul {
     font-family: 'Jost';
@@ -79,6 +97,7 @@ ul li:nth-child(1) {
     position: fixed;
 }
 
+/* Popup Styling */
 .hidden {
     display: none;
 }
@@ -116,26 +135,11 @@ ul li:nth-child(1) {
     font-size: 20px;
 }
 
+/* Language and Contrast Toggle */
 .flag-btn {
     border: none;
     background: none;
     cursor: pointer;
-}
-
-:root {
-    --bg-color: #f5f5f5;
-    --text-color: black;
-}
-
-.light-mode {
-    --bg-color: #5c2e14;
-    --text-color: black;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 #contrast-container {
@@ -188,7 +192,6 @@ body {
     border-radius: 50%;
 }
 
-
 input:checked + .slider {
     background-color: #222;
 }
@@ -198,3 +201,132 @@ input:checked + .slider:before {
 }
 
 
+.section {
+    display: none;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 10px;
+}
+
+
+.section:not(.hidden) {
+    display: block;
+}
+
+
+.clan-container, .curse-container, .character-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.clan, .curse, .character {
+    text-align: center;
+}
+
+.clan img, .curse img, .character img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.clan img:hover, .curse img:hover, .character img:hover {
+    transform: scale(1.1);
+}
+
+/* Detail Popup */
+.detail-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.detail-popup .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.detail-popup .popup-content h2 {
+    font-family: 'JJK', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.detail-popup .popup-content p {
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    color: #333;
+}
+
+.detail-popup .popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.detail-popup .popup-content .close:hover {
+    color: red;
+}
+
+
+#side-menu {
+    position: absolute;
+    top: 10%;
+    left: 1%; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.menu-item {
+    font-family: 'JJK', sans-serif;
+    font-size: 1.5vw;
+    background-color: #b82f10;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    background-color: #000000;
+    color: #b82f10;
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+    ul {
+        font-size: 4vw;
+    }
+
+    .clan img, .curse img, .character img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .detail-popup .popup-content {
+        width: 90%;
+    }
+}

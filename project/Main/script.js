@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("script.js loaded!");
 
-    // Elements
     const popup = document.getElementById("popup");
     const contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
 
-    // Utility functions for cookies
+
     function setCookie(name, value, days) {
         const date = new Date();
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -22,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load settings from cookies
     function loadSettings() {
-        const language = getCookie("language") || "de"; // Default to German
-        const contrastMode = getCookie("contrastMode") || "dark"; // Default to dark mode
+        const language = getCookie("language") || "de"; 
+        const contrastMode = getCookie("contrastMode") || "dark"; 
 
         console.log(`Loaded settings from cookies: lang=${language}, contrast=${contrastMode}`);
         applyLanguage(language);
