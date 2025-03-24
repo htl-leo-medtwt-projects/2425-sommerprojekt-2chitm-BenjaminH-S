@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         item.addEventListener("click", function () {
             const targetSection = this.getAttribute("data-section");
             sections.forEach(section => {
-                if (section.getAttribute("data-section") === targetSection) {
+                if (section.getAttribute("data-section") == targetSection) {
                     section.classList.remove("hidden");
                 } else {
                     section.classList.add("hidden");
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const targetSection = this.getAttribute("id");
             sections.forEach(section => {
-                if (section.getAttribute("data-section") === targetSection) {
+                if (section.getAttribute("data-section") == targetSection) {
                     section.classList.remove("hidden");
                 } else {
                     section.classList.add("hidden");
