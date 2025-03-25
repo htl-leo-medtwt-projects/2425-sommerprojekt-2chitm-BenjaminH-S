@@ -135,7 +135,6 @@ ul li:nth-child(1) {
     font-size: 20px;
 }
 
-/* Language and Contrast Toggle */
 .flag-btn {
     border: none;
     background: none;
@@ -289,18 +288,18 @@ input:checked + .slider:before {
 #side-menu {
     position: absolute;
     top: 10%;
-    left: 1%; 
+    right: 90.6%; 
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2vw;
     z-index: 100;
 }
 
 .menu-item {
     font-family: 'JJK', sans-serif;
-    font-size: 1.5vw;
+    font-size: 2vw;
     background-color: #b82f10;
-    color: white;
+    color: rgb(0, 0, 0);
     border: 2px solid black;
     border-radius: 5px;
     padding: 10px 20px;
@@ -314,7 +313,6 @@ input:checked + .slider:before {
     color: #b82f10;
     transform: scale(1.05);
 }
-
 
 @media (max-width: 768px) {
     ul {

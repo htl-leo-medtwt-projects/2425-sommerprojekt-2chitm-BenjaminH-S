@@ -8,6 +8,20 @@
     src: url(../Font/Jost-Medium.ttf);
 }
 
+
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: black;
+    --bg-image: url(../Img/Backgrounds/Quiz_Light.jpg);
+}
+
+.light-mode {
+    --bg-color: #5c2e14;
+    --text-color: black;
+    --bg-image: url(../Img/Backgrounds/Quiz_Dark.jpg);
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -16,10 +30,12 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    background-image: url(../Img/Backgrounds/Quiz_Dark.jpg);
+    background-image: var(--bg-image);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-image 1s ease-in-out, background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-/* Navigation */
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -80,6 +96,7 @@ ul li:nth-child(1) {
     position: fixed;
 }
 
+/* Popup Styling */
 .hidden {
     display: none;
 }
@@ -117,26 +134,11 @@ ul li:nth-child(1) {
     font-size: 20px;
 }
 
+/* Language and Contrast Toggle */
 .flag-btn {
     border: none;
     background: none;
     cursor: pointer;
-}
-
-:root {
-    --bg-color: #f5f5f5;
-    --text-color: black;
-}
-
-.light-mode {
-    --bg-color: #5c2e14;
-    --text-color: black;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 #contrast-container {
@@ -189,7 +191,6 @@ body {
     border-radius: 50%;
 }
 
-
 input:checked + .slider {
     background-color: #222;
 }
@@ -197,4 +198,3 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(26px);
 }
-

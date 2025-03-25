@@ -122,3 +122,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load settings on page load
     loadSettings();
 });
+
+function applyContrast(mode) {
+    console.log(`Applying contrast mode: ${mode}`);
+    const quizPage = window.location.pathname.includes("Quiz/quiz.html");
+
+    if (mode === "light") {
+        document.body.classList.add("light-mode");
+        if (contrastToggle) contrastToggle.checked = true;
+
+        // Change background for the quiz page
+        if (quizPage) {
+            document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+        }
+    } else {
+        document.body.classList.remove("light-mode");
+        if (contrastToggle) contrastToggle.checked = false;
+
+        // Change background for the quiz page
+        if (quizPage) {
+            document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+        }
+    }
+}

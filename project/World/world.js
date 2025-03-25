@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuItems = document.querySelectorAll(".menu-item");
     const sections = document.querySelectorAll(".section");
 
+    // Handle section switching for side menu
     menuItems.forEach(item => {
         item.addEventListener("click", function () {
             const targetSection = this.getAttribute("data-section");
             sections.forEach(section => {
-                if (section.getAttribute("data-section") == targetSection) {
+                if (section.getAttribute("data-section") === targetSection) {
                     section.classList.remove("hidden");
                 } else {
                     section.classList.add("hidden");
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Handle popups for images
     const images = document.querySelectorAll(".clan img, .curse img, .character img");
 
     images.forEach(image => {
@@ -39,20 +41,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Handle navigation links
     const navItems = document.querySelectorAll("ul li a");
 
     navItems.forEach(item => {
         item.addEventListener("click", function (event) {
-            event.preventDefault();
-
             const targetSection = this.getAttribute("id");
-            sections.forEach(section => {
-                if (section.getAttribute("data-section") == targetSection) {
-                    section.classList.remove("hidden");
-                } else {
-                    section.classList.add("hidden");
-                }
-            });
+
+            // Check if the link is for a section on the same page
+            if (sections.some(section => section.getAttribute("data-section") === targetSection)) {
+                event.preventDefault(); // Prevent navigation for same-page sections
+                sections.forEach(section => {
+                    if (section.getAttribute("data-section") === targetSection) {
+                        section.classList.remove("hidden");
+                    } else {
+                        section.classList.add("hidden");
+                    }
+                });
+            }
+            // Otherwise, allow default navigation for external links
         });
     });
 });
