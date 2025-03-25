@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
 
-
     function setCookie(name, value, days) {
         const date = new Date();
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return null;
     }
 
-    // Load settings from cookies
     function loadSettings() {
         const language = getCookie("language") || "de"; 
         const contrastMode = getCookie("contrastMode") || "dark"; 
@@ -29,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         applyContrast(contrastMode);
     }
 
-    // Apply language settings
     function applyLanguage(lang) {
         console.log(`Applying language: ${lang}`);
         const translations = {
@@ -60,42 +57,58 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        document.documentElement.lang = lang; // Update the <html> lang attribute
+        document.documentElement.lang = lang; 
     }
 
-    // Apply contrast settings
+
     function applyContrast(mode) {
         console.log(`Applying contrast mode: ${mode}`);
+        const navBar = document.querySelector("ul"); 
+        const quizPage = window.location.pathname.includes("Quiz/quiz.html");
+
         if (mode === "light") {
             document.body.classList.add("light-mode");
             if (contrastToggle) contrastToggle.checked = true;
+
+            if (quizPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+            }
+
+            if (navBar) {
+                navBar.classList.add("low-contrast-nav");
+            }
         } else {
             document.body.classList.remove("light-mode");
             if (contrastToggle) contrastToggle.checked = false;
+
+            if (quizPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+            }
+
+            if (navBar) {
+                navBar.classList.remove("low-contrast-nav");
+            }
         }
     }
 
-    // Add event listeners to language buttons
     langButtons.forEach(button => {
         button.addEventListener("click", function () {
             const selectedLang = this.getAttribute("data-lang");
             console.log(`Language button clicked: ${selectedLang}`);
             applyLanguage(selectedLang);
-            setCookie("language", selectedLang, 7); // Save to cookies
+            setCookie("language", selectedLang, 7); 
         });
     });
 
-    // Add event listener to contrast toggle
     if (contrastToggle) {
         contrastToggle.addEventListener("change", function () {
             const newContrast = contrastToggle.checked ? "light" : "dark";
             console.log(`Contrast toggle changed: ${newContrast}`);
             applyContrast(newContrast);
-            setCookie("contrastMode", newContrast, 7); // Save to cookies
+            setCookie("contrastMode", newContrast, 7);
         });
     }
 
-    // Show and hide the settings popup
     function showOptions() {
         console.log("Showing options...");
         if (popup) popup.classList.remove("hidden");
@@ -119,29 +132,5 @@ document.addEventListener("DOMContentLoaded", function () {
         closeButton.addEventListener("click", closeOptions);
     }
 
-    // Load settings on page load
     loadSettings();
 });
-
-function applyContrast(mode) {
-    console.log(`Applying contrast mode: ${mode}`);
-    const quizPage = window.location.pathname.includes("Quiz/quiz.html");
-
-    if (mode === "light") {
-        document.body.classList.add("light-mode");
-        if (contrastToggle) contrastToggle.checked = true;
-
-        // Change background for the quiz page
-        if (quizPage) {
-            document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
-        }
-    } else {
-        document.body.classList.remove("light-mode");
-        if (contrastToggle) contrastToggle.checked = false;
-
-        // Change background for the quiz page
-        if (quizPage) {
-            document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
-        }
-    }
-}

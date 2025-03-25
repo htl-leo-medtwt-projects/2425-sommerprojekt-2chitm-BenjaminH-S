@@ -18,7 +18,7 @@ body {
     background-size: cover;
 }
 
-/* Navigation */
+/* Default navigation bar styling */
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -26,12 +26,29 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #b82f10;
+    background-color: black; /* Default dark background */
+    color: white; /* Default dark text color */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
     position: relative;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Low contrast navigation bar styling */
+ul.low-contrast-nav {
+    background-color: #b82f10; /* Light mode red background */
+    color: black; /* Light mode text color */
+}
+
+ul.low-contrast-nav li a {
+    color: black; /* Light mode text color for links */
+}
+
+ul.low-contrast-nav li a:hover {
+    background-color: black; /* Dark hover background */
+    color: white; /* White hover text */
 }
 
 li {
