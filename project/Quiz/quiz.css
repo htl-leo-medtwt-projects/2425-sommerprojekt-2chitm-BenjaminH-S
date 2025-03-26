@@ -1,3 +1,4 @@
+/* Font definitions */
 @font-face {
     font-family: 'JJK';
     src: url(../Font/jujutsu-kaisen.ttf);
@@ -8,20 +9,19 @@
     src: url(../Font/Jost-Medium.ttf);
 }
 
-
 :root {
-    --bg-color: #f5f5f5;
-    --text-color: black;
-    --bg-image: url(../Img/Backgrounds/Quiz_Light.jpg);
+    --bg-color: black; 
+    --text-color: white; 
+    --bg-image: url(../Img/Backgrounds/Quiz_Dark.jpg); 
 }
 
 .light-mode {
-    --bg-color: #5c2e14;
-    --text-color: black;
-    --bg-image: url(../Img/Backgrounds/Quiz_Dark.jpg);
+    --bg-color: #f5f5f5; 
+    --text-color: black; 
+    --bg-image: url(../Img/Backgrounds/Quiz_Light.jpg); 
 }
 
-
+/* Body styling */
 body {
     margin: 0;
     padding: 0;
@@ -36,7 +36,7 @@ body {
     transition: background-image 1s ease-in-out, background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-/* Default navigation bar styling */
+/* Navigation bar styling */
 ul {
     font-family: 'Jost';
     font-size: 2vw;
@@ -44,7 +44,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #b82f10; /* Default red background */
+    background-color: #b82f10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,19 +53,18 @@ ul {
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-/* Low contrast navigation bar styling */
 ul.low-contrast-nav {
-    background-color: black; /* Black background */
-    color: white; /* White text */
+    background-color: black;
+    color: white;
 }
 
 ul.low-contrast-nav li a {
-    color: white; /* White text for links */
+    color: white;
 }
 
 ul.low-contrast-nav li a:hover {
-    background-color: white; /* White hover background */
-    color: black; /* Black hover text */
+    background-color: white;
+    color: black;
 }
 
 li {
@@ -83,8 +82,8 @@ li a {
 }
 
 li a:hover:not(#header) {
-    background-color: #000000;
-    color: #b82f10;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #header {
@@ -113,7 +112,7 @@ ul li:nth-child(1) {
     position: fixed;
 }
 
-/* Popup Styling */
+/* Popup styling */
 .hidden {
     display: none;
 }
@@ -151,13 +150,14 @@ ul li:nth-child(1) {
     font-size: 20px;
 }
 
-/* Language and Contrast Toggle */
+/* Language button styling */
 .flag-btn {
     border: none;
     background: none;
     cursor: pointer;
 }
 
+/* Contrast toggle styling */
 #contrast-container {
     display: flex;
     align-items: center;
@@ -214,4 +214,13 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
+}
+
+/* Wheel styling */
+#wheel {
+    transition: filter 0.5s ease-in-out;
+}
+
+.light-mode #wheel {
+    filter: invert(1); /* Makes the wheel white in light mode */
 }

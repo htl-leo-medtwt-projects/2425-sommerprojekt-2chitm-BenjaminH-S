@@ -60,33 +60,49 @@ document.addEventListener("DOMContentLoaded", function () {
         document.documentElement.lang = lang; 
     }
 
-
     function applyContrast(mode) {
         console.log(`Applying contrast mode: ${mode}`);
-        const navBar = document.querySelector("ul"); 
-        const quizPage = window.location.pathname.includes("Quiz/quiz.html");
-
+        const navBar = document.querySelector("ul"); // Select the navigation bar
+        const wheel = document.getElementById("wheel"); // Select the wheel image
+        const quizPage = window.location.pathname.includes("Quiz/quiz.html"); // Check if on the Quiz page
+    
         if (mode === "light") {
             document.body.classList.add("light-mode");
             if (contrastToggle) contrastToggle.checked = true;
-
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
-            }
-
+    
+            // Change navigation bar to light mode
             if (navBar) {
                 navBar.classList.add("low-contrast-nav");
+            }
+    
+            // Change background for the quiz page to Quiz_Light
+            if (quizPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+                console.log("Background set to Quiz_Light.jpg");
+            }
+    
+            // Change wheel to white version
+            if (wheel) {
+                console.log("Wheel set to white using CSS filter");
             }
         } else {
             document.body.classList.remove("light-mode");
             if (contrastToggle) contrastToggle.checked = false;
-
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
-            }
-
+    
+            // Reset navigation bar to dark mode
             if (navBar) {
                 navBar.classList.remove("low-contrast-nav");
+            }
+    
+            // Change background for the quiz page to Quiz_Dark
+            if (quizPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+                console.log("Background set to Quiz_Dark.jpg");
+            }
+    
+            // Reset wheel to default version
+            if (wheel) {
+                console.log("Wheel reset to default using CSS filter");
             }
         }
     }
