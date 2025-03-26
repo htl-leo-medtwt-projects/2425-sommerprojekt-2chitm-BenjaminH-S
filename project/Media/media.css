@@ -1,3 +1,4 @@
+/* Font definitions */
 @font-face {
     font-family: 'JJK';
     src: url(../Font/jujutsu-kaisen.ttf);
@@ -8,6 +9,18 @@
     src: url(../Font/Jost-Medium.ttf);
 }
 
+:root {
+    --bg-color: black; 
+    --text-color: white; 
+    --bg-image: url(../Img/Backgrounds/Quiz_Dark.jpg); 
+}
+
+.light-mode {
+    --bg-color: #f5f5f5;
+    --text-color: black; 
+    --bg-image: url(../Img/Backgrounds/Quiz_Light.jpg); 
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -16,23 +29,11 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    background-image: var(--bg-image);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-image 1s ease-in-out, background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
-
-#myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 60%; 
-    min-height: 100%;
-    z-index: 0;
-}
-
-#center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 
 ul {
     font-family: 'Jost';
@@ -41,8 +42,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: black;
-    color: white; 
+    background-color: #b82f10; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,18 +51,18 @@ ul {
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-ul.low-contrast-nav {
-    background-color: #b82f10; 
-    color: black;
-}
-
-ul.low-contrast-nav li a {
-    color: black; 
-}
-
-ul.low-contrast-nav li a:hover {
-    background-color: black; 
+.light-mode ul {
+    background-color: black;
     color: white; 
+}
+
+.light-mode ul li a {
+    color: white; 
+}
+
+.light-mode ul li a:hover {
+    background-color: white; 
+    color: black;
 }
 
 li {
@@ -80,8 +80,8 @@ li a {
 }
 
 li a:hover:not(#header) {
-    background-color: #000000;
-    color: #b82f10;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #header {
@@ -109,6 +109,7 @@ ul li:nth-child(1) {
 #rad.fixed {
     position: fixed;
 }
+
 
 .hidden {
     display: none;
@@ -151,22 +152,6 @@ ul li:nth-child(1) {
     border: none;
     background: none;
     cursor: pointer;
-}
-
-:root {
-    --bg-color: #f5f5f5;
-    --text-color: black;
-}
-
-.light-mode {
-    --bg-color: #5c2e14;
-    --text-color: black;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 #contrast-container {
@@ -227,14 +212,12 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-#side-menu {
-    position: absolute;
-    top: 10%;
-    right: 92%; 
-    display: flex;
-    flex-direction: column;
-    gap: 2vw;
-    z-index: 100;
+#wheel {
+    transition: filter 0.5s ease-in-out;
+}
+
+.light-mode #wheel {
+    filter: invert(1);
 }
 
 .menu-item {
