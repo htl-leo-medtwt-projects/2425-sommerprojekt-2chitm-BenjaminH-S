@@ -24,5 +24,5 @@
 
 ## Ziele bis zum nächsten Sprint 
 
-- [] World-Unterseite vollständig aufbauen 
-- [] Observer-API in derselben Unterseite einbinden 
+- [ ] World-Unterseite vollständig aufbauen 
+- [ ] Observer-API in derselben Unterseite einbinden 
