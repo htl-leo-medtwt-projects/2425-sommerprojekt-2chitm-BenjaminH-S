@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
     
             if (searchBar) {
-                searchBar.style.backgroundColor = "#b82f10"; // Light mode background
-                searchBar.style.color = "black"; // Light mode text color
+                searchBar.style.backgroundColor = "#932810";
+                searchBar.style.color = "black";
             }
     
             if (quizPage) {
