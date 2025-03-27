@@ -138,6 +138,7 @@ ul li:nth-child(1) {
     font-size: 1.5vw;
     display: block;
     margin-right: 16.5vw;
+    margin-top: 2vw;
 }
 
 .close {
@@ -220,6 +221,16 @@ input:checked + .slider:before {
     filter: invert(1);
 }
 
+#side-menu {
+    position: absolute;
+    top: 10%;
+    right: 91.5%; 
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    z-index: 100;
+}
+
 .menu-item {
     font-family: 'JJK', sans-serif;
     font-size: 2vw;
@@ -237,4 +248,30 @@ input:checked + .slider:before {
     background-color: #000000;
     color: #b82f10;
     transform: scale(1.05);
+}
+
+input[type="text"] {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #932810;
+    color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    font-family: 'Jost', sans-serif;
+}
+
+input[type="text"]::placeholder {
+    color: black; 
+    font-family: 'Jost', sans-serif; 
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    outline: none; 
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); 
 }

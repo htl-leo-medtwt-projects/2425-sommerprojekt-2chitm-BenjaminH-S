@@ -1,3 +1,4 @@
+/* Font definitions */
 @font-face {
     font-family: 'JJK';
     src: url(../Font/jujutsu-kaisen.ttf);
@@ -41,15 +42,12 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #b82f10;
+    background-color: #b82f10; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 60px;
-    position: fixed; 
-    top: 0; 
-    width: 100%;
-    z-index: 1000; 
+    position: relative;
     transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
@@ -112,6 +110,7 @@ ul li:nth-child(1) {
     position: fixed;
 }
 
+
 .hidden {
     display: none;
 }
@@ -139,6 +138,7 @@ ul li:nth-child(1) {
     font-size: 1.5vw;
     display: block;
     margin-right: 16.5vw;
+    margin-top: 2vw;
 }
 
 .close {
@@ -219,4 +219,30 @@ input:checked + .slider:before {
 
 .light-mode #wheel {
     filter: invert(1);
+}
+
+input[type="text"] {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #932810;
+    color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    font-family: 'Jost', sans-serif;
+}
+
+input[type="text"]::placeholder {
+    color: black; 
+    font-family: 'Jost', sans-serif; 
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    outline: none; 
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); 
 }
