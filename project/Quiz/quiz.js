@@ -60,17 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const navItems = document.querySelectorAll("ul li");
         const settingsIcon = document.getElementById("rad");
         const settingsBox = document.getElementById("popup");
+        const searchBar = document.querySelector('input[type="text"]'); // Select the search bar
         const quizPage = window.location.pathname.includes("Quiz/quiz.html");
-
+    
         if (mode === "light") {
             document.body.classList.add("light-mode");
             if (contrastToggle) contrastToggle.checked = true;
-
+    
             if (navBar) {
                 navBar.style.backgroundColor = "black";
                 navBar.style.color = "white";
             }
-
+    
             if (navItems) {
                 navItems.forEach((item, index) => {
                     item.style.borderRight = "4px solid white";
@@ -81,29 +82,33 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-
+    
             if (settingsIcon) {
                 settingsIcon.style.borderLeft = "none";
                 settingsIcon.style.borderRight = "none";
             }
-
+    
             if (settingsBox) {
                 settingsBox.style.backgroundColor = "white";
             }
-
+    
+            if (searchBar) {
+                searchBar.style.backgroundColor = "white";
+            }
+    
             if (quizPage) {
                 document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
             }
-
+    
         } else {
             document.body.classList.remove("light-mode");
             if (contrastToggle) contrastToggle.checked = false;
-
+    
             if (navBar) {
                 navBar.style.backgroundColor = "#b82f10";
                 navBar.style.color = "black";
             }
-
+    
             if (navItems) {
                 navItems.forEach((item, index) => {
                     item.style.borderRight = "4px solid black";
@@ -114,17 +119,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-
+    
             if (settingsIcon) {
                 settingsIcon.style.borderLeft = "none";
                 settingsIcon.style.borderRight = "none";
             }
-
+    
             if (settingsBox) {
                 settingsBox.style.backgroundColor = "#b82f10";
                 settingsBox.style.color = "black";
             }
-
+    
+            if (searchBar) {
+                searchBar.style.backgroundColor = "#b82f10"; // Light mode background
+                searchBar.style.color = "black"; // Light mode text color
+            }
+    
             if (quizPage) {
                 document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
             }
