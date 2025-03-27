@@ -180,3 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadSettings();
 });
+
+document.querySelectorAll('.flag-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+    });
+});
