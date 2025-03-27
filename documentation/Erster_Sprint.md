@@ -5,6 +5,8 @@
 ### 2CHITM 
 ### [Link zum Repo](https://github.com/htl-leo-medtwt-projects/2425-sommerprojekt-2chitm-BenjaminH-S) 
 
+
+
 ## Änderungen seit dem letzten Sprint 
 
 **Figma-Prototype**
@@ -12,6 +14,7 @@
 
 **Ordnerstruktur**
 - Es wurden endlich den einzelnen Unterseiten ihre Javascript-Dateien hinzugefügt, nachdem die Kontrast- und Spracheinstellungen auf der Main-Seite erfolgreich implementiert wurden
+
 
 ## Screenshots der verrichteten Arbeit
 
