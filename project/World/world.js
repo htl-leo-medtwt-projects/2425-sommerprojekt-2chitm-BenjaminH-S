@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "mediales": "Mediales",
                 "welt": "Welt",
                 "quiz": "Quiz",
-                "geschichte": "Geschichte"
+                "geschichte": "Geschichte",
+                "clans" : "Clans",
+                "curses" : "Flüche",
+                "characters" : "Charaktere",
             },
             "en": {
                 "settings-title": "Settings",
@@ -41,7 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "mediales": "Media",
                 "welt": "World",
                 "quiz": "Quiz",
-                "geschichte": "Story"
+                "geschichte": "Story",
+                "clans" : "Clans",
+                "curses" : "Curses",
+                "characters" : "Characters",
             }
         };
 
@@ -60,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const navItems = document.querySelectorAll("ul li");
         const settingsIcon = document.getElementById("rad");
         const settingsBox = document.getElementById("popup");
-        const searchBar = document.querySelector('input[type="text"]'); // Select the search bar
+        const searchBar = document.querySelector('input[type="text"]'); 
         const quizPage = window.location.pathname.includes("Quiz/quiz.html");
     
         if (mode === "light") {
