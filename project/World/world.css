@@ -283,3 +283,27 @@ input[type="text"]:focus {
     color: #b82f10;
     transform: scale(1.05);
 }
+
+.content-section {
+    display: none;
+}
+
+.content-section.hidden {
+    display: none;
+}
+
+.content-section:not(.hidden) {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.character-img {
+    transition: filter 0.3s ease;
+}
+
+.character-img.highlight {
+    filter: brightness(1.5);
+}
