@@ -224,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Fluch-Details
     document.querySelectorAll('.curse-btn').forEach(button => {
         button.addEventListener('click', () => {
             const curseName = button.getAttribute('data-curse');
