@@ -244,6 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("kamo-btn").addEventListener("click", () => showClanInfo("Kamo"));
 
     function showClanInfo(clanName) {
+        const clanHighlightElement = document.getElementById("clan_highlight");
+    
         const clanDetails = {
             "Gojo": {
                 name: "Gojo Clan",
@@ -254,27 +256,36 @@ document.addEventListener("DOMContentLoaded", function () {
             "Zenin": {
                 name: "Zenin Clan",
                 highlight: "Mastery of Cursed Techniques",
-                description: "Der Zenin-Clan steht für Macht, Tradition und brutale Meritokratie. Der Clan glaubt an die Überlegenheit starker Techniken und schaut auf nicht-verfluchte Familienmitglieder mit Verachtung herab.",
+                description: "Der Zenin-Clan steht für Macht, Tradition und brutale Meritokratie. Der Clan glaubt an die Überlegenheit starker Techniken und schaut auf nicht-verfluchte Familienmitglieder mit Verachtung herab. Frauen und Techniken wie die der Zehn Schattentechnik wurden nur akzeptiert, wenn sie mit Macht einhergingen. Doch diese Ideologie führte auch zur eigenen Zersetzung. Interne Konflikte, Neid und Machtgier sorgten für den Zerfall des Clans",
                 imageId: "zenin-img"
             },
             "Kamo": {
                 name: "Kamo Clan",
                 highlight: "Blood Manipulation",
-                description: "Der Kamo-Clan ist einer der ältesten und einflussreichsten Jujutsu-Clans Japans. Besonders bekannt ist sein grausames Experiment mit der Fluchgeburt Choso.",
+                description: "Der Kamo-Clan ist einer der ältesten und einflussreichsten Jujutsu-Clans Japans. Er ist berüchtigt für seine strenge Hierarchie, politische Kälte und seine Verbindung zur dunklen Vergangenheit der Jujutsu-Geschichte. Der Clan stellt Effizienz und Reinheit der Linie über alles – sogar über Menschlichkeit. Der Ruf des Kamo-Clans ist durch eine düstere Figur getrübt: Kamo Noritoshi (alt), besser bekannt als Kenjaku, ein abtrünniger Jujutsu-Zauberer, der für ethisch verwerfliche Experimente berüchtigt ist. Besonders bekannt ist sein grausames Experiment, bei dem er mit der Fluchgeburt Choso und seinen „Brüdern“ Hybridwesen aus Flüchen und Menschen erschuf.",
                 imageId: "kamo-img"
             }
         };
-
+    
         const clan = clanDetails[clanName];
-
+    
         document.getElementById("clan_name").textContent = clan.name;
-        document.getElementById("clan_highlight").textContent = clan.highlight;
+    
+        if (clanHighlightElement) {
+            if (clanName === "Gojo") {
+                clanHighlightElement.innerHTML = `The <span>Six</span> <img src="../Img/World/Six_Eyes.png" alt="The Six Eyes" class="inline-eye"> <span>Eyes</span>`;
+            } else {
+                clanHighlightElement.textContent = clan.highlight;
+            }
+        }
+    
         document.getElementById("clan-description").textContent = clan.description;
-
+    
         document.querySelectorAll('.clan-img').forEach(img => img.classList.add('hidden'));
         const image = document.getElementById(clan.imageId);
         if (image) image.classList.remove('hidden');
     }
+    
 
     loadSettings();
 });

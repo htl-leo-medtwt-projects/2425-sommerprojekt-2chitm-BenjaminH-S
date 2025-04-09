@@ -293,6 +293,7 @@ input[type="text"]:focus {
     justify-content: center;
     gap: 4.4vw;
     margin-top: 20px;
+    margin-bottom: 4vw;
 }
 
 .clan-btn, .curse-btn, .character-img {
@@ -354,6 +355,30 @@ input[type="text"]:focus {
     margin-bottom: 10px;
 }
 
+#curses_header{
+    font-family: 'JJK', sans-serif;
+    font-size: 3vw;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+}
+
+#characters_header{
+    font-family: 'JJK', sans-serif;
+    font-size: 3vw;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+}
+
+#clan-description {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.5vw;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+}
+
 #clan_highlight {
     font-family: 'Jost', sans-serif;
     font-size: 1.5vw;
@@ -364,4 +389,11 @@ input[type="text"]:focus {
 
 .hidden {
     display: none;
+}
+
+.inline-eye {
+    width: 30px;
+    height: auto;
+    vertical-align: middle;
+    margin: 0 5px;
 }
