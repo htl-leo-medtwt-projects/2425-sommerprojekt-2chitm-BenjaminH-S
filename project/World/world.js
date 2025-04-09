@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const settingsBox = document.getElementById("popup");
         const searchBar = document.querySelector('input[type="text"]');
         const quizPage = window.location.pathname.includes("Quiz/quiz.html");
+        const clansButton = document.getElementById("clans");
+        const cursButton = document.getElementById("curses");
+        const charsButton = document.getElementById("characters");
 
         if (mode === "light") {
             document.body.classList.add("light-mode");
@@ -104,8 +107,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchBar.style.backgroundColor = "white";
             }
 
+            if (clansButton) {
+                clansButton.style.backgroundColor = "white";
+            }
+            
+            if (cursButton) {
+                cursButton.style.backgroundColor = "white";
+            }
+
+            if (charsButton) {
+                charsButton.style.backgroundColor = "white";
+            }
+
             if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/World_Light.jpg')";
             }
 
         } else {
@@ -143,11 +158,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchBar.style.color = "black";
             }
 
+            if (clansButton) {
+                clansButton.style.backgroundColor = "#b82f10";
+                clansButton.addEventListener('mouseover', () => {
+                    clansButton.style.color = 'black';
+                });
+            }
+            
+            if (cursButton) {
+                cursButton.style.backgroundColor = "#b82f10";
+                cursButton.addEventListener('mouseover', () => {
+                    cursButton.style.color = 'black';
+                });
+            }
+
+            if (charsButton) {
+                charsButton.style.backgroundColor = "#b82f10";
+                charsButton.addEventListener('mouseover', () => {
+                    charsButton.style.color = 'black';
+                });
+            }
+
             if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/World_Dark.jpg')";
             }
         }
     }
+
 
     function showOptions() {
         if (popup) popup.classList.remove("hidden");
@@ -165,9 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             applyLanguage(selectedLang);
             setCookie("language", selectedLang, 7);
         });
-    });
 
-    langButtons.forEach(button => {
         button.addEventListener('click', () => {
             langButtons.forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
@@ -204,54 +239,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.querySelectorAll('.clan-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const clanName = button.getAttribute('data-clan');
-            const clanDetails = {
-                "Gojo": "Details über den Gojo-Clan...",
-                "Zenin": "Details über den Zenin-Clan...",
-                "Kamo": "Details über den Kamo-Clan..."
-            };
+    document.getElementById("zenin-btn").addEventListener("click", () => showClanInfo("Zenin"));
+    document.getElementById("gojo-btn").addEventListener("click", () => showClanInfo("Gojo"));
+    document.getElementById("kamo-btn").addEventListener("click", () => showClanInfo("Kamo"));
 
-            const description = document.getElementById("clan-description");
-            if (description) {
-                description.textContent = clanDetails[clanName] || "Keine Details verfügbar.";
+    function showClanInfo(clanName) {
+        const clanDetails = {
+            "Gojo": {
+                name: "Gojo Clan",
+                highlight: "The Six Eyes",
+                description: "Der Gojo-Clan ist legendär – nicht nur wegen seiner Techniken, sondern auch, weil er Satoru Gojo hervorgebracht hat: Den ersten in 400 Jahren, der mit Sechs Augen (Rikugan) und der Unendlichkeit (Limitless) geboren wurde. Der Clan war immer stark, wurde aber durch Gojos Existenz praktisch unangreifbar.",
+                imageId: "gojo-img"
+            },
+            "Zenin": {
+                name: "Zenin Clan",
+                highlight: "Mastery of Cursed Techniques",
+                description: "Der Zenin-Clan steht für Macht, Tradition und brutale Meritokratie. Der Clan glaubt an die Überlegenheit starker Techniken und schaut auf nicht-verfluchte Familienmitglieder mit Verachtung herab.",
+                imageId: "zenin-img"
+            },
+            "Kamo": {
+                name: "Kamo Clan",
+                highlight: "Blood Manipulation",
+                description: "Der Kamo-Clan ist einer der ältesten und einflussreichsten Jujutsu-Clans Japans. Besonders bekannt ist sein grausames Experiment mit der Fluchgeburt Choso.",
+                imageId: "kamo-img"
             }
+        };
 
-            document.querySelectorAll('.clan-img').forEach(img => img.classList.add('hidden'));
-            const clanImg = document.getElementById(`${clanName.toLowerCase()}-img`);
-            if (clanImg) clanImg.classList.remove('hidden');
-        });
-    });
+        const clan = clanDetails[clanName];
 
-    document.querySelectorAll('.curse-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const curseName = button.getAttribute('data-curse');
-            const curseDetails = {
-                "Jogo": "Details über Jogo...",
-                "Hanami": "Details über Hanami...",
-                "Mahito": "Details über Mahito...",
-                "Dagon": "Details über Dagon...",
-                "Sukuna": "Details über Sukuna..."
-            };
+        document.getElementById("clan_name").textContent = clan.name;
+        document.getElementById("clan_highlight").textContent = clan.highlight;
+        document.getElementById("clan-description").textContent = clan.description;
 
-            const description = document.getElementById("curse-description");
-            if (description) {
-                description.textContent = curseDetails[curseName] || "Keine Details verfügbar.";
-            }
-
-            document.querySelectorAll('.curse-img').forEach(img => img.classList.add('hidden'));
-            const curseImg = document.getElementById(`${curseName.toLowerCase()}-img`);
-            if (curseImg) curseImg.classList.remove('hidden');
-        });
-    });
-
-    document.querySelectorAll('.character-img').forEach(image => {
-        image.addEventListener('click', () => {
-            document.querySelectorAll('.character-img').forEach(img => img.classList.remove('highlight'));
-            image.classList.add('highlight');
-        });
-    });
+        document.querySelectorAll('.clan-img').forEach(img => img.classList.add('hidden'));
+        const image = document.getElementById(clan.imageId);
+        if (image) image.classList.remove('hidden');
+    }
 
     loadSettings();
 });

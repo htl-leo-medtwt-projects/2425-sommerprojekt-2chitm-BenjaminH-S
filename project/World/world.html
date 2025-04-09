@@ -24,24 +24,24 @@
     </ul>
 
     <div id="side-menu">
-        <button class="menu-item" data-section="clans-section">Clans</button>
-        <button class="menu-item" data-section="curses-section">Flüche</button>
-        <button class="menu-item" data-section="characters-section">Charaktere</button>
+        <button class="menu-item" data-section="clans-section" id="clans">Clans</button>
+        <button class="menu-item" data-section="curses-section" id="curses">Flüche</button>
+        <button class="menu-item" data-section="characters-section" id="characters">Charaktere</button>
     </div>
 
     <div id="clans-section" class="content-section hidden">
-        <h2>Göjö Clan</h2>
+        <h2 id="clan_name">Gojo Clan</h2>
         <div class="clan-container">
-            <img src="../Img/World/Gojo.png" alt="Gojo Clan" class="clan-btn" data-clan="Gojo" id="gojo-btn">
             <img src="../Img/World/Zenin.png" alt="Zenin Clan" class="clan-btn" data-clan="Zenin" id="zenin-btn">
+            <img src="../Img/World/Gojo.png" alt="Gojo Clan" class="clan-btn" data-clan="Gojo" id="gojo-btn">
             <img src="../Img/World/Kamo.png" alt="Kamo Clan" class="clan-btn" data-clan="Kamo" id="kamo-btn">
         </div>
         <div id="clan-description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+            
         </div>
         <div class="clan-details">
-            <img src="../Img/World/Six_Eyes.png" alt="The Six Eyes" class="clan-img hidden" id="six-eyes-img">
-            <p>The Six Eyes</p>
+            <img src="../Img/World/Six_Eyes.png" alt="The Six Eyes" class="clan-img hidden" id="gojo-img">
+            <p id="clan_highlight"></p>
         </div>
     </div>
     
