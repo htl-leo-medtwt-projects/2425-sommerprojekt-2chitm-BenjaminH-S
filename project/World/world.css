@@ -11,7 +11,10 @@
 :root {
     --bg-color: black; 
     --text-color: white; 
-    --bg-image: url(../Img/Backgrounds/World_Light.jpg); 
+    --bg-image: url(../Img/Backgrounds/World_Light.jpg);
+    --accent-color: #b82f10;
+    --accent-shadow: rgba(184, 47, 16, 0.7);
+    --accent-shadow-intense: rgba(184, 47, 16, 0.9);
 }
 
 .light-mode {
@@ -41,7 +44,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #b82f10; 
+    background-color: var(--accent-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,18 +58,9 @@ ul {
     color: white; 
 }
 
-.light-mode ul li a {
-    color: white; 
-}
-
-.light-mode ul li a:hover {
-    background-color: white; 
-    color: black;
-}
-
 li {
     float: none;
-    margin: 0 0px;
+    margin: 0;
     border-right: 4px solid #000000;
 }
 
@@ -80,7 +74,16 @@ li a {
 
 li a:hover:not(#header) {
     background-color: #000000;
-    color: #b82f10;
+    color: var(--accent-color);
+}
+
+.light-mode ul li a {
+    color: white; 
+}
+
+.light-mode ul li a:hover {
+    background-color: white; 
+    color: black;
 }
 
 #header {
@@ -99,7 +102,7 @@ ul li:nth-child(1) {
 
 body:not(.light-mode) ul li a:hover:not(#header) {
     background-color: black;
-    color: #b82f10;
+    color: var(--accent-color);
 }
 
 .light-mode ul li a:hover:not(#header) {
@@ -109,7 +112,7 @@ body:not(.light-mode) ul li a:hover:not(#header) {
 
 #rad {
     position: absolute;
-    right: 0px;
+    right: 0;
     top: 50%;
     transform: translateY(-45%);
     border: none;
@@ -131,7 +134,7 @@ body:not(.light-mode) ul li a:hover:not(#header) {
     background-color: #772b0e;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 400px;
     text-align: center;
 }
@@ -240,7 +243,7 @@ input[type="text"] {
     border-radius: 5px;
     background-color: #932810;
     color: black;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
     font-family: 'Jost', sans-serif;
 }
 
@@ -252,7 +255,7 @@ input[type="text"]::placeholder {
 
 input[type="text"]:focus {
     outline: none; 
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); 
 }
 
 #side-menu {
@@ -268,7 +271,7 @@ input[type="text"]:focus {
 .menu-item {
     font-family: 'JJK', sans-serif;
     font-size: 2vw;
-    background-color: #b82f10;
+    background-color: var(--accent-color);
     color: rgb(0, 0, 0);
     border: 2px solid black;
     border-radius: 5px;
@@ -288,7 +291,49 @@ input[type="text"]:focus {
     text-align: center;
 }
 
-.clan-container, .curse-container, .character-container {
+hr {
+    border: none;
+    height: 4px;
+    width: 100vw;
+    background-color: #ffffff; 
+    margin: 20px 0;
+}
+
+#clan_name, #curses_header, #characters_header {
+    font-family: 'JJK', sans-serif;
+    font-size: 3.5vw;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.dimmed {
+    opacity: 0.5;
+    filter: brightness(70%);
+    transition: all 0.3s ease;
+}
+  
+.active {
+    border: 3px solid var(--accent-color); 
+    box-shadow: 0 0 12px var(--accent-shadow); 
+    transform: scale(1.1);
+    opacity: 1;
+    filter: brightness(100%);
+    transition: all 0.3s ease;
+}
+  
+.clan-btn.dimmed:hover, .curse-btn.dimmed:hover {
+    transform: scale(1.05); 
+    opacity: 0.8;
+}
+  
+.clan-btn.active:hover, .curse-btn.active:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px var(--accent-shadow);
+}
+
+.clan-container {
     display: flex;
     justify-content: center;
     gap: 4.4vw;
@@ -296,79 +341,32 @@ input[type="text"]:focus {
     margin-bottom: 4vw;
 }
 
-.clan-btn, .curse-btn, .character-img {
+.clan-btn {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid var(--accent-shadow);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    object-fit: cover;
 }
 
-.clan-btn:hover, .curse-btn:hover, .character-img:hover {
+.clan-btn:hover {
     transform: scale(1.1);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.clan-details, .character-details {
+.clan-details {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 50px;
 }
 
-.clan-details img, .character-details img {
+.clan-details img {
     width: 100px;
     height: auto;
-}
-
-.character-card {
-    text-align: center;
-}
-
-.character-card p {
-    margin-top: 10px;
-    font-family: 'JJK', sans-serif;
-    font-size: 1.2em;
-}
-
-.character-info {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.character-info h3 {
-    font-family: 'JJK', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.character-info p {
-    font-family: 'Jost', sans-serif;
-    font-size: 1em;
-}
-
-#clan_name {
-    font-family: 'JJK', sans-serif;
-    font-size: 3vw;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    margin-bottom: 10px;
-}
-
-#curses_header{
-    font-family: 'JJK', sans-serif;
-    font-size: 3vw;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    margin-bottom: 10px;
-}
-
-#characters_header{
-    font-family: 'JJK', sans-serif;
-    font-size: 3vw;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    margin-bottom: 10px;
 }
 
 #clan-description {
@@ -387,13 +385,231 @@ input[type="text"]:focus {
     margin-top: 10px;
 }
 
-.hidden {
-    display: none;
-}
-
 .inline-eye {
     width: 30px;
     height: auto;
     vertical-align: middle;
+    border-radius: 50%;
     margin: 0 5px;
+}
+
+#six_eyes_info {
+    font-family: 'Jost', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5vw;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    width: 40vw;
+}
+
+#curses-section {
+    position: relative;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.curse-container {
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.curse-btn {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 3px solid var(--accent-shadow);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    object-fit: cover;
+}
+
+.curse-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px var(--accent-shadow-intense);
+}
+
+.curse-btn.active {
+    border: 4px solid var(--accent-color);
+    box-shadow: 0 0 25px var(--accent-shadow-intense);
+    transform: scale(1.2);
+}
+
+.curse-btn.dimmed {
+    opacity: 0.5;
+    filter: grayscale(50%);
+    border: 3px solid rgba(100, 100, 100, 0.5);
+}
+
+#curse-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.curse-title {
+    font-family: 'JJK', sans-serif;
+    font-size: 2.5vw;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 15px;
+}
+
+.curse-highlight {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.5vw;
+    color: var(--accent-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#curse-description {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.3vw;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+    position: relative;
+    border-left: 4px solid var(--accent-color);
+    border-right: 4px solid var(--accent-color);
+}
+
+.curse-image-display {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    margin: 20px 0;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-shadow);
+}
+
+#characters-section {
+    position: relative;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.character-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+.character-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    width: 45%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid var(--accent-color);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(184, 47, 16, 0.4);
+}
+
+.character-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--accent-color), transparent, var(--accent-color));
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.character-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.character-card:hover .character-img {
+    transform: scale(1.1);
+    border-color: var(--accent-color);
+}
+
+.character-card p {
+    font-family: 'JJK', sans-serif;
+    font-size: 1.8vw;
+    color: white;
+    margin-top: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.character-details {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.character-info {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    width: 45%;
+    max-width: 400px;
+    text-align: center;
+    border: 2px solid var(--accent-color);
+    position: relative;
+}
+
+.character-info::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: 0;
+    left: 10%;
+    transform: scaleX(0.7);
+    transition: transform 0.3s ease;
+}
+
+.character-info:hover::after {
+    transform: scaleX(1);
+}
+
+.character-info h3 {
+    font-family: 'JJK', sans-serif;
+    font-size: 2vw;
+    color: white;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.character-info p {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.3vw;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }

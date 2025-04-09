@@ -185,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
     function showOptions() {
         if (popup) popup.classList.remove("hidden");
     }
@@ -239,13 +238,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.getElementById("zenin-btn").addEventListener("click", () => showClanInfo("Zenin"));
-    document.getElementById("gojo-btn").addEventListener("click", () => showClanInfo("Gojo"));
-    document.getElementById("kamo-btn").addEventListener("click", () => showClanInfo("Kamo"));
+    const zeninBtn = document.getElementById("zenin-btn");
+    const gojoBtn = document.getElementById("gojo-btn");
+    const kamoBtn = document.getElementById("kamo-btn");
+    
+    if (zeninBtn && gojoBtn && kamoBtn) {
+        zeninBtn.addEventListener("click", () => showClanInfo("Zenin"));
+        gojoBtn.addEventListener("click", () => showClanInfo("Gojo"));
+        kamoBtn.addEventListener("click", () => showClanInfo("Kamo"));
+    }
 
     function showClanInfo(clanName) {
         const clanHighlightElement = document.getElementById("clan_highlight");
-    
+        
+        document.getElementById("zenin-btn").classList.remove("dimmed", "active");
+        document.getElementById("gojo-btn").classList.remove("dimmed", "active");
+        document.getElementById("kamo-btn").classList.remove("dimmed", "active");
+        
+        if (clanName === "Zenin") {
+            document.getElementById("zenin-btn").classList.add("active");
+            document.getElementById("gojo-btn").classList.add("dimmed");
+            document.getElementById("kamo-btn").classList.add("dimmed");
+        } else if (clanName === "Gojo") {
+            document.getElementById("gojo-btn").classList.add("active");
+            document.getElementById("zenin-btn").classList.add("dimmed");
+            document.getElementById("kamo-btn").classList.add("dimmed");
+        } else if (clanName === "Kamo") {
+            document.getElementById("kamo-btn").classList.add("active");
+            document.getElementById("zenin-btn").classList.add("dimmed");
+            document.getElementById("gojo-btn").classList.add("dimmed");
+        }
+        
         const clanDetails = {
             "Gojo": {
                 name: "Gojo Clan",
@@ -262,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Kamo": {
                 name: "Kamo Clan",
                 highlight: "Blood Manipulation",
-                description: "Der Kamo-Clan ist einer der ältesten und einflussreichsten Jujutsu-Clans Japans. Er ist berüchtigt für seine strenge Hierarchie, politische Kälte und seine Verbindung zur dunklen Vergangenheit der Jujutsu-Geschichte. Der Clan stellt Effizienz und Reinheit der Linie über alles – sogar über Menschlichkeit. Der Ruf des Kamo-Clans ist durch eine düstere Figur getrübt: Kamo Noritoshi (alt), besser bekannt als Kenjaku, ein abtrünniger Jujutsu-Zauberer, der für ethisch verwerfliche Experimente berüchtigt ist. Besonders bekannt ist sein grausames Experiment, bei dem er mit der Fluchgeburt Choso und seinen „Brüdern“ Hybridwesen aus Flüchen und Menschen erschuf.",
+                description: "Der Kamo-Clan ist einer der ältesten und einflussreichsten Jujutsu-Clans Japans. Er ist berüchtigt für seine strenge Hierarchie, politische Kälte und seine Verbindung zur dunklen Vergangenheit der Jujutsu-Geschichte. Der Clan stellt Effizienz und Reinheit der Linie über alles – sogar über Menschlichkeit. Der Ruf des Kamo-Clans ist durch eine düstere Figur getrübt: Kamo Noritoshi (alt), besser bekannt als Kenjaku, ein abtrünniger Jujutsu-Zauberer, der für ethisch verwerfliche Experimente berüchtigt ist. Besonders bekannt ist sein grausames Experiment, bei dem er mit der Fluchgeburt Choso und seinen 'Brüdern' Hybridwesen aus Flüchen und Menschen erschuf.",
                 imageId: "kamo-img"
             }
         };
@@ -273,7 +296,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
         if (clanHighlightElement) {
             if (clanName === "Gojo") {
-                clanHighlightElement.innerHTML = `The <span>Six</span> <img src="../Img/World/Six_Eyes.png" alt="The Six Eyes" class="inline-eye"> <span>Eyes</span>`;
+                clanHighlightElement.innerHTML = 
+                `<hr> The <span>Six</span> <img src="../Img/World/Six_Eyes.png" alt="The Six Eyes" class="inline-eye"> <span>Eyes</span>
+                <div id="six_eyes_info">Die Sechs Augen sind eine vererbte, einzigartige Augentechnik, die nur extrem selten innerhalb des Gojo-Clans auftritt – in Jahrhunderten vielleicht nur einmal. Sie verleihen dem Träger eine außergewöhnliche Wahrnehmung, die weit über das normale Sehen hinausgeht.</div>`;
             } else {
                 clanHighlightElement.textContent = clan.highlight;
             }
@@ -285,7 +310,135 @@ document.addEventListener("DOMContentLoaded", function () {
         const image = document.getElementById(clan.imageId);
         if (image) image.classList.remove('hidden');
     }
+
+    function showCurseInfo(curseName) {
+        document.querySelectorAll('.curse-btn').forEach(btn => {
+            btn.classList.remove('active', 'dimmed');
+        });
+        
+        document.querySelectorAll('.curse-btn').forEach(btn => {
+            if (btn.getAttribute('data-curse') === curseName) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.add('dimmed');
+            }
+        });
+        
+        const curseDetails = {
+            "Jogo": {
+                title: "Jogo",
+                highlight: "Disaster Curse of Volcanoes",
+                description: "Jogo ist einer der vier Speziellen Grade unter den Disaster Curses und verkörpert die menschliche Angst vor Vulkanen. Mit einer Kraft, die selbst die von erfahrenen Jujutsu-Zauberern übertrifft, nutzt er seine Fähigkeit, Flammen und Magma zu kontrollieren. Seine Kampfphilosophie betont den Triumph der Stärksten - eine brutale Meritokratie, die sein ganzes Denken beherrscht.",
+                imageUrl: "../Img/World/Jogo_Full.png"
+            },
+            "Hanami": {
+                title: "Hanami",
+                highlight: "Disaster Curse of Nature",
+                description: "Hanami repräsentiert die menschliche Angst vor der Natur und deren Rache für den Umweltschaden. Als Spezieller Grad nutzt Hanami Pflanzen- und Holzmanipulation mit außergewöhnlicher Präzision. Im Gegensatz zu den anderen Disaster Curses zeigt Hanami eine gewisse Sensibilität für das Gleichgewicht der Natur und handelt aus der Überzeugung, dass die Menschen eine Bedrohung für die natürliche Ordnung darstellen.",
+                imageUrl: "../Img/World/Hanami_Full.png"
+            },
+            "Mahito": {
+                title: "Mahito",
+                highlight: "Disaster Curse of Humanity",
+                description: "Mahito verkörpert die Angst der Menschen vor anderen Menschen - ein Konzept so tief und dunkel wie die menschliche Seele selbst. Seine Fähigkeit 'Idle Transfiguration' erlaubt es ihm, die Seele eines Wesens zu manipulieren, wodurch er Körper nach Belieben verformen kann. Als relativ junger Fluch ist Mahito verspielt, sadistisch und betrachtet Menschen lediglich als Spielzeuge für seine grausamen 'Experimente'.",
+                imageUrl: "../Img/World/Mahito_Full.png"
+            },
+            "Dagon": {
+                title: "Dagon",
+                highlight: "Disaster Curse of the Ocean",
+                description: "Dagon, anfangs als 'Rumpfisch-Fluch' bekannt, repräsentiert die menschliche Angst vor dem Ozean und seinen unergründlichen Tiefen. Nach seiner Transformation erreicht er einen Speziellen Grad und entwickelt eine ausgeprägte Persönlichkeit. Seine Fluch-Technik 'Horizont des Gefangenen Todes' erschafft eine Domain Expansion in Form eines Strandes, der von tödlichen Wasserkreaturen bevölkert wird.",
+                imageUrl: "../Img/World/Dagon_Full.png"
+            },
+            "Sukuna": {
+                title: "Sukuna",
+                highlight: "The King of Curses",
+                description: "Sukuna ist keine normale Cursed Spirit, sondern eine legendäre Figur aus der Jujutsu-Geschichte - der 'König der Flüche'. In der Heian-Ära als menschlicher Zauberer geboren, wurde er zu einem Fluch, der selbst in einer Zeit der mächtigen Zauberer gefürchtet war. Seine Macht war so groß, dass nach seinem Tod seine Finger als mächtige verfluchte Objekte erhalten blieben. Als Ryomen Sukuna wiedergeboren wird, zeigt er unvergleichliche Stärke und Arroganz.",
+                imageUrl: "../Img/World/Sukuna_Full.png"
+            }
+        };
+        
+        const curse = curseDetails[curseName];
+        
+        const descriptionElement = document.getElementById('curse-description');
+        
+        let infoContainer = document.getElementById('curse-info-container');
+        if (!infoContainer) {
+            infoContainer = document.createElement('div');
+            infoContainer.id = 'curse-info-container';
+            descriptionElement.parentNode.insertBefore(infoContainer, descriptionElement);
+        }
+        
+        infoContainer.innerHTML = `
+            <h3 class="curse-title">${curse.title}</h3>
+            <p class="curse-highlight">${curse.highlight}</p>
+            <img src="${curse.imageUrl}" alt="${curse.title}" class="curse-image-display">
+        `;
+        
+        descriptionElement.textContent = curse.description;
+    }
+
+    const jogoBtn = document.getElementById("jogo-btn");
+    const hanamiBtn = document.getElementById("hanami-btn");
+    const mahitoBtn = document.getElementById("mahito-btn");
+    const dagonBtn = document.getElementById("dagon-btn");
+    const sukunaBtn = document.getElementById("sukuna-btn");
     
+    if (jogoBtn && hanamiBtn && mahitoBtn && dagonBtn && sukunaBtn) {
+        jogoBtn.addEventListener("click", () => showCurseInfo("Jogo"));
+        hanamiBtn.addEventListener("click", () => showCurseInfo("Hanami"));
+        mahitoBtn.addEventListener("click", () => showCurseInfo("Mahito"));
+        dagonBtn.addEventListener("click", () => showCurseInfo("Dagon"));
+        sukunaBtn.addEventListener("click", () => showCurseInfo("Sukuna"));
+        
+        showCurseInfo("Mahito");
+    }
+    
+    const jujutsuSorcererCard = document.querySelector('.character-card:nth-child(1)');
+    const curseUserCard = document.querySelector('.character-card:nth-child(2)');
+    
+    if (jujutsuSorcererCard && curseUserCard) {
+        jujutsuSorcererCard.addEventListener('click', function() {
+            updateCharacterInfo('sorcerer');
+            this.style.transform = 'translateY(-10px) scale(1.05)';
+            curseUserCard.style.transform = 'translateY(0) scale(0.95)';
+            curseUserCard.style.opacity = '0.7';
+            this.style.opacity = '1';
+        });
+        
+        curseUserCard.addEventListener('click', function() {
+            updateCharacterInfo('curse');
+            this.style.transform = 'translateY(-10px) scale(1.05)';
+            jujutsuSorcererCard.style.transform = 'translateY(0) scale(0.95)';
+            jujutsuSorcererCard.style.opacity = '0.7';
+            this.style.opacity = '1';
+        });
+    }
+    
+    const characterInfoSections = document.querySelectorAll('.character-info');
+    characterInfoSections.forEach(section => {
+        section.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = 'rgba(184, 47, 16, 0.2)';
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        section.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    function updateCharacterInfo(type) {
+        const weaponsInfo = document.querySelector('.character-info:nth-child(1)');
+        const energyInfo = document.querySelector('.character-info:nth-child(2)');
+        
+        if (type === 'sorcerer') {
+            weaponsInfo.querySelector('p').textContent = 'Jujutsu-Zauberer nutzen spezielle Waffen, die mit verfluchter Energie verstärkt sind. Diese Waffen können Flüche verletzen und zerstören.';
+            energyInfo.querySelector('p').textContent = 'Jujutsu-Zauberer nutzen und kontrollieren verfluchte Energie durch Training und Techniken, um Flüche zu bekämpfen und die Gesellschaft zu schützen.';
+        } else {
+            weaponsInfo.querySelector('p').textContent = 'Fluchnutzer verwenden oft verunreinigte oder verbotene Waffen, die mit negativer Energie durchdrungen sind, um ihre zerstörerischen Ziele zu erreichen.';
+            energyInfo.querySelector('p').textContent = 'Fluchnutzer manipulieren verfluchte Energie für bösartige Zwecke, oft durch verbotene Techniken und auf Kosten anderer Menschen oder sogar ihrer eigenen Menschlichkeit.';
+        }
+    }
 
     loadSettings();
 });
