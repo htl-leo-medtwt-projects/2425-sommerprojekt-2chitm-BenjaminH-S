@@ -433,6 +433,54 @@ hr {
     width: 40vw;
 }
 
+.naobito_zenin_cont {
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
+}
+
+#naobito_zenin{
+    width: 35vw;
+}
+
+.mai_zenin_cont{
+    display: flex;
+    align-items: flex-start;
+    gap: 4vw;
+}
+
+#mai_zenin{
+    width: 35vw;
+    margin-left: 20vw;
+}
+
+#gojo_satoru{
+    width: 35vw;
+    margin-left: 20vw;
+}
+
+.kid-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 4vw;
+}
+
+#gojo_satoru{
+    width: 35vw;
+    margin-left: 20vw;
+}
+
+.noritoshi-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
+}
+  
+#noritoshi_kamo {
+   width: 37vw;
+}
+  
+
 #curses-section {
     position: relative;
     padding: 40px 20px;
@@ -552,9 +600,28 @@ hr {
     position: relative;
 }
 
-.character-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(184, 47, 16, 0.4);
+.sorcerer-card:hover {
+    border: 2px solid green;
+    box-shadow: 0 0 15px green;
+    transition: 0.3s;
+}
+
+.curse-user-card:hover {
+    border: 2px solid red;
+    box-shadow: 0 0 15px red;
+    transition: 0.3s;
+}
+
+.weapon-info:hover {
+    border: 2px solid grey;
+    box-shadow: 0 0 15px grey;
+    transition: 0.3s;
+}
+
+.energy-info:hover {
+    border: 2px solid blue;
+    box-shadow: 0 0 15px blue;
+    transition: 0.3s;
 }
 
 .character-card::before {
