@@ -16,11 +16,11 @@
 ## Screenshots der verrichteten Arbeit
 
 **Commits-Insight**
-![Commits](image.png)
+![Commits](image_2.png)
 
 
 **Code-Frequency**
-![Code-Additions](image-1.png)
+![Code-Additions](image_3.png)
 
 ## Ziele bis zum nächsten Sprint 
 - [ ] Story Unterseite umsetzen
