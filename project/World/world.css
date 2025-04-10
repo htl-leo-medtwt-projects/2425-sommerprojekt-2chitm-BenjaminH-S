@@ -24,6 +24,8 @@
 }
 
 body {
+    max-width: 100%;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -232,7 +234,7 @@ input:checked + .slider:before {
     filter: invert(1);
 }
 
-input[type="text"] {
+#search-bar {
     position: fixed;
     top: 10px;
     left: 10px;
@@ -243,19 +245,20 @@ input[type="text"] {
     border-radius: 5px;
     background-color: #932810;
     color: black;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     font-family: 'Jost', sans-serif;
+    z-index: 9999;
 }
 
-input[type="text"]::placeholder {
-    color: black; 
-    font-family: 'Jost', sans-serif; 
+#search-bar::placeholder {
+    color: black;
+    font-family: 'Jost', sans-serif;
     font-size: 16px;
 }
 
-input[type="text"]:focus {
-    outline: none; 
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); 
+#search-bar:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 #side-menu {
@@ -294,7 +297,7 @@ input[type="text"]:focus {
 hr {
     border: none;
     height: 4px;
-    width: 100vw;
+    width: 110vw;
     background-color: #ffffff; 
     margin: 20px 0;
 }
@@ -393,7 +396,32 @@ hr {
     margin: 0 5px;
 }
 
-#six_eyes_info {
+#six-eyes {
+    font-family: 'Jost', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5vw;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    width: 36vw;
+    text-align: center;
+}
+
+#blood_tech{
+    font-family: 'Jost', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5vw;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    width: 40vw;
+}
+
+#zenin_tech{
     font-family: 'Jost', sans-serif;
     display: block;
     margin-left: auto;
@@ -416,7 +444,7 @@ hr {
     display: flex;
     justify-content: center;
     gap: 5vw;
-    margin: 40px 0;
+    margin: 10px;
     flex-wrap: wrap;
 }
 
@@ -612,4 +640,12 @@ hr {
     font-size: 1.3vw;
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.character-info-img {
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border: 2px solid #444;
+    width: 180px;
+    height: 180px;
 }

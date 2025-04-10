@@ -28,4 +28,3 @@
 ## Ziele bis zum nächsten Sprint 
 - [ ] Kontrast-Modis sollen bei allen Seiten funktionsfähig eingebaut werden
 - [ ] World-Unterseite vollständig aufbauen 
-- [ ] Observer-API in derselben Unterseite einbinden 
