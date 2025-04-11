@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const navItems = document.querySelectorAll("ul li");
         const settingsIcon = document.getElementById("rad");
         const settingsBox = document.getElementById("popup");
-        const searchBar = document.querySelector('input[type="text"]'); // Select the search bar
-        const quizPage = window.location.pathname.includes("Quiz/quiz.html");
+        const searchBar = document.querySelector('input[type="text"]'); 
+        const StoryPage = window.location.pathname.includes("Story/story.html");
     
         if (mode === "light") {
             document.body.classList.add("light-mode");
@@ -96,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchBar.style.backgroundColor = "white";
             }
     
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+            if (StoryPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Light.jpeg')";
             }
     
         } else {
@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchBar.style.color = "black";
             }
     
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+            if (StoryPage) {
+                document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Dark.png')";
             }
         }
     }

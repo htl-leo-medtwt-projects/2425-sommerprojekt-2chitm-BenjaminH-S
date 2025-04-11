@@ -447,6 +447,7 @@ hr {
     display: flex;
     align-items: flex-start;
     gap: 4vw;
+    margin-top: 5vw;
 }
 
 #mai_zenin{
@@ -470,6 +471,17 @@ hr {
     margin-left: 20vw;
 }
 
+.gojo-container{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 5vw;
+    gap: 2vw;
+}
+
+#gojo_powers{
+    width: 35vw;
+}
+
 .noritoshi-container {
     display: flex;
     align-items: flex-start;
@@ -479,7 +491,6 @@ hr {
 #noritoshi_kamo {
    width: 37vw;
 }
-  
 
 #curses-section {
     position: relative;
@@ -652,6 +663,26 @@ hr {
     border-color: var(--accent-color);
 }
 
+.character-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.character-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.selected-green {
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 2px solid green;
+}
+
+.selected-red {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 2px solid red;
+}
+
 .character-card p {
     font-family: 'JJK', sans-serif;
     font-size: 1.8vw;
@@ -715,4 +746,23 @@ hr {
     border: 2px solid #444;
     width: 180px;
     height: 180px;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 2vw;
+    margin: 2vw 0;
+    padding: 2vw;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.energy-weapon-group {
+    background-color: rgba(50, 50, 100, 0.3);
+}
+
+.sorcerer-curseuser-group {
+    background-color: rgba(50, 100, 50, 0.3);
 }
