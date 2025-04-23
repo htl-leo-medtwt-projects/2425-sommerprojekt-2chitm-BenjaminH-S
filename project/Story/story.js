@@ -66,78 +66,32 @@ document.addEventListener("DOMContentLoaded", function () {
         if (mode === "light") {
             document.body.classList.add("light-mode");
             if (contrastToggle) contrastToggle.checked = true;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "black";
-                navBar.style.color = "white";
-            }
-    
+            if (navBar) navBar.style.backgroundColor = "black";
             if (navItems) {
                 navItems.forEach((item, index) => {
                     item.style.borderRight = "4px solid white";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid white";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
+                    if (index === 0) item.style.borderLeft = "4px solid white";
                 });
             }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "white";
-            }
-    
-            if (searchBar) {
-                searchBar.style.backgroundColor = "white";
-            }
-    
-            if (StoryPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Light.jpeg')";
-            }
-    
+            if (settingsBox) settingsBox.style.backgroundColor = "white";
+            if (searchBar) searchBar.style.backgroundColor = "white";
+            if (StoryPage) document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Light.jpeg')";
         } else {
             document.body.classList.remove("light-mode");
             if (contrastToggle) contrastToggle.checked = false;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "#b82f10";
-                navBar.style.color = "black";
-            }
-    
+            if (navBar) navBar.style.backgroundColor = "#b82f10";
             if (navItems) {
                 navItems.forEach((item, index) => {
                     item.style.borderRight = "4px solid black";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid black";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
+                    if (index === 0) item.style.borderLeft = "4px solid black";
                 });
             }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "#b82f10";
-                settingsBox.style.color = "black";
-            }
-    
+            if (settingsBox) settingsBox.style.backgroundColor = "#b82f10";
             if (searchBar) {
                 searchBar.style.backgroundColor = "#932810";
                 searchBar.style.color = "black";
             }
-    
-            if (StoryPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Dark.png')";
-            }
+            if (StoryPage) document.body.style.backgroundImage = "url('../Img/Backgrounds/Story_Dark.png')";
         }
     }
 
@@ -192,78 +146,24 @@ function closePopup() {
     document.getElementById("popup").classList.add("hidden");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const timelineData = [
-        {
-            title: "Yuji trifft Sukuna",
-            year: 2018,
-            arc: "Einführung",
-            desc: "Yuji Itadori verschluckt Sukunas Finger und wird das Gefäß für den König der Flüche."
-        },
-        {
-            title: "Jujutsu Schule",
-            year: 2019,
-            arc: "Tokyo Jujutsu High",
-            desc: "Yuji, Megumi und Nobara bilden ein Team und lernen über Flüche, Lehrer und Techniken."
-        },
-        {
-            title: "Kyoto Turnier",
-            year: 2020,
-            arc: "Kyoto Goodwill Event",
-            desc: "Freundschaftsturnier zwischen Tokyo & Kyoto. Konflikte, Techniken, Intrigen."
-        },
-        {
-            title: "Shibuya Incident",
-            year: 2021,
-            arc: "Shibuya",
-            desc: "Gojo wird versiegelt. Massive Zerstörung. Sukuna tötet hunderte – Tokyo ist im Chaos."
-        },
-        {
-            title: "Culling Game",
-            year: 2022,
-            arc: "Culling Game",
-            desc: "Yuji, Megumi & Co kämpfen um Regeln, Leben und Zukunft in einem tödlichen Spiel."
-        }
-    ];
-
-    const container = document.createElement("div");
-    container.id = "roadmap";
-    document.body.appendChild(container);
-
-    timelineData.forEach((event, index) => {
-        const node = document.createElement("div");
-        node.className = "roadmap-node";
-        node.innerHTML = `
-            <div class="dot" data-index="${index}"></div>
-            <div class="label">${event.year}<br><strong>${event.title}</strong></div>
-            <div class="desc hidden">${event.desc}</div>
-        `;
-        container.appendChild(node);
-    });
-
-    document.querySelectorAll(".dot").forEach(dot => {
-        dot.addEventListener("click", (e) => {
-            const idx = e.target.dataset.index;
-            const allDescs = document.querySelectorAll(".desc");
-            allDescs.forEach(d => d.classList.add("hidden"));
-            document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
-            dot.classList.add("active");
-            allDescs[idx].classList.remove("hidden");
-        });
-    });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
-    const nodes = document.querySelectorAll(".roadmap-node");
-    const progressBar = document.createElement("div");
-    progressBar.id = "progress-bar";
-    document.getElementById("roadmap").prepend(progressBar);
+    const roadmap = document.getElementById("roadmap");
+    const nodes = roadmap.querySelectorAll(".roadmap-node");
 
+    // Fortschrittsbalken einfügen
+    let progressBar = document.getElementById("progress-bar");
+    if (!progressBar) {
+        progressBar = document.createElement("div");
+        progressBar.id = "progress-bar";
+        roadmap.insertAdjacentElement("afterbegin", progressBar);
+    }
+
+    // Fortschritt aus dem lokalen Speicher laden
     const completed = JSON.parse(localStorage.getItem("completedChapters")) || [];
 
     nodes.forEach((node, index) => {
         const dot = node.querySelector(".dot");
-        const label = node.querySelector(".label");
         const desc = node.querySelector(".desc");
 
         if (completed.includes(index)) {
@@ -271,19 +171,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         dot.addEventListener("click", () => {
+            // Fortschritt speichern
             if (!completed.includes(index)) {
                 completed.push(index);
                 localStorage.setItem("completedChapters", JSON.stringify(completed));
                 dot.classList.add("active");
                 updateProgressBar();
             }
-            desc.classList.toggle("hidden");
+
+            // Beschreibung anzeigen
+            document.querySelectorAll(".desc").forEach(d => d.classList.add("hidden"));
+            desc.classList.remove("hidden");
         });
     });
 
     function updateProgressBar() {
         const percent = (completed.length / nodes.length) * 100;
-        progressBar.style.width = `${percent}%`;
+        progressBar.style.width = percent + "%";
     }
 
     updateProgressBar();

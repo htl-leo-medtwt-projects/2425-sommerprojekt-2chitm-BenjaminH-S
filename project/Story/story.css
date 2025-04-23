@@ -381,11 +381,13 @@ input[type="text"]:focus {
 }
 
 #progress-bar {
-    height: 10px;
+    height: 8px;
     background-color: #b82f10;
-    position: absolute;
-    top: -10px;
-    left: 0;
+    position: relative;
+    margin: 0 auto 2vw auto;
+    width: 0%;
+    max-width: 90%;
     transition: width 0.5s ease-in-out;
     border-radius: 5px;
 }
+
