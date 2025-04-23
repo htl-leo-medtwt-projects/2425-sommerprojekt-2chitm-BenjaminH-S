@@ -134,6 +134,7 @@ body:not(.light-mode) ul li a:hover:not(#header) {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     width: 400px;
     text-align: center;
+    z-index: 100;
 }
 
 .popup-content {
@@ -346,4 +347,90 @@ input[type="text"]:focus {
 
 #triviaBox.show {
     display: block;
+}
+
+#arc-details {
+    margin-top: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arc-section {
+    display: flex;
+    gap: 3vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    width: 90%;
+}
+
+.arc-section.hidden {
+    display: none;
+}
+
+#arc-container {
+    padding: 3vw;
+}
+
+#main-arcs {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    flex-wrap: wrap;
+    margin-top: 3vw;
+}
+
+.arc {
+    font-size: 1.4vw;
+    padding: 1vw 2vw;
+    background-color: #b82f10;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.arc:hover {
+    transform: scale(1.05);
+}
+
+.back-btn {
+    margin-bottom: 2vw;
+    padding: 0.6vw 1.2vw;
+    background-color: #b82f10;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1vw;
+    transition: 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #922100;
+}
+
+.arc {
+    width: 50px;
+    height: 50px;
+    background-color: #b82f10;
+    border: 4px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8vw;
+    text-align: center;
+    padding: 0.5vw;
+}
+
+.arc:hover {
+    transform: scale(1.1);
 }

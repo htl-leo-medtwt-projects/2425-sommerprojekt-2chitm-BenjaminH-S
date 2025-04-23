@@ -6,24 +6,50 @@
     <title>Jujutsu Kognien | Story</title>
     <link rel="icon" type="image/x-icon" href="../Img/Favicon/fav.png">
     <link rel="stylesheet" href="story.css">
-    <script src = "story.js" defer></script>
+    <script src="story.js" defer></script>
 </head>
 <body>
-
     <ul>
-        <input type="text" placeholder="Search...">
         <li><a href="../Media/media.html" id="mediales">Mediales</a></li>
         <li><a href="../World/world.html" id="welt">Welt</a></li>
         <li><a id="header" href="../Main/main.html">Jujutsu Kaisen</a></li>
         <li><a href="../Quiz/quiz.html" id="quiz">Quiz</a></li>
         <li><a id="geschichte">Geschichte</a></li>
-       
         <li style="float:right" id="rad">
             <a href="#about">
                 <img src="../Img/Nav/rad.png" alt="Rad" id="wheel" width="50px" height="50px">
             </a>
         </li>
     </ul>
+
+    <div id="arc-container">
+        <div id="main-arcs">
+            <div class="arc" data-target="gojo-backstory">Gojo</div>
+            <div class="arc" data-target="shibuya-incident">Shibuya</div>
+            <div class="arc" data-target="culling-game">Culling</div>
+        </div>
+
+        <div id="arc-details">
+            <div id="gojo-backstory" class="arc-section hidden">
+                <button class="back-btn">← Zurück</button>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Geburt</div><div class="desc">Geburt mit Six Eyes</div></div>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Satoru & Geto</div><div class="desc">Schulzeit & Freundschaft</div></div>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Hidden Inventory</div><div class="desc">Konflikt mit Toji</div></div>
+            </div>
+
+            <div id="shibuya-incident" class="arc-section hidden">
+                <button class="back-btn">← Zurück</button>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Start</div><div class="desc">Siegel von Gojo</div></div>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Kämpfe</div><div class="desc">Megumi, Yuji & Co kämpfen gegen Flüche</div></div>
+            </div>
+
+            <div id="culling-game" class="arc-section hidden">
+                <button class="back-btn">← Zurück</button>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Eintritt</div><div class="desc">Spielbeginn für Yuji & Megumi</div></div>
+                <div class="roadmap-node"><div class="dot"></div><div class="label">Regeln</div><div class="desc">Neues Regelwerk zur Manipulation</div></div>
+            </div>
+        </div>
+    </div>
 
     <div id="popup" class="hidden">
         <div class="popup-content">
@@ -51,7 +77,4 @@
     </div>
 </body>
 </html>
-
-
-
 

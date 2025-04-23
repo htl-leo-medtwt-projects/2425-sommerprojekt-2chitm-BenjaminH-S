@@ -614,15 +614,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Fluchnutzer",
                     text: "Ein Fluchnutzer ist ein böser menschlicher Zauberer, der Jujutsu mit bösen Absichten verwendet. Natürlich existieren sie schon so lange wie die Jujutsu-Zauberer und stellten insbesondere während der Heian-Ära eine bedeutende Bedrohung neben den verfluchten Geistern dar."
                 }
-            ],
-            info_texts: ["Verfluchte Waffen", "Verfluchte Energie"],
-            info_descriptions: [
-                "Verfluchte Waffen sind mit verfluchter Energie durchdrungene Werkzeuge, die verfluchten Geistern auch ohne Techniken des Trägers schaden können. Sie existieren in vielen Formen – von einfachen Klingen bis zu komplexen Artefakten.",
-                "Verfluchte Energie entsteht aus negativen menschlichen Emotionen. Zauberer nutzen sie, um mächtige Techniken auszuführen. Die Beherrschung verfluchter Energie ist essenziell im Kampf gegen Flüche.",
-                "Eine mächtige Technik, bei der ein Zauberer ein eigenes Gebiet erschafft, das seine Fähigkeiten verstärkt.",
-                "Individuelle Fähigkeiten, die durch verfluchte Energie aktiviert werden – jeder Nutzer hat einzigartige Techniken.",
-                "Gruppen wie die Jujutsu-Schulen überwachen und bekämpfen Flüche und bilden Zauberer aus.",
-                "Zauberer und Flüche werden von Grad 4 bis Spezialgrad klassifiziert – je höher, desto gefährlicher."
             ]
         },
         en: {
@@ -636,15 +627,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     title: "Curse Users",
                     text: "A curse user is an evil human sorcerer who uses jujutsu with malintent. Naturally, they have existed as long as jujutsu sorcerers have, and were also prominent threats during the Heian Era alongside cursed spirits."
                 }
-            ],
-            info_texts: ["Cursed Weapons", "Cursed Energy","Domain Expansions", "Cursed Techniques", "Jujutsu Organisations", "Ranking System"],
-            info_descriptions: [
-                "Cursed weapons are tools imbued with cursed energy, capable of harming cursed spirits even without the wielder using techniques. They come in many forms, from simple blades to complex artifacts.",
-                "Cursed energy is born from negative human emotions. Sorcerers harness it to perform powerful techniques. Mastery of cursed energy is essential to survive in battles against curses.",
-                "A powerful technique where a sorcerer creates a space that boosts their abilities.",
-                "Unique abilities powered by cursed energy. Each user has their own style.",
-                "Groups like Jujutsu High train sorcerers and fight cursed spirits.",
-                "Sorcerers and curses are ranked from Grade 4 to Special Grade based on power."
             ]
         }
     };
@@ -685,3 +667,55 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const allCharacterCards = document.querySelectorAll('.character-card');
+
+    allCharacterCards.forEach(card => {
+        card.addEventListener('click', () => {
+            allCharacterCards.forEach(c => c.classList.remove('selected-green', 'selected-red'));
+            if (card.classList.contains('sorcerer-card')) {
+                card.classList.add('selected-green');
+            } else if (card.classList.contains('curse-user-card')) {
+                card.classList.add('selected-red');
+            } else {
+                card.style.border = "2px solid var(--accent-color)";
+                card.style.boxShadow = "0 0 15px var(--accent-shadow)";
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const descriptions = document.querySelectorAll('.description');
+    const languageButtons = document.querySelectorAll('.flag-btn');
+
+    const translations = {
+        "en": [
+            "Cursed weapons are tools imbued with cursed energy, capable of harming cursed spirits even without the wielder using techniques. They come in many forms, from simple blades to complex artifacts.",
+            "Cursed energy is born from negative human emotions. Sorcerers harness it to perform powerful techniques. Mastery of cursed energy is essential to survive in battles against curses.",
+            "A powerful technique where a sorcerer creates a space that boosts their abilities.",
+            "Unique abilities powered by cursed energy. Each user has their own style.",
+            "Groups like Jujutsu High train sorcerers and fight cursed spirits.",
+            "Sorcerers and curses are ranked from Grade 4 to Special Grade based on power."
+        ],
+        "de": [
+            "Verfluchte Waffen sind mit verfluchter Energie durchtränkte Werkzeuge, die selbst ohne Techniken verfluchte Geister verletzen können. Sie gibt es in vielen Formen – von einfachen Klingen bis hin zu komplexen Artefakten.",
+            "Verfluchte Energie entsteht aus negativen menschlichen Emotionen. Zauberer nutzen sie, um mächtige Techniken einzusetzen. Die Beherrschung dieser Energie ist essenziell im Kampf gegen Flüche.",
+            "Eine mächtige Technik, bei der ein Zauberer einen Raum erschafft, der seine Fähigkeiten verstärkt.",
+            "Einzigartige Fähigkeiten, die durch verfluchte Energie angetrieben werden. Jeder Nutzer hat seinen eigenen Stil.",
+            "Gruppen wie Jujutsu High bilden Zauberer aus und kämpfen gegen Fluchgeister.",
+            "Zauberer und Flüche werden von Grad 4 bis Sondergrad je nach Stärke eingestuft."
+        ]
+    };
+
+    languageButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (translations[lang]) {
+                descriptions.forEach((el, idx) => {
+                    el.textContent = translations[lang][idx];
+                });
+            }
+        });
+    });
+});

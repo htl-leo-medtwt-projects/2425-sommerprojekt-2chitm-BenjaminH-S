@@ -189,107 +189,6 @@ document.querySelectorAll('.flag-btn').forEach(button => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const timelineData = [
-        {
-            title: "Gojo & Geto als Schüler",
-            year: 2006,
-            arc: "Hidden Inventory",
-            desc: "Gojo und Geto sollen Riko Amanai schützen, das Star Plasma Vessel – die Welt hängt an ihrem Leben.",
-            img: "../Img/Story/gojo_geto_youth.jpg",
-            sound: "../Sound/gojo_theme.mp3",
-            trivia: "Geto und Gojo galten als unbesiegbares Duo – bis sie auf Toji trafen."
-        },
-        {
-            title: "Toji tötet Riko Amanai",
-            year: 2006,
-            arc: "Hidden Inventory",
-            desc: "Toji Fushiguro bricht die Schutzbarriere und erschießt Riko Amanai – vor Getos Augen.",
-            img: "../Img/Story/toji_kills_riko.jpg",
-            sound: "../Sound/toji.mp3",
-            trivia: "Toji besitzt keine Fluchenergie, aber sein Körper ist ein Tempel für verfluchte Werkzeuge."
-        },
-        {
-            title: "Gojo erweckt 'Red' & 'Infinity'",
-            year: 2006,
-            arc: "Hidden Inventory",
-            desc: "Verletzt, aber lebendig – Gojo entdeckt Reversed Cursed Technique & kombiniert Red + Blue.",
-            img: "../Img/Story/gojo_awakened.jpg",
-            sound: "../Sound/hollow_purple.mp3",
-            trivia: "Gojo ist der erste Jujutsuzauberer, der gleichzeitig 'Limitless' & 'Reversed Cursed Energy' gemeistert hat."
-        },
-        {
-            title: "Getos Fall",
-            year: 2007,
-            arc: "Hidden Inventory",
-            desc: "Nach Riko Amanais Tod verliert Geto den Glauben an Menschen – seine dunkle Wandlung beginnt.",
-            img: "../Img/Story/geto_fall.jpg",
-            sound: "../Sound/geto_quote.mp3",
-            trivia: "Geto sagte: 'Die Welt braucht nur Jujuzisten.' Danach tötete er über 100 Zivilisten."
-        },
-        {
-            title: "Gojo vs Sukuna beginnt",
-            year: 2018,
-            arc: "Shinjuku Showdown",
-            desc: "Gojo tritt gegen den König der Flüche an – Sukuna im Körper von Megumi, mit Mahoraga in petto.",
-            img: "../Img/Story/shinjuku_start.jpg",
-            sound: "../Sound/shinjuku_battle.mp3",
-            trivia: "Ihr Kampf erschütterte die Realität – ganze Stadtteile verschwanden in Sekunden."
-        },
-        {
-            title: "Gojo stirbt",
-            year: 2018,
-            arc: "Shinjuku Showdown",
-            desc: "Sukuna trickst Gojo mit Mahoragas Adaption aus und durchtrennt ihn komplett.",
-            img: "../Img/Story/gojo_dead.jpg",
-            sound: "../Sound/gojo_death.mp3",
-            trivia: "Seine letzten Worte waren über Toji – ein Hinweis, dass er nicht in Frieden geht."
-        },        
-        {
-            title: "Yuji trifft Sukuna",
-            year: 2018,
-            arc: "Einführung",
-            desc: "Yuji Itadori verschluckt Sukunas Finger und wird das Gefäß für den König der Flüche.",
-            img: "../Img/Story/yuji_sukuna.jpg",
-            sound: "../Sound/sukuna_laugh.mp3",
-            trivia: "Sukuna hat ursprünglich 4 Arme und 2 Gesichter in seiner echten Form."
-        },
-        {
-            title: "Eintritt in die Jujutsu Schule",
-            year: 2019,
-            arc: "Jujutsu High",
-            desc: "Yuji, Megumi und Nobara starten ihre Ausbildung und treffen Satoru Gojo.",
-            img: "../Img/Story/gojo_intro.jpg",
-            sound: "../Sound/gojo_yeah.mp3",
-            trivia: "Gojo ist der erste in 100 Jahren, der mit der Sechs-Augen-Technik geboren wurde."
-        },
-        {
-            title: "Kyoto Goodwill Event",
-            year: 2020,
-            arc: "Kyoto Turnier",
-            desc: "Die beiden Schulen treten gegeneinander an. Panda & Todo zeigen ihre Stärke.",
-            img: "../Img/Story/kyoto_event.jpg",
-            sound: "../Sound/todo.mp3",
-            trivia: "Aoi Todo ist ein Idol-Fan – sein Lieblings-Typ bei Frauen ist 'hoch mit großem Hintern'."
-        },
-        {
-            title: "Shibuya Incident",
-            year: 2021,
-            arc: "Shibuya",
-            desc: "Gojo wird versiegelt. Sukuna richtet Massaker an. Nanami stirbt.",
-            img: "../Img/Story/shibuya.jpg",
-            sound: "../Sound/explode.mp3",
-            trivia: "Sukuna tötet über 1000 Menschen in wenigen Minuten – mit nur einem Finger!"
-        },
-        {
-            title: "Culling Game",
-            year: 2022,
-            arc: "Culling Game",
-            desc: "Ein tödliches Spiel beginnt. Yuji, Megumi & Kinji kämpfen gegen Zeit und Regeln.",
-            img: "../Img/Story/culling.jpg",
-            sound: "../Sound/culling.mp3",
-            trivia: "Hakari kann durch sein Domain-Glücksspiel für 4:11 Minuten unsterblich sein."
-        }
-    ];
 
     const container = document.createElement("div");
     container.id = "roadmap";
@@ -358,6 +257,40 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 node.style.display = "none";
             }
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const arcDots = document.querySelectorAll('.arc');
+    const arcSections = document.querySelectorAll('.arc-section');
+    const mainArcContainer = document.getElementById('main-arcs');
+
+    arcDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const targetId = dot.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+
+           
+            mainArcContainer.style.display = 'none';
+
+            
+            arcSections.forEach(section => section.classList.add('hidden'));
+
+          
+            targetSection.classList.remove('hidden');
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    const backButtons = document.querySelectorAll('.back-btn');
+    backButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            
+            arcSections.forEach(section => section.classList.add('hidden'));
+
+            mainArcContainer.style.display = 'flex';
+            mainArcContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 });

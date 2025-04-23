@@ -585,6 +585,10 @@ hr {
     box-shadow: 0 0 15px var(--accent-shadow);
 }
 
+.description{
+    font-family: 'Jost', sans-serif;
+}
+
 #characters-section {
     position: relative;
     padding: 40px 20px;
