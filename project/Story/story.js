@@ -189,6 +189,8 @@ document.querySelectorAll('.flag-btn').forEach(button => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    AOS.init();
+
     const arcDots = document.querySelectorAll('.arc');
     const arcSections = document.querySelectorAll('.arc-section');
     const mainArcContainer = document.getElementById('main-arcs');
@@ -201,16 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
             mainArcContainer.style.display = 'none';
             arcSections.forEach(section => section.classList.add('hidden'));
             targetSection.classList.remove('hidden');
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    const backButtons = document.querySelectorAll('.back-btn');
-    backButtons.forEach(btn => {
+    document.querySelectorAll('.back-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             arcSections.forEach(section => section.classList.add('hidden'));
             mainArcContainer.style.display = 'flex';
-            mainArcContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            mainArcContainer.scrollIntoView({ behavior: 'smooth' });
         });
     });
 });
