@@ -188,79 +188,6 @@ document.querySelectorAll('.flag-btn').forEach(button => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    const container = document.createElement("div");
-    container.id = "roadmap";
-    document.body.appendChild(container);
-
-    const searchInput = document.createElement("input");
-    searchInput.placeholder = "Suche nach Arc oder Jahr...";
-    searchInput.id = "searchBox";
-    document.body.insertBefore(searchInput, container);
-
-    const triviaBox = document.createElement("div");
-    triviaBox.id = "triviaBox";
-    document.body.appendChild(triviaBox);
-
-    timelineData.forEach((event, index) => {
-        const node = document.createElement("div");
-        node.className = "roadmap-node";
-        node.innerHTML = `
-            <div class="dot" data-index="${index}"></div>
-            <div class="label">${event.year}<br><strong>${event.title}</strong></div>
-            <div class="desc hidden">
-                <img src="${event.img}" alt="${event.title}" class="event-img"/>
-                <p>${event.desc}</p>
-                <button class="trivia-btn">Wusstest du schon?</button>
-                <audio id="sound-${index}" src="${event.sound}"></audio>
-            </div>
-        `;
-        container.appendChild(node);
-    });
-
-    document.querySelectorAll(".dot").forEach(dot => {
-        dot.addEventListener("click", (e) => {
-            const idx = e.target.dataset.index;
-            document.querySelectorAll(".desc").forEach(d => d.classList.add("hidden"));
-            document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
-            dot.classList.add("active");
-
-            const descBox = document.querySelectorAll(".desc")[idx];
-            descBox.classList.remove("hidden");
-
-            const audio = document.getElementById(`sound-${idx}`);
-            if (audio) {
-                audio.currentTime = 0;
-                audio.play();
-            }
-        });
-    });
-
-    document.querySelectorAll(".trivia-btn").forEach((btn, idx) => {
-        btn.addEventListener("click", () => {
-            triviaBox.innerHTML = `<strong>Trivia:</strong> ${timelineData[idx].trivia}`;
-            triviaBox.classList.add("show");
-        });
-    });
-
-    searchInput.addEventListener("input", () => {
-        const val = searchInput.value.toLowerCase();
-        document.querySelectorAll(".roadmap-node").forEach((node, idx) => {
-            const item = timelineData[idx];
-            if (
-                item.title.toLowerCase().includes(val) ||
-                item.arc.toLowerCase().includes(val) ||
-                item.year.toString().includes(val)
-            ) {
-                node.style.display = "flex";
-            } else {
-                node.style.display = "none";
-            }
-        });
-    });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const arcDots = document.querySelectorAll('.arc');
     const arcSections = document.querySelectorAll('.arc-section');
@@ -271,13 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = dot.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
 
-           
             mainArcContainer.style.display = 'none';
-
-            
             arcSections.forEach(section => section.classList.add('hidden'));
-
-          
             targetSection.classList.remove('hidden');
             targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
@@ -286,9 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const backButtons = document.querySelectorAll('.back-btn');
     backButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            
             arcSections.forEach(section => section.classList.add('hidden'));
-
             mainArcContainer.style.display = 'flex';
             mainArcContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
