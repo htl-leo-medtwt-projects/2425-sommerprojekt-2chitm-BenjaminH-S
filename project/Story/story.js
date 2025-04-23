@@ -189,7 +189,10 @@ document.querySelectorAll('.flag-btn').forEach(button => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    AOS.init();
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
 
     const arcDots = document.querySelectorAll('.arc');
     const arcSections = document.querySelectorAll('.arc-section');
