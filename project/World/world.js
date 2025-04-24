@@ -525,6 +525,64 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     loadSettings();
+
+    const sorcererCard = document.querySelector('.sorcerer-card');
+    const curseUserCard = document.querySelector('.curse-user-card');
+    
+    sorcererCard.addEventListener('click', () => {
+        sorcererCard.classList.add('selected-green');
+        sorcererCard.classList.remove('dimmed-box', 'selected-red');
+    
+        curseUserCard.classList.remove('selected-red', 'selected-green');
+        curseUserCard.classList.add('dimmed-box');
+    });
+    
+    curseUserCard.addEventListener('click', () => {
+        curseUserCard.classList.add('selected-red');
+        curseUserCard.classList.remove('dimmed-box', 'selected-green');
+    
+        sorcererCard.classList.remove('selected-green', 'selected-red');
+        sorcererCard.classList.add('dimmed-box');
+    });
+    
+    const weaponCard = document.querySelector('.weapon-card');
+    const energyCard = document.querySelector('.energy-card');
+    
+    weaponCard.addEventListener('click', () => {
+        weaponCard.classList.add('selected-grey');
+        weaponCard.classList.remove('dimmed-box', 'selected-blue');
+    
+        energyCard.classList.remove('selected-blue', 'selected-grey');
+        energyCard.classList.add('dimmed-box');
+    });
+    
+    energyCard.addEventListener('click', () => {
+        energyCard.classList.add('selected-blue');
+        energyCard.classList.remove('dimmed-box', 'selected-grey');
+    
+        weaponCard.classList.remove('selected-grey', 'selected-blue');
+        weaponCard.classList.add('dimmed-box');
+    });
+
+    const domainCard = document.querySelectorAll('.character-card')[2];
+const techniqueCard = document.querySelectorAll('.character-card')[3];
+
+domainCard.addEventListener('click', () => {
+    domainCard.classList.add('selected-black');
+    domainCard.classList.remove('dimmed-box', 'selected-purple');
+
+    techniqueCard.classList.remove('selected-purple', 'selected-black');
+    techniqueCard.classList.add('dimmed-box');
+});
+
+techniqueCard.addEventListener('click', () => {
+    techniqueCard.classList.add('selected-purple');
+    techniqueCard.classList.remove('dimmed-box', 'selected-black');
+
+    domainCard.classList.remove('selected-black', 'selected-purple');
+    domainCard.classList.add('dimmed-box');
+});
+
 });
 
 
