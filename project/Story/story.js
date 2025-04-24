@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2006,
             arc: "Hidden Inventory",
             desc: "Gojo und Geto sollen Riko Amanai schützen, das Star Plasma Vessel – die Welt hängt an ihrem Leben.",
-            img: "../Img/Story/gojo_geto_youth.jpg",
+            img: "../Img/Story/G_G.png",
             trivia: "Geto und Gojo galten als unbesiegbares Duo – bis sie auf Toji trafen."
         },
         {
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2006,
             arc: "Hidden Inventory",
             desc: "Toji Fushiguro bricht die Schutzbarriere und erschießt Riko Amanai – vor Getos Augen.",
-            img: "../Img/Story/toji_kills_riko.jpg",
+            img: "../Img/Story/Toji.png",
             trivia: "Toji besitzt keine Fluchenergie, aber sein Körper ist ein Tempel für verfluchte Werkzeuge."
         },
         {
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2006,
             arc: "Hidden Inventory",
             desc: "Verletzt, aber lebendig – Gojo entdeckt Reversed Cursed Technique & kombiniert Red + Blue.",
-            img: "../Img/Story/gojo_awakened.jpg",
+            img: "../Img/Story/Revival.png",
             trivia: "Gojo ist der erste Jujutsuzauberer, der gleichzeitig 'Limitless' & 'Reversed Cursed Energy' gemeistert hat."
         },
         {
@@ -177,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2006,
             arc: "Hidden Inventory",
             desc: "Nach der Wiederauferstehung tötet Gojo Toji mit 'Hollow Purple' – ein Meisterwerk der Technik.",
+            img: "../Img/Story/Toji_D.png",
             trivia: "Gojo ist der erste Jujutsuzauberer, der gleichzeitig 'Limitless' & 'Reversed Cursed Energy' gemeistert hat."
         },
         {
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2007,
             arc: "Hidden Inventory",
             desc: "Nach Riko Amanais Tod verliert Geto den Glauben an Menschen – seine dunkle Wandlung beginnt.",
-            img: "../Img/Story/geto_fall.jpg",
+            img: "../Img/Story/Geto.png",
             trivia: "Geto sagte: 'Die Welt braucht nur Jujuzisten.' Danach tötete er über 100 Zivilisten."
         },
         {
@@ -192,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Einführung",
             desc: "Yuji Itadori verschluckt Sukunas Finger und wird das Gefäß für den König der Flüche.",
-            img: "../Img/Story/yuji_sukuna.jpg",
+            img: "../Img/Story/Sukuna.png",
             trivia: "Sukuna hat ursprünglich 4 Arme und 2 Gesichter in seiner echten Form."
         },
         {
@@ -200,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Jujutsu High",
             desc: "Yuji, Megumi und Nobara starten ihre Ausbildung und treffen Satoru Gojo.",
-            img: "../Img/Story/gojo_intro.jpg",
+            img: "../Img/Story/School.png",
             trivia: "Gojo ist der erste in 100 Jahren, der mit der Sechs-Augen-Technik geboren wurde."
         },
         {
@@ -208,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Kyoto Turnier",
             desc: "Die beiden Schulen treten gegeneinander an. Panda & Todo zeigen ihre Stärke.",
-            img: "../Img/Story/kyoto_event.jpg",
+            img: "../Img/Story/Goodwill.png",
             trivia: "Aoi Todo ist ein Idol-Fan – sein Lieblings-Typ bei Frauen ist 'hoch mit großem Hintern'."
         },
         {
@@ -216,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Shibuya",
             desc: "Gojo wird versiegelt. Sukuna richtet Massaker an. Nanami stirbt.",
-            img: "../Img/Story/shibuya.jpg",
+            img: "../Img/Story/Cube.png",
             trivia: "Sukuna tötet über 1000 Menschen in wenigen Minuten – mit nur einem Finger!"
         },
         {
@@ -224,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Culling Game",
             desc: "Ein tödliches Spiel beginnt. Yuji, Megumi & Kinji kämpfen gegen Zeit und Regeln.",
-            img: "../Img/Story/culling.jpg",
+            img: "../Img/Story/C_G.png",
             trivia: "Hakari kann durch sein Domain-Glücksspiel für 4:11 Minuten unsterblich sein."
         },
         {
@@ -232,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Shinjuku Showdown",
             desc: "Gojo tritt gegen den König der Flüche an – Sukuna im Körper von Megumi, mit Mahoraga in petto.",
-            img: "../Img/Story/shinjuku_start.jpg",
+            img: "../Img/Story/Gojo_Sukuna.png",
             trivia: "Ihr Kampf erschütterte die Realität – ganze Stadtteile verschwanden in Sekunden."
         },
         {
@@ -240,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year: 2018,
             arc: "Shinjuku Showdown",
             desc: "Sukuna trickst Gojo mit Mahoragas Adaption aus und durchtrennt ihn komplett.",
-            img: "../Img/Story/gojo_dead.jpg",
+            img: "../Img/Story/Gojo_Lose.png",
             trivia: "Seine letzten Worte waren über Toji – ein Hinweis, dass er nicht in Frieden geht."
         }
     ];

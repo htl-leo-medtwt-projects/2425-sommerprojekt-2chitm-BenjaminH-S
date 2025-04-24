@@ -348,3 +348,9 @@ input[type="text"]:focus {
 #triviaBox.show {
     display: block;
 }
+
+.event-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
