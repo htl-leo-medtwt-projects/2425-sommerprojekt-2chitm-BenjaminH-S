@@ -798,3 +798,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+const contrastToggle = document.getElementById('contrast-toggle');
+
+const imageMap = [
+    { selector: '.sorcerer-card img', dark: 'Jujutsu_Sorcerers.png', light: 'Jujutsu_Sorcerers_Dark.png' },
+    { selector: '.curse-user-card img', dark: 'Curse_Users.png', light: 'Curse_Users_dark.png' },
+    { selector: '.weapon-card img', dark: 'Cursed_Weapons.png', light: 'Cursed_Weapons_dark.png' },
+    { selector: '.energy-card img', dark: 'Cursed_Energy.png', light: 'Cursed_Energy_dark.png' },
+    { selector: '.domain-card img', dark: 'D_E.png', light: 'D_E_dark.png' },
+    { selector: '.technique-card img', dark: 'C_T.png', light: 'C_T_dark.png' },
+    { selector: '.organisations-card img', dark: 'Organisation.png', light: 'Organisation_dark.png' },
+    { selector: '.ranking-card img', dark: 'Ranking.png', light: 'Ranking_dark.png' },
+    { selector: '#jogo-btn', dark: 'Jogo.png', light: 'Jogo_dark.png' },
+    { selector: '#hanami-btn', dark: 'Hanami.png', light: 'Hanami_dark.png' },
+    { selector: '#mahito-btn', dark: 'Mahito.png', light: 'Mahito_dark.png' },
+    { selector: '#dagon-btn', dark: 'Dagon.png', light: 'Dagon_dark.png' },
+    { selector: '#sukuna-btn', dark: 'Sukuna.png', light: 'Sukuna_dark.png' },
+    { selector: '#gojo-btn', dark: 'Gojo.png', light: 'Gojo_dark.png' },
+    { selector: '#zenin-btn', dark: 'Zenin.png', light: 'Zenin_dark.png' },
+    { selector: '#kamo-btn', dark: 'Kamo.png', light: 'Kamo_dark.png' },
+    //{ selector: '#zenin-img', dark: 'Zenin_Tech.png', light: 'Zenin_Tech_dark.png' },
+    //{ selector: '#kamo-img', dark: 'Kamo_Tech.png', light: 'Kamo_Tech_dark.png' }
+];
+
+function updateImagesForContrast(isLightMode) {
+    imageMap.forEach(({ selector, light, dark }) => {
+        const img = document.querySelector(selector);
+        if (img) {
+            img.src = `../Img/World/${isLightMode ? light : dark}`;
+        }
+    });
+}
+
+contrastToggle.addEventListener('change', () => {
+    const isLightMode = contrastToggle.checked;
+    document.body.classList.toggle('light-mode', isLightMode);
+    updateImagesForContrast(isLightMode);
+});
+
+updateImagesForContrast(document.body.classList.contains('light-mode'));
