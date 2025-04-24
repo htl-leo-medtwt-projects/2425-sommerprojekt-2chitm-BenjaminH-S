@@ -354,3 +354,20 @@ input[type="text"]:focus {
     height: 100px;
     object-fit: cover;
 }
+
+.arc-btn {
+    background-color: #b82f10;
+    border: none;
+    color: white;
+    font-family: 'JJK';
+    padding: 0.7vw 1.5vw;
+    margin: 0.5vw;
+    border-radius: 10px;
+    font-size: 1vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.arc-btn:hover {
+    background-color: #932810;
+}

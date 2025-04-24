@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const popup = document.getElementById("popup");
     const contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
@@ -243,6 +244,22 @@ document.addEventListener("DOMContentLoaded", () => {
             desc: "Sukuna trickst Gojo mit Mahoragas Adaption aus und durchtrennt ihn komplett.",
             img: "../Img/Story/Gojo_Lose.png",
             trivia: "Seine letzten Worte waren über Toji – ein Hinweis, dass er nicht in Frieden geht."
+        },
+        {
+            title: "Reines Blutbad",
+            year: 2018,
+            arc: "Shinjuku Showdown",
+            desc: "Jeder stellt sich Sukunas Weg entgegen – Aber diejenigen, die es tun werden sofort von ihm besiegt.",
+            img: "../Img/Story/Gojo_Lose.png",
+            trivia: "Yuta Okkotsu stellt sich ihm 2 mal in den Weg - aber das zweite Mal als Gojo!"
+        },
+        {
+            title: "Sukuna stirbt",
+            year: 2018,
+            arc: "Shinjuku Showdown",
+            desc: "Yuji tötet dafür Sukuna und befreit Megumi aus seinem Körper. Als Revanche für Gojo.",
+            img: "../Img/Story/Yuji_Sukuna.png",
+            trivia: "Yuji gab Sukuna die Chance, mit ihm zu leben – aber der verneinte das Angebot."
         }
     ];
 
@@ -258,6 +275,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const triviaBox = document.createElement("div");
     triviaBox.id = "triviaBox";
     document.body.appendChild(triviaBox);
+
+    const arcFilter = document.createElement("div");
+    arcFilter.id = "arcFilter";
+    arcFilter.style.margin = "2vw auto";
+    arcFilter.style.textAlign = "center";
+    arcFilter.style.fontFamily = "'Jost'";
+    arcFilter.innerHTML = `
+    <button class="arc-btn" data-arc="All">Alle</button>
+    <button class="arc-btn" data-arc="Hidden Inventory">Hidden Inventory</button>
+    <button class="arc-btn" data-arc="Shibuya">Shibuya</button>`;
+    
+    document.body.insertBefore(arcFilter, searchInput);
 
     timelineData.forEach((event, index) => {
         const node = document.createElement("div");
@@ -275,23 +304,58 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(node);
     });
 
+    document.querySelectorAll(".arc-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const selectedArc = btn.dataset.arc.toLowerCase();
+            document.querySelectorAll(".roadmap-node").forEach((node, idx) => {
+                const item = timelineData[idx];
+                const matches = selectedArc === "all" || item.arc.toLowerCase() === selectedArc;
+    
+                if (matches) {
+                    node.style.display = "flex";
+                    node.style.opacity = 0;
+                    setTimeout(() => {
+                        node.style.opacity = 1;
+                        node.style.transition = "opacity 0.8s ease";
+                    }, 0);
+                } else {
+                    node.style.display = "none";
+                }
+            });
+    
+            triviaBox.classList.remove("show");
+        });
+    });
+    
+
     document.querySelectorAll(".dot").forEach(dot => {
         dot.addEventListener("click", (e) => {
             const idx = e.target.dataset.index;
-            document.querySelectorAll(".desc").forEach(d => d.classList.add("hidden"));
-            document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
-            dot.classList.add("active");
-
-            const descBox = document.querySelectorAll(".desc")[idx];
-            descBox.classList.remove("hidden");
-
-            const audio = document.getElementById(`sound-${idx}`);
-            if (audio) {
-                audio.currentTime = 0;
-                audio.play();
+            const descBoxes = document.querySelectorAll(".desc");
+            const allDots = document.querySelectorAll(".dot");
+            const thisDesc = descBoxes[idx];
+    
+            const isActive = dot.classList.contains("active");
+            descBoxes.forEach(d => d.classList.add("hidden"));
+            allDots.forEach(d => d.classList.remove("active"));
+    
+            if (!isActive) {
+                dot.classList.add("active");
+                thisDesc.classList.remove("hidden");
             }
         });
     });
+    
+    document.addEventListener("click", (e) => {
+        const isDot = e.target.classList.contains("dot");
+        const isDesc = e.target.closest(".desc");
+    
+        if (!isDot && !isDesc) {
+            document.querySelectorAll(".desc").forEach(d => d.classList.add("hidden"));
+            document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
+        }
+    });
+    
 
     document.querySelectorAll(".trivia-btn").forEach((btn, idx) => {
         btn.addEventListener("click", () => {
@@ -316,8 +380,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
-
-
-
 
