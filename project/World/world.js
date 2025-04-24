@@ -564,14 +564,14 @@ document.addEventListener("DOMContentLoaded", function () {
         weaponCard.classList.add('dimmed-box');
     });
 
-    const domainCard = document.querySelectorAll('.character-card')[2];
-const techniqueCard = document.querySelectorAll('.character-card')[3];
+const domainCard = document.querySelector('.domain-card');
+const techniqueCard = document.querySelector('.technique-card');
 
 domainCard.addEventListener('click', () => {
     domainCard.classList.add('selected-black');
     domainCard.classList.remove('dimmed-box', 'selected-purple');
 
-    techniqueCard.classList.remove('selected-purple', 'selected-black');
+    techniqueCard.classList.remove('selected-black', 'selected-purple');
     techniqueCard.classList.add('dimmed-box');
 });
 
@@ -579,9 +579,30 @@ techniqueCard.addEventListener('click', () => {
     techniqueCard.classList.add('selected-purple');
     techniqueCard.classList.remove('dimmed-box', 'selected-black');
 
-    domainCard.classList.remove('selected-black', 'selected-purple');
+    domainCard.classList.remove('selected-purple', 'selected-black');
     domainCard.classList.add('dimmed-box');
 });
+
+
+const orgaCard = document.querySelector('.organisations-card');
+const rankCard = document.querySelector('.ranking-card');
+
+orgaCard.addEventListener('click', () => {
+    orgaCard.classList.add('selected-brown');
+    orgaCard.classList.remove('dimmed-box', 'selected-white');
+
+    rankCard.classList.remove('selected-brown', 'selected-white');
+    rankCard.classList.add('dimmed-box');
+});
+
+rankCard.addEventListener('click', () => {
+    rankCard.classList.add('selected-white');
+    rankCard.classList.remove('dimmed-box', 'selected-brown');
+
+    orgaCard.classList.remove('selected-white', 'selected-brown');
+    orgaCard.classList.add('dimmed-box');
+});
+
 
 });
 

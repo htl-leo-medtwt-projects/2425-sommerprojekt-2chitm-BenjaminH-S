@@ -773,49 +773,50 @@ hr {
 
 .selected-green {
     border: 2px solid #00ff99 !important;
-    box-shadow: 0 0 15px #00ff99;
+    box-shadow: 0 0 20px #00ff99;
+    background-color: rgba(0, 255, 153, 0.15); 
     transform: scale(1.03);
 }
 
 .selected-red {
     border: 2px solid red !important;
-    box-shadow: 0 0 15px red;
+    box-shadow: 0 0 20px red;
+    background-color: rgba(255, 0, 0, 0.15);
     transform: scale(1.03);
 }
 
 .selected-blue {
     border: 2px solid blue !important;
-    box-shadow: 0 0 15px blue;
-    transform: scale(1.03);
-}
-
-.selected-grey {
-    border: 2px solid grey !important;
-    box-shadow: 0 0 15px grey;
+    box-shadow: 0 0 20px blue;
+    background-color: rgba(0, 0, 255, 0.15);
     transform: scale(1.03);
 }
 
 .selected-black {
     border: 2px solid black !important;
-    box-shadow: 0 0 15px black;
+    box-shadow: 0 0 20px black;
+    background-color: rgba(0, 0, 0, 0.25);
     transform: scale(1.03);
 }
 
 .selected-purple {
     border: 2px solid purple !important;
-    box-shadow: 0 0 15px purple;
+    box-shadow: 0 0 20px purple;
+    background-color: rgba(128, 0, 128, 0.15);
     transform: scale(1.03);
 }
 
 .selected-brown {
     border: 2px solid saddlebrown !important;
-    box-shadow: 0 0 15px saddlebrown;
+    box-shadow: 0 0 20px saddlebrown;
+    background-color: rgba(139, 69, 19, 0.15);
     transform: scale(1.03);
 }
 
 .selected-white {
     border: 2px solid white !important;
-    box-shadow: 0 0 15px white;
+    box-shadow: 0 0 20px white;
+    background-color: rgba(255, 255, 255, 0.07);
     transform: scale(1.03);
 }
 
