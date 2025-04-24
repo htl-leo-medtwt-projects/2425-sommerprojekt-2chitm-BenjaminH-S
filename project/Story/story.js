@@ -214,12 +214,12 @@ document.addEventListener("DOMContentLoaded", () => {
             trivia: "Aoi Todo ist ein Idol-Fan – sein Lieblings-Typ bei Frauen ist 'hoch mit großem Hintern'."
         },
         {
-            title: "Shibuya Incident",
+            title: "Willkommen in Shibuya",
             year: 2018,
-            arc: "Shibuya",
-            desc: "Gojo wird versiegelt. Sukuna richtet Massaker an. Nanami stirbt.",
+            arc: "Shibuya Incident",
+            desc: "Gojo wird versiegelt durch Kenjaku mithilfe der 'Prison Realm'",
             img: "../Img/Story/Cube.png",
-            trivia: "Sukuna tötet über 1000 Menschen in wenigen Minuten – mit nur einem Finger!"
+            trivia: "Im Prison Realm verläuft die Zeit gar nicht und man kann seine Fluch-Energie kaum verwenden!."
         },
         {
             title: "Culling Game",
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
             arc: "Shinjuku Showdown",
             desc: "Jeder stellt sich Sukunas Weg entgegen – Aber diejenigen, die es tun werden sofort von ihm besiegt.",
             img: "../Img/Story/Gojo_Lose.png",
-            trivia: "Yuta Okkotsu stellt sich ihm 2 mal in den Weg - aber das zweite Mal als Gojo!"
+            trivia: "Yuta Okkotsu stellt sich Sukuna 2 mal in den Weg - aber das zweite Mal als Gojo!"
         },
         {
             title: "Sukuna stirbt",
