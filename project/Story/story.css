@@ -243,6 +243,7 @@ input[type="text"] {
     color: black;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
     font-family: 'Jost', sans-serif;
+    z-index: 1000;
 }
 
 input[type="text"]::placeholder {
@@ -363,11 +364,15 @@ input[type="text"]:focus {
     padding: 0.7vw 1.5vw;
     margin: 0.5vw;
     border-radius: 10px;
-    font-size: 1vw;
+    font-size: 1.4vw;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .arc-btn:hover {
     background-color: #932810;
+}
+
+#search-bar.light-search::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }

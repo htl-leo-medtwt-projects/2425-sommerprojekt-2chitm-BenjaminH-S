@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS geladen");
 
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+    
+
     const popup = document.getElementById("popup");
     const contrastToggle = document.getElementById("contrast-toggle");
     const langButtons = document.querySelectorAll(".flag-btn");
@@ -838,3 +844,8 @@ contrastToggle.addEventListener('change', () => {
 });
 
 updateImagesForContrast(document.body.classList.contains('light-mode'));
+
+document.querySelectorAll('.clan-btn, .clan-img, .curse-btn, .character-card').forEach((el, i) => {
+    el.setAttribute("data-aos", "zoom-in");
+    el.setAttribute("data-aos-delay", `${i * 100}`);
+});
