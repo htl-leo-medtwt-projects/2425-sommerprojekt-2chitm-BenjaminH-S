@@ -68,17 +68,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         };
-        
-
-        Object.keys(translations[lang]).forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = translations[lang][id];
+    
+        const langData = translations[lang];
+    
+        Object.keys(langData).forEach(key => {
+            if (key !== "arc-buttons") {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = langData[key];
+                }
             }
         });
-
+    
+        const arcButtons = document.querySelectorAll('.arc-btn');
+        arcButtons.forEach(button => {
+            const arcKey = button.getAttribute('data-arc');
+            if (langData["arc-buttons"][arcKey]) {
+                button.textContent = langData["arc-buttons"][arcKey];
+            }
+        });
+    
         document.documentElement.lang = lang;
     }
+    
 
     function applyContrast(mode) {
         const navBar = document.querySelector("ul");
