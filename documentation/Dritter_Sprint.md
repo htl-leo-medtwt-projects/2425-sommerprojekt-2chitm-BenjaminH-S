@@ -8,20 +8,22 @@
 ## Änderungen seit dem letzten Sprint 
 
 **World-Unterseite**
-- World Unterseite wurde komplett umgesetzt und ist komplett funktionsfähig seitens Kontrastsetzung und Sprachübersetzung
+- Kontrast Switch der World-Unterseite wurde nochmal verbessert, und gewisse Funktionalitäten wurden verbessert
 
-**Kontrast-Modis**
-- Die Bugs von den anderen Unterseiten bzgl. des Kontrasts wurden aufgehoben und sind voll funktionsfähig
+**Story-Unterseite**
+- Story Unterseite wurde implementiert samt Übersetzung und ausreichender Interaktion!
+
+**Library-Einbindung**
+- Die AOS-Library wurde erfolgreich mitunter der Unterseite Story eingebunden für minimale visuelle Änderungen (Fade-In, etc.)
 
 ## Screenshots der verrichteten Arbeit
 
 **Commits-Insight**
-![Commits](image_2.png)
+![Commits](image3.png)
 
 
 **Code-Frequency**
-![Code-Additions](image_3.png)
+![Code-Additions](image4.png)
 
 ## Ziele bis zum nächsten Sprint 
-- [ ] Story Unterseite umsetzen
-- [ ] Neue Library finden und einsetzen 
+- [] Quiz Seite zu einer GameHub Seite umschreiben mit vielen interaktiven Sachen (Drag-And-Drop, Quiz, usw.)
