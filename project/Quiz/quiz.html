@@ -15,7 +15,7 @@
         <li><a href="../Media/media.html" id="mediales">Mediales</a></li>
         <li><a href="../World/world.html" id="welt">Welt</a></li>
         <li><a id="header" href="../Main/main.html">Jujutsu Kaisen</a></li>
-        <li><a id="quiz">Quiz</a></li>
+        <li><a id="quiz">GameHub</a></li>
         <li><a href="../Story/story.html" id="geschichte">Geschichte</a></li>
        
         <li style="float:right" id="rad">
@@ -26,10 +26,45 @@
     </ul>
 
     <div id="box">
-        <h3 id="title">Jujutsu Kognien GameHub</h3>
+        <h3 id="title">Jujutsu Kaisen GameHub</h3>
         <p>Willkommen zum GameHub!</p>
-        <p></p>
-    </div>
+      
+        <section id="quiz-section">
+          <h4>Quiz: Bist du ein wahrer Jujutsuka?</h4>
+          <button onclick="startQuiz()">Starten</button>
+          <div id="quiz-container" class="hidden"></div>
+        </section>
+      
+        <section id="tictactoe-section">
+          <h4>Tic Tac Toe: Gojo vs Sukuna</h4>
+          <div id="tictactoe-board"></div>
+        </section>
+      
+        <section id="dragdrop-section">
+          <h4>Drag & Drop: Ordne die Flüche den Charakteren zu</h4>
+          <div class="drag-items">
+            <div draggable="true" class="drag" data-char="Sukuna">Sukuna</div>
+            <div draggable="true" class="drag" data-char="Mahito">Mahito</div>
+          </div>
+          <div class="drop-targets">
+            <div class="drop" data-char="Sukuna">Ryomen Sukuna</div>
+            <div class="drop" data-char="Mahito">Mahito</div>
+          </div>
+        </section>
+      
+        <section id="quotes-section">
+          <h4>Wer hat das gesagt?</h4>
+          <div id="quote-question"></div>
+          <div id="quote-options"></div>
+        </section>
+      
+        <section id="wheel-section">
+          <h4>Glücksrad der Techniken</h4>
+          <button onclick="spinWheel()">Drehen</button>
+          <div id="wheel-result"></div>
+        </section>
+      </div>
+      
 
     <div id="popup" class="hidden">
         <div class="popup-content">

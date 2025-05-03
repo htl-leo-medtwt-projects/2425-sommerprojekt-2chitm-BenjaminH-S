@@ -187,3 +187,33 @@ document.querySelectorAll('.flag-btn').forEach(button => {
         button.classList.add('selected');
     });
 });
+
+function startQuiz() {
+    document.getElementById('quiz-container').classList.remove('hidden');
+  }
+  
+  function spinWheel() {
+    const techniques = ["Unendlichkeit", "Fluchverstärkung", "Idle Transfiguration", "Reversed Cursed Energy"];
+    const result = techniques[Math.floor(Math.random() * techniques.length)];
+    document.getElementById('wheel-result').innerText = `Du hast erhalten: ${result}`;
+  }
+  
+  document.querySelectorAll('.drag').forEach(el => {
+    el.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', e.target.dataset.char);
+    });
+  });
+  
+  document.querySelectorAll('.drop').forEach(el => {
+    el.addEventListener('dragover', e => e.preventDefault());
+    el.addEventListener('drop', e => {
+      const dragged = e.dataTransfer.getData('text/plain');
+      if (dragged === el.dataset.char) {
+        el.textContent = `✅ ${dragged}`;
+        el.classList.add('correct');
+      } else {
+        el.textContent = `❌ Falsch`;
+      }
+    });
+  });
+  
