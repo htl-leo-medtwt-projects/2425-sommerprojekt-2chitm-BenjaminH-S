@@ -255,66 +255,49 @@ input[type="text"]:focus {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); 
 }
 
-.card {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 2px solid #b82f10;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-    padding: 20px;
-    margin: 10px auto;
-    width: 80%;
-    font-family: 'Jost', sans-serif;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    border-radius: 15px;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #b82f10;
-}
-
-.tictactoe-cell {
-    background-color: #111;
-    border: 1px solid #444;
-    color: #fff;
-    font-size: 2rem;
-    display: flex;
+.memory-container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    margin-top: 20px;
     justify-content: center;
-    align-items: center;
+  }
+  
+  .memory-card {
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
     cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-.tictactoe-cell:hover {
-    box-shadow: 0 0 10px #770000;
-}
-
-.drag {
-    background: linear-gradient(145deg, #400000, #770000);
-    padding: 15px;
+  }
+  
+  .memory-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .memory-card.flipped .memory-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .memory-front, .memory-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
     border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    margin: 10px;
-    box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
-    transition: transform 0.2s ease;
-}
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .memory-front {
+    transform: rotateY(180deg);
+  }
+  
+  .memory-back {
+    background-color: #222;
+  }
+  
 
-.drag:hover {
-    transform: scale(1.1);
-}
-
-.drop {
-    border: 2px dashed #b82f10;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.drop.correct {
-    background-color: rgba(0, 255, 0, 0.3);
-    border-color: lime;
-}

@@ -198,22 +198,63 @@ function startQuiz() {
     document.getElementById('wheel-result').innerText = `Du hast erhalten: ${result}`;
   }
   
-  document.querySelectorAll('.drag').forEach(el => {
-    el.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text/plain', e.target.dataset.char);
-    });
-  });
+  const characters = [
+    { name: "Gojo", img: "../Img/Memory/gojo.jpg" },
+    { name: "Itadori", img: "../Img/Memory/itadori.jpg" },
+    { name: "Nobara", img: "../Img/Memory/nobara.jpg" },
+    { name: "Megumi", img: "../Img/Memory/megumi.jpg" },
+    { name: "Sukuna", img: "../Img/Memory/sukuna.jpg" },
+    { name: "Nanami", img: "../Img/Memory/nanami.jpg" },
+  ];
   
-  document.querySelectorAll('.drop').forEach(el => {
-    el.addEventListener('dragover', e => e.preventDefault());
-    el.addEventListener('drop', e => {
-      const dragged = e.dataTransfer.getData('text/plain');
-      if (dragged === el.dataset.char) {
-        el.textContent = `✅ ${dragged}`;
-        el.classList.add('correct');
-      } else {
-        el.textContent = `❌ Falsch`;
-      }
+  let flippedCards = [];
+  let lockBoard = false;
+  
+  function startMemoryGame() {
+    const game = document.getElementById("memory-game");
+    game.innerHTML = "";
+    game.classList.remove("hidden");
+  
+    const doubled = [...characters, ...characters];
+    const shuffled = doubled.sort(() => 0.5 - Math.random());
+  
+    shuffled.forEach(char => {
+      const card = document.createElement("div");
+      card.className = "memory-card";
+      card.innerHTML = `
+        <div class="memory-card-inner">
+          <div class="memory-front" style="background-image: url('${char.img}')"></div>
+          <div class="memory-back"></div>
+        </div>`;
+      
+      card.dataset.name = char.name;
+      card.addEventListener("click", () => flipCard(card));
+      game.appendChild(card);
     });
-  });
+  }
+  
+  function flipCard(card) {
+    if (lockBoard || card.classList.contains("flipped")) return;
+  
+    card.classList.add("flipped");
+    flippedCards.push(card);
+  
+    if (flippedCards.length === 2) {
+      lockBoard = true;
+      const [first, second] = flippedCards;
+  
+      if (first.dataset.name === second.dataset.name) {
+        flippedCards = [];
+        lockBoard = false;
+      } else {
+        setTimeout(() => {
+          first.classList.remove("flipped");
+          second.classList.remove("flipped");
+          flippedCards = [];
+          lockBoard = false;
+        }, 1000);
+      }
+    }
+  }
+  
   
