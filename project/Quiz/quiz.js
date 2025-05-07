@@ -188,73 +188,137 @@ document.querySelectorAll('.flag-btn').forEach(button => {
     });
 });
 
-function startQuiz() {
-    document.getElementById('quiz-container').classList.remove('hidden');
-  }
-  
-  function spinWheel() {
-    const techniques = ["Unendlichkeit", "Fluchverstärkung", "Idle Transfiguration", "Reversed Cursed Energy"];
-    const result = techniques[Math.floor(Math.random() * techniques.length)];
-    document.getElementById('wheel-result').innerText = `Du hast erhalten: ${result}`;
-  }
-  
-  const characters = [
-    { name: "Gojo", img: "../Img/Memory/gojo.jpg" },
-    { name: "Itadori", img: "../Img/Memory/itadori.jpg" },
-    { name: "Nobara", img: "../Img/Memory/nobara.jpg" },
-    { name: "Megumi", img: "../Img/Memory/megumi.jpg" },
-    { name: "Sukuna", img: "../Img/Memory/sukuna.jpg" },
-    { name: "Nanami", img: "../Img/Memory/nanami.jpg" },
-  ];
-  
-  let flippedCards = [];
-  let lockBoard = false;
-  
-  function startMemoryGame() {
+function startMemoryGame() {
     const game = document.getElementById("memory-game");
-    game.innerHTML = "";
+    game.innerHTML = ""; 
     game.classList.remove("hidden");
   
-    const doubled = [...characters, ...characters];
-    const shuffled = doubled.sort(() => 0.5 - Math.random());
+    const chars = ["gojo", "megumi", "nobara", "yuji", "sukuna", "kenjaku"];
+    const cards = [...chars, ...chars].sort(() => 0.5 - Math.random());
+    let flipped = [];
   
-    shuffled.forEach(char => {
+    cards.forEach(char => {
       const card = document.createElement("div");
       card.className = "memory-card";
       card.innerHTML = `
         <div class="memory-card-inner">
-          <div class="memory-front" style="background-image: url('${char.img}')"></div>
+          <div class="memory-front" style="background-image:url('../Img/FunHub/${char}.png')"></div>
           <div class="memory-back"></div>
         </div>`;
-      
-      card.dataset.name = char.name;
-      card.addEventListener("click", () => flipCard(card));
+      card.addEventListener("click", () => flipCard(card, char));
       game.appendChild(card);
     });
-  }
   
-  function flipCard(card) {
-    if (lockBoard || card.classList.contains("flipped")) return;
+    function flipCard(card, char) {
+      if (card.classList.contains("flipped")) return;
+      card.classList.add("flipped");
+      flipped.push({ card, char });
   
-    card.classList.add("flipped");
-    flippedCards.push(card);
-  
-    if (flippedCards.length === 2) {
-      lockBoard = true;
-      const [first, second] = flippedCards;
-  
-      if (first.dataset.name === second.dataset.name) {
-        flippedCards = [];
-        lockBoard = false;
-      } else {
-        setTimeout(() => {
-          first.classList.remove("flipped");
-          second.classList.remove("flipped");
-          flippedCards = [];
-          lockBoard = false;
-        }, 1000);
+      if (flipped.length === 2) {
+        const [a, b] = flipped;
+        if (a.char !== b.char) {
+          setTimeout(() => {
+            a.card.classList.remove("flipped");
+            b.card.classList.remove("flipped");
+          }, 1000);
+        }
+        flipped = [];
       }
     }
   }
+  
+  function replayMemoryGame() {
+    startMemoryGame();
+  }
+  
+  function spinWheel() {
+    const result = document.getElementById("wheel-result");
+    const techniques = ["Hollow Purple", "Ten Shadows", "Straw Doll", "Cursed Speech"];
+    const selection = techniques[Math.floor(Math.random() * techniques.length)];
+    result.textContent = `Du hast: ${selection}`;
+  }
+  
+  function resetWheel() {
+    document.getElementById("wheel-result").textContent = "";
+  }
+  
+  const quizData = [
+    {
+      question: "Was ist Gojo Satorus Technik?",
+      options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"],
+      answer: "Limitless"
+    },
+    {
+      question: "Wer ist der Träger Sukunas?",
+      options: ["Toji", "Yuji", "Megumi", "Nanami"],
+      answer: "Yuji"
+    }
+  ];
+  
+  function startQuiz() {
+    const container = document.getElementById("quiz-game");
+    container.classList.remove("hidden");
+    container.innerHTML = "";
+    let index = 0;
+  
+    showQuestion();
+  
+    function showQuestion() {
+      const q = quizData[index];
+      container.innerHTML = `<p>${q.question}</p>`;
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          alert(opt === q.answer ? "Richtig!" : "Falsch!");
+          index++;
+          if (index < quizData.length) showQuestion();
+          else container.innerHTML = "Quiz beendet!";
+        };
+        container.appendChild(btn);
+      });
+    }
+  }
+  
+  const quoteData = [
+    {
+      quote: "Jeder in meiner Familie hat eine Rolle. Ich war das Opfer.",
+      options: ["Toji", "Geto", "Yuji", "Megumi"],
+      answer: "Megumi"
+    },
+    {
+      quote: "Ich bin der stärkste.",
+      options: ["Sukuna", "Gojo", "Mahito", "Nanami"],
+      answer: "Gojo"
+    }
+  ];
+  
+  function startQuoteGame() {
+    const container = document.getElementById("quote-game");
+    container.classList.remove("hidden");
+    container.innerHTML = "";
+    let index = 0;
+  
+    showQuote();
+  
+    function showQuote() {
+      const q = quoteData[index];
+      container.innerHTML = `<p>„${q.quote}“</p>`;
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "quote-option";
+        btn.textContent = opt;
+        btn.onclick = () => {
+          alert(opt === q.answer ? "Richtig!" : `Falsch! Richtige Antwort: ${q.answer}`);
+          index++;
+          if (index < quoteData.length) showQuote();
+          else container.innerHTML = "Zitate-Spiel beendet!";
+        };
+        container.appendChild(btn);
+      });
+    }
+  }
+  
   
   
