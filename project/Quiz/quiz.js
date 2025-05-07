@@ -188,6 +188,7 @@ document.querySelectorAll('.flag-btn').forEach(button => {
     });
 });
 
+
 function startMemoryGame() {
     const game = document.getElementById("memory-game");
     game.innerHTML = ""; 
@@ -318,6 +319,16 @@ function startMemoryGame() {
         container.appendChild(btn);
       });
     }
+  }
+  
+  let currentIndex = 0;
+
+  function slide(direction) {
+      const slider = document.getElementById("game-slider");
+      const totalSlides = slider.children.length;
+  
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
   }
   
   

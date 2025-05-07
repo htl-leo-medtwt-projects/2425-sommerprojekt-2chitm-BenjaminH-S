@@ -337,3 +337,51 @@ input[type="text"]:focus {
     color: #000;
   }
 
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    margin: 40px auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+  }
+  
+  .game-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  
+  .slide {
+    min-width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Jost', sans-serif;
+  }
+  
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+  }
+  
+  .slider-btn.left {
+    left: 10px;
+  }
+  
+  .slider-btn.right {
+    right: 10px;
+  }
+  
+

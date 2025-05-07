@@ -26,33 +26,32 @@
     </ul>
 
     <div id="box">
-        <h2>Jujutsu Kaisen GameHub</h2>
-    
-        <section>
-          <h3>Memory: Erkenne die Charaktere</h3>
-          <button onclick="startMemoryGame()">Spiel starten</button>
-          <button onclick="replayMemoryGame()">Erneut spielen</button>
-          <div id="memory-game" class="memory-container hidden"></div>
-        </section>
-    
-        <section>
-          <h3>Glücksrad der Techniken</h3>
-          <button onclick="spinWheel()">Drehen</button>
-          <button onclick="resetWheel()">Erneut spielen</button>
-          <div id="wheel-result"></div>
-        </section>
-    
-        <section>
-          <h3>Wissenstest</h3>
-          <button onclick="startQuiz()">Quiz starten</button>
-          <div id="quiz-game" class="quiz-container hidden"></div>
-        </section>
-    
-        <section>
-          <h3>Zitate-Raten</h3>
-          <button onclick="startQuoteGame()">Starten</button>
-          <div id="quote-game" class="quote-container hidden"></div>
-        </section>
+        <div class="slider-container">
+            <div class="game-slider" id="game-slider">
+              <div class="slide">
+                <h3>Memory</h3>
+                <p>Erkenne die Charaktere!</p>
+                <button onclick="startMemoryGame()">Starten</button>
+              </div>
+              <div class="slide">
+                <h3>Glücksrad</h3>
+                <p>Drehe das Rad der Techniken!</p>
+                <button onclick="spinWheel()">Drehen</button>
+              </div>
+              <div class="slide">
+                <h3>Quiz</h3>
+                <p>Teste dein Wissen!</p>
+                <button onclick="startQuiz()">Starten</button>
+              </div>
+              <div class="slide">
+                <h3>Zitate-Raten</h3>
+                <p>Wer hat das gesagt?</p>
+                <button onclick="startQuoteGame()">Starten</button>
+              </div>
+            </div>
+            <button class="slider-btn left" onclick="slide(-1)">&#10094;</button>
+            <button class="slider-btn right" onclick="slide(1)">&#10095;</button>
+          </div>
       </div>
       
 
