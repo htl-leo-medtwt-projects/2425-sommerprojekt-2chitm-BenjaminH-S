@@ -1,225 +1,196 @@
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+}
+
+function showOptions() {
+  const popup = document.getElementById("popup");
+  if (popup) popup.classList.remove("hidden");
+}
+
+function closeOptions() {
+  const popup = document.getElementById("popup");
+  if (popup) popup.classList.add("hidden");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("popup");
-    const contrastToggle = document.getElementById("contrast-toggle");
-    const langButtons = document.querySelectorAll(".flag-btn");
+  const popup = document.getElementById("popup");
+  const contrastToggle = document.getElementById("contrast-toggle");
+  const langButtons = document.querySelectorAll(".flag-btn");
 
-    function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-    }
+  function loadSettings() {
+    const language = getCookie("language") || "de";
+    const contrastMode = getCookie("contrastMode") || "dark";
+    applyLanguage(language);
+    applyContrast(contrastMode);
+  }
 
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length == 2) return parts.pop().split(";").shift();
-        return null;
-    }
+  function applyLanguage(lang) {
+    const translations = {
+      de: {
+        "settings-title": "Einstellungen",
+        "contrast-label": "Kontrast",
+        "language-label": "Sprache",
+        "mediales": "Mediales",
+        "welt": "Welt",
+        "quiz": "Quiz",
+        "geschichte": "Geschichte",
+        "memory-title": "Memory",
+        "memory-sub": "Erkenne die Charaktere!",
+        "memory-button": "Starten",
+        "wheel-title": "Glücksrad",
+        "wheel-sub": "Drehe das Rad der Techniken!",
+        "wheel-button": "Drehen",
+        "quiz-title": "Quiz",
+        "quiz-sub": "Teste dein Wissen!",
+        "quiz-button": "Starten",
+        "quote-title": "Zitate-Raten",
+        "quote-sub": "Wer hat das gesagt?",
+        "quote-button": "Starten"
+      },
+      en: {
+        "settings-title": "Settings",
+        "contrast-label": "Contrast",
+        "language-label": "Language",
+        "mediales": "Media",
+        "welt": "World",
+        "quiz": "Quiz",
+        "geschichte": "Story",
+        "memory-title": "Memory",
+        "memory-sub": "Recognize the characters!",
+        "memory-button": "Start",
+        "wheel-title": "Wheel of Fortune",
+        "wheel-sub": "Spin the wheel of techniques!",
+        "wheel-button": "Spin",
+        "quiz-title": "Quiz",
+        "quiz-sub": "Test your knowledge!",
+        "quiz-button": "Start",
+        "quote-title": "Quote Guess",
+        "quote-sub": "Who said this?",
+        "quote-button": "Start"
+      }
+    };
 
-    function loadSettings() {
-        const language = getCookie("language") || "de";
-        const contrastMode = getCookie("contrastMode") || "dark";
-        applyLanguage(language);
-        applyContrast(contrastMode);
-    }
-
-    function applyLanguage(lang) {
-      const translations = {
-        de: {
-          "settings-title": "Einstellungen",
-          "contrast-label": "Kontrast",
-          "language-label": "Sprache",
-          "mediales": "Mediales",
-          "welt": "Welt",
-          "quiz": "Quiz",
-          "geschichte": "Geschichte",
-          "memory-title": "Memory",
-          "memory-sub": "Erkenne die Charaktere!",
-          "memory-button": "Starten",
-          "wheel-title": "Glücksrad",
-          "wheel-sub": "Drehe das Rad der Techniken!",
-          "wheel-button": "Drehen",
-          "quiz-title": "Quiz",
-          "quiz-sub": "Teste dein Wissen!",
-          "quiz-button": "Starten",
-          "quote-title": "Zitate-Raten",
-          "quote-sub": "Wer hat das gesagt?",
-          "quote-button": "Starten"
-        },
-        en: {
-          "settings-title": "Settings",
-          "contrast-label": "Contrast",
-          "language-label": "Language",
-          "mediales": "Media",
-          "welt": "World",
-          "quiz": "Quiz",
-          "geschichte": "Story",
-          "memory-title": "Memory",
-          "memory-sub": "Recognize the characters!",
-          "memory-button": "Start",
-          "wheel-title": "Wheel of Fortune",
-          "wheel-sub": "Spin the wheel of techniques!",
-          "wheel-button": "Spin",
-          "quiz-title": "Quiz",
-          "quiz-sub": "Test your knowledge!",
-          "quiz-button": "Start",
-          "quote-title": "Quote Guess",
-          "quote-sub": "Who said this?",
-          "quote-button": "Start"
-        }
-      };
-
-      Object.entries(translations[lang]).forEach(([id, text]) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = text;
-      });
-    
-      document.documentElement.lang = lang;
-      setCookie("language", lang, 7);
-
-        Object.keys(translations[lang]).forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = translations[lang][id];
-            }
-        });
-
-        document.documentElement.lang = lang;
-    }
-
-    function applyContrast(mode) {
-        const navBar = document.querySelector("ul");
-        const navItems = document.querySelectorAll("ul li");
-        const settingsIcon = document.getElementById("rad");
-        const settingsBox = document.getElementById("popup");
-        const searchBar = document.querySelector('input[type="text"]');
-        const quizPage = window.location.pathname.includes("Quiz/quiz.html");
-    
-        if (mode === "light") {
-            document.body.classList.add("light-mode");
-            if (contrastToggle) contrastToggle.checked = true;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "black";
-                navBar.style.color = "white";
-            }
-    
-            if (navItems) {
-                navItems.forEach((item, index) => {
-                    item.style.borderRight = "4px solid white";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid white";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
-                });
-            }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "white";
-            }
-    
-            if (searchBar) {
-                searchBar.style.backgroundColor = "white";
-            }
-    
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
-            }
-    
-        } else {
-            document.body.classList.remove("light-mode");
-            if (contrastToggle) contrastToggle.checked = false;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "#b82f10";
-                navBar.style.color = "black";
-            }
-    
-            if (navItems) {
-                navItems.forEach((item, index) => {
-                    item.style.borderRight = "4px solid black";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid black";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
-                });
-            }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "#b82f10";
-                settingsBox.style.color = "black";
-            }
-    
-            if (searchBar) {
-                searchBar.style.backgroundColor = "#932810";
-                searchBar.style.color = "black";
-            }
-    
-            if (quizPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
-            }
-        }
-    }
-
-    langButtons.forEach(button => {
-      button.addEventListener("click", function () {
-        const selectedLang = this.getAttribute("data-lang");
-        applyLanguage(selectedLang);
-        setCookie("language", selectedLang, 7);
-      });
+    Object.entries(translations[lang]).forEach(([id, text]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
     });
-    
 
-    if (contrastToggle) {
-        contrastToggle.addEventListener("change", function () {
-            const newContrast = contrastToggle.checked ? "light" : "dark";
-            applyContrast(newContrast);
-            setCookie("contrastMode", newContrast, 7);
-        });
+    document.documentElement.lang = lang;
+    setCookie("language", lang, 7);
+  }
+
+  function applyContrast(mode) {
+    const navBar = document.querySelector("ul");
+    const navItems = document.querySelectorAll("ul li");
+    const settingsIcon = document.getElementById("rad");
+    const settingsBox = document.getElementById("popup");
+    const searchBar = document.querySelector('input[type="text"]');
+    const quizPage = window.location.pathname.includes("Quiz/quiz.html");
+
+    if (mode === "light") {
+      document.body.classList.add("light-mode");
+      if (contrastToggle) contrastToggle.checked = true;
+
+      if (navBar) navBar.style.backgroundColor = "black";
+      if (navBar) navBar.style.color = "white";
+
+      navItems.forEach((item, index) => {
+        item.style.borderRight = "4px solid white";
+        item.style.borderLeft = index === 0 ? "4px solid white" : "none";
+      });
+
+      if (settingsIcon) {
+        settingsIcon.style.borderLeft = "none";
+        settingsIcon.style.borderRight = "none";
+      }
+
+      if (settingsBox) settingsBox.style.backgroundColor = "white";
+      if (searchBar) searchBar.style.backgroundColor = "white";
+
+      if (quizPage) {
+        document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Light.jpg')";
+      }
+    } else {
+      document.body.classList.remove("light-mode");
+      if (contrastToggle) contrastToggle.checked = false;
+
+      if (navBar) navBar.style.backgroundColor = "#b82f10";
+      if (navBar) navBar.style.color = "black";
+
+      navItems.forEach((item, index) => {
+        item.style.borderRight = "4px solid black";
+        item.style.borderLeft = index === 0 ? "4px solid black" : "none";
+      });
+
+      if (settingsIcon) {
+        settingsIcon.style.borderLeft = "none";
+        settingsIcon.style.borderRight = "none";
+      }
+
+      if (settingsBox) {
+        settingsBox.style.backgroundColor = "#b82f10";
+        settingsBox.style.color = "black";
+      }
+
+      if (searchBar) {
+        searchBar.style.backgroundColor = "#932810";
+        searchBar.style.color = "black";
+      }
+
+      if (quizPage) {
+        document.body.style.backgroundImage = "url('../Img/Backgrounds/Quiz_Dark.jpg')";
+      }
     }
+  }
 
-    function showOptions() {
-        if (popup) popup.classList.remove("hidden");
-    }
+  langButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const selectedLang = this.getAttribute("data-lang");
+      applyLanguage(selectedLang);
+      setCookie("language", selectedLang, 7);
+    });
+  });
 
-    function closeOptions() {
-        if (popup) popup.classList.add("hidden");
-    }
+  if (contrastToggle) {
+    contrastToggle.addEventListener("change", function () {
+      const newContrast = contrastToggle.checked ? "light" : "dark";
+      applyContrast(newContrast);
+      setCookie("contrastMode", newContrast, 7);
+    });
+  }
 
-    const settingsButton = document.getElementById("rad");
-    if (settingsButton) {
-        settingsButton.addEventListener("click", function (event) {
-            event.preventDefault();
-            showOptions();
-        });
-    }
+  const settingsButton = document.getElementById("rad");
+  if (settingsButton) {
+    settingsButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      showOptions();
+    });
+  }
 
-    const closeButton = document.querySelector(".close");
-    if (closeButton) {
-        closeButton.addEventListener("click", closeOptions);
-    }
+  const closeButton = document.querySelector(".close");
+  if (closeButton) {
+    closeButton.addEventListener("click", closeOptions);
+  }
 
-    loadSettings();
+  loadSettings();
 });
 
 document.querySelectorAll('.flag-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-    });
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('selected'));
+    button.classList.add('selected');
+  });
 });
+
 
 
 function startMemoryGame() {
@@ -276,7 +247,7 @@ function startMemoryGame() {
     document.getElementById("wheel-result").textContent = "";
   }
   
-  const quizData = [
+  const quizData_de = [
     { question: "Was ist Gojo Satorus Technik?", options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"], answer: "Limitless" },
     { question: "Wer ist der Träger Sukunas?", options: ["Toji", "Yuji", "Megumi", "Nanami"], answer: "Yuji" },
     { question: "Wie viele Finger hat Sukuna insgesamt?", options: ["10", "15", "20", "5"], answer: "20" },
@@ -298,6 +269,110 @@ function startMemoryGame() {
     { question: "Wer ist Yuta Okkotsu mit einer verfluchten Seele verbunden?", options: ["Rika", "Nobara", "Maki", "Panda"], answer: "Rika" },
     { question: "Was ist das Ziel des Fluchkönigs Sukuna?", options: ["Wiedergeburt", "Machtübernahme", "Rache", "Weltfrieden"], answer: "Wiedergeburt" }
   ];
+
+  const quizData_en = [
+    {
+      question: "What is Gojo Satoru’s technique?",
+      options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"],
+      answer: "Limitless"
+    },
+    {
+      question: "Who is Sukuna’s vessel?",
+      options: ["Toji", "Yuji", "Megumi", "Nanami"],
+      answer: "Yuji"
+    },
+    {
+      question: "How many fingers does Sukuna have in total?",
+      options: ["10", "15", "20", "5"],
+      answer: "20"
+    },
+    {
+      question: "What is the name of Megumi’s technique?",
+      options: ["Idle Transfiguration", "Ten Shadows", "Straw Doll", "Black Flash"],
+      answer: "Ten Shadows"
+    },
+    {
+      question: "Who uses 'Cursed Speech'?",
+      options: ["Toge", "Gojo", "Yuji", "Nobara"],
+      answer: "Toge"
+    },
+    {
+      question: "Who is Megumi’s father?",
+      options: ["Naobito", "Toji", "Gojo", "Geto"],
+      answer: "Toji"
+    },
+    {
+      question: "What is 'Black Flash'?",
+      options: ["Cursed attack", "Teleportation", "Gojo’s technique", "Cursed object"],
+      answer: "Cursed attack"
+    },
+    {
+      question: "What is Nobara’s weapon?",
+      options: ["Hammer and nails", "Sword", "Doll", "Dagger"],
+      answer: "Hammer and nails"
+    },
+    {
+      question: "Who was taken over by Kenjaku?",
+      options: ["Suguru Geto", "Nanami", "Yuta", "Mahito"],
+      answer: "Suguru Geto"
+    },
+    {
+      question: "Which student has a panda form?",
+      options: ["Yuta", "Panda", "Toge", "Ino"],
+      answer: "Panda"
+    },
+    {
+      question: "What is Gojo’s special ability?",
+      options: ["Infinite Void", "Idle Transfiguration", "Ten Shadows", "Straw Doll"],
+      answer: "Infinite Void"
+    },
+    {
+      question: "Who uses the technique 'Idle Transfiguration'?",
+      options: ["Mahito", "Kenjaku", "Toji", "Maki"],
+      answer: "Mahito"
+    },
+    {
+      question: "Who is a descendant of the Zenin Clan?",
+      options: ["Maki", "Nobara", "Yuji", "Gojo"],
+      answer: "Maki"
+    },
+    {
+      question: "What is the name of Maki’s cursed tool?",
+      options: ["Playful Cloud", "Black Rope", "Katana", "Hammer"],
+      answer: "Playful Cloud"
+    },
+    {
+      question: "What was Nanami’s profession?",
+      options: ["Office worker", "Doctor", "Teacher", "Student"],
+      answer: "Office worker"
+    },
+    {
+      question: "Who was Gojo’s best friend?",
+      options: ["Geto", "Nanami", "Yaga", "Toji"],
+      answer: "Geto"
+    },
+    {
+      question: "What is Yuji Itadori’s motivation?",
+      options: ["Saving people", "Getting rich", "Impressing Gojo", "Revenge"],
+      answer: "Saving people"
+    },
+    {
+      question: "Who is Mahito?",
+      options: ["Cursed spirit", "Sorcerer", "Teacher", "Curse hunter"],
+      answer: "Cursed spirit"
+    },
+    {
+      question: "Who is Yuta Okkotsu bound to through a cursed soul?",
+      options: ["Rika", "Nobara", "Maki", "Panda"],
+      answer: "Rika"
+    },
+    {
+      question: "What is the goal of the curse king Sukuna?",
+      options: ["Rebirth", "Take over power", "Revenge", "World peace"],
+      answer: "Rebirth"
+    }
+  ];
+  
   
   
   function startQuiz() {
@@ -312,8 +387,9 @@ function startMemoryGame() {
     let index = 0;
     let correctCount = 0;
   
-    // ZUFÄLLIGE 5 FRAGEN auswählen
-    const shuffled = [...quizData].sort(() => 0.5 - Math.random());
+    const lang = getCookie("language") || "de";
+    const baseData = lang === "en" ? quizData_en : quizData_de;
+    const shuffled = [...baseData].sort(() => 0.5 - Math.random());    
     const selectedQuestions = shuffled.slice(0, 5);
   
     showQuestion();
@@ -368,7 +444,7 @@ function startMemoryGame() {
   
   
   
-  const quoteData = [
+  const quoteData_de = [
     { quote: "Ich bin der stärkste.", options: ["Gojo", "Sukuna", "Nanami", "Yuji"], answer: "Gojo" },
     { quote: "Jeder in meiner Familie hat eine Rolle. Ich war das Opfer.", options: ["Megumi", "Toji", "Yuji", "Geto"], answer: "Megumi" },
     { quote: "Ich bin kein Held. Ich bin ein Zauberer.", options: ["Yuji", "Gojo", "Nobara", "Panda"], answer: "Yuji" },
@@ -391,6 +467,31 @@ function startMemoryGame() {
     { quote: "Die Schwachen haben keinen Platz in dieser Welt.", options: ["Naoya", "Toji", "Kenjaku", "Mahito"], answer: "Naoya" }
   ];
   
+  const quoteData_en = [
+    { quote: "I am the strongest.", options: ["Gojo", "Sukuna", "Nanami", "Yuji"], answer: "Gojo" },
+    { quote: "Everyone in my family had a role. I was the victim.", options: ["Megumi", "Toji", "Yuji", "Geto"], answer: "Megumi" },
+    { quote: "I'm not a hero. I'm a sorcerer.", options: ["Yuji", "Gojo", "Nobara", "Panda"], answer: "Yuji" },
+    { quote: "Humans are fascinating.", options: ["Geto", "Mahito", "Kenjaku", "Gojo"], answer: "Geto" },
+    { quote: "I don't kill without a reason.", options: ["Toji", "Maki", "Nanami", "Gojo"], answer: "Toji" },
+    { quote: "I'd rather die as a monster than live doing nothing.", options: ["Yuji", "Megumi", "Yuta", "Toji"], answer: "Yuji" },
+    { quote: "If justice doesn't exist, then I'll create it myself.", options: ["Geto", "Nanami", "Gojo", "Yuji"], answer: "Geto" },
+    { quote: "I'm not particularly strong, I'm just used to dying.", options: ["Nanami", "Yuji", "Maki", "Toji"], answer: "Nanami" },
+    { quote: "I hate when someone decides how you should live.", options: ["Nobara", "Maki", "Gojo", "Yuji"], answer: "Nobara" },
+    { quote: "I'm not a toy. I'm Panda.", options: ["Panda", "Toge", "Yuta", "Mahito"], answer: "Panda" },
+    { quote: "Strength without love is worthless.", options: ["Yaga", "Gojo", "Yuji", "Nanami"], answer: "Yaga" },
+    { quote: "You shouldn't live because you have to – but because you want to.", options: ["Nanami", "Yuji", "Yuta", "Maki"], answer: "Nanami" },
+    { quote: "Why do we even fight?", options: ["Megumi", "Yuji", "Gojo", "Toge"], answer: "Yuji" },
+    { quote: "Cursed energy comes from negative emotions.", options: ["Gojo", "Yaga", "Geto", "Mahito"], answer: "Gojo" },
+    { quote: "I'm not afraid to die. I'm afraid of not living.", options: ["Yuji", "Nobara", "Maki", "Toji"], answer: "Nobara" },
+    { quote: "Everyone carries a weight they don’t show.", options: ["Nanami", "Yuta", "Geto", "Megumi"], answer: "Megumi" },
+    { quote: "The world isn't fair, so you must be.", options: ["Gojo", "Nanami", "Yuji", "Maki"], answer: "Nanami" },
+    { quote: "My technique isn’t elegant – but it works.", options: ["Maki", "Toji", "Yuta", "Nobara"], answer: "Maki" },
+    { quote: "I don't want anyone to die.", options: ["Yuji", "Gojo", "Megumi", "Yuta"], answer: "Yuji" },
+    { quote: "The weak have no place in this world.", options: ["Naoya", "Toji", "Kenjaku", "Mahito"], answer: "Naoya" }
+  ];
+  
+  
+  
   
   function startQuoteGame() {
     const container = document.getElementById("quote-game");
@@ -404,8 +505,9 @@ function startMemoryGame() {
     let index = 0;
     let correctCount = 0;
   
-    // ZUFÄLLIGE 5 ZITATE
-    const shuffled = [...quoteData].sort(() => 0.5 - Math.random());
+    const lang = getCookie("language") || "de";
+    const baseQuotes = lang === "en" ? quoteData_en : quoteData_de;
+    const shuffled = [...baseQuotes].sort(() => 0.5 - Math.random());    
     const selectedQuotes = shuffled.slice(0, 5);
   
     showQuote();
