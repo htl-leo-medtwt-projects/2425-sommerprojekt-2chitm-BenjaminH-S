@@ -258,29 +258,71 @@ function startMemoryGame() {
   
   function startQuiz() {
     const container = document.getElementById("quiz-game");
+    if (!container) return;
+  
     container.classList.remove("hidden");
     container.innerHTML = "";
     let index = 0;
+    let correctCount = 0;
   
     showQuestion();
   
     function showQuestion() {
       const q = quizData[index];
       container.innerHTML = `<p>${q.question}</p>`;
+  
       q.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "quiz-option";
         btn.textContent = opt;
         btn.onclick = () => {
-          alert(opt === q.answer ? "Richtig!" : "Falsch!");
-          index++;
-          if (index < quizData.length) showQuestion();
-          else container.innerHTML = "Quiz beendet!";
+          const isCorrect = opt === q.answer;
+          if (isCorrect) correctCount++;
+  
+          container.querySelectorAll(".quiz-option").forEach(b => {
+            b.disabled = true;
+            if (b.textContent === q.answer) {
+              b.style.backgroundColor = "#4CAF50"; 
+              b.style.color = "white";
+            } else if (b.textContent === opt && !isCorrect) {
+              b.style.backgroundColor = "#f44336"; 
+              b.style.color = "white";
+            } else {
+              b.style.opacity = "0.6";
+            }
+          });
+  
+          setTimeout(() => {
+            index++;
+            if (index < quizData.length) {
+              showQuestion();
+            } else {
+              showResults();
+            }
+          }, 1500);
         };
         container.appendChild(btn);
       });
     }
+  
+    function showResults() {
+      container.innerHTML = `
+        <h3>Quiz beendet!</h3>
+        <p>Du hast <strong>${correctCount} von ${quizData.length}</strong> richtig beantwortet!</p>
+      `;
+    
+      const allSlides = document.querySelectorAll(".slide");
+      allSlides.forEach(slide => {
+        if (slide.textContent.includes("Teste dein Wissen")) {
+          const restartBtn = slide.querySelector("button");
+          if (restartBtn) {
+            restartBtn.textContent = "Erneut spielen?";
+          }
+        }
+      });
+    }    
   }
+  
   
   const quoteData = [
     {
@@ -292,34 +334,91 @@ function startMemoryGame() {
       quote: "Ich bin der stärkste.",
       options: ["Sukuna", "Gojo", "Mahito", "Nanami"],
       answer: "Gojo"
+    },
+    {
+      quote: "Menschen sind faszinierend.",
+      options: ["Mahito", "Kenjaku", "Geto", "Gojo"],
+      answer: "Geto"
+    },
+    {
+      quote: "Ich töte nicht ohne Grund.",
+      options: ["Toji", "Maki", "Nanami", "Megumi"],
+      answer: "Toji"
+    },
+    {
+      quote: "Ich bin kein Held. Ich bin ein Zauberer.",
+      options: ["Yuji", "Gojo", "Nobara", "Panda"],
+      answer: "Yuji"
     }
   ];
   
   function startQuoteGame() {
     const container = document.getElementById("quote-game");
+    if (!container) return;
+  
     container.classList.remove("hidden");
     container.innerHTML = "";
     let index = 0;
+    let correctCount = 0;
   
     showQuote();
   
     function showQuote() {
       const q = quoteData[index];
       container.innerHTML = `<p>„${q.quote}“</p>`;
+  
       q.options.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "quote-option";
         btn.textContent = opt;
         btn.onclick = () => {
-          alert(opt === q.answer ? "Richtig!" : `Falsch! Richtige Antwort: ${q.answer}`);
-          index++;
-          if (index < quoteData.length) showQuote();
-          else container.innerHTML = "Zitate-Spiel beendet!";
+          const isCorrect = opt === q.answer;
+          if (isCorrect) correctCount++;
+  
+          container.querySelectorAll(".quote-option").forEach(b => {
+            b.disabled = true;
+            if (b.textContent === q.answer) {
+              b.style.backgroundColor = "#4CAF50"; 
+              b.style.color = "white";
+            } else if (b.textContent === opt && !isCorrect) {
+              b.style.backgroundColor = "#f44336";
+              b.style.color = "white";
+            } else {
+              b.style.opacity = "0.6";
+            }
+          });
+  
+          setTimeout(() => {
+            index++;
+            if (index < quoteData.length) {
+              showQuote();
+            } else {
+              showResults();
+            }
+          }, 1500);
         };
         container.appendChild(btn);
       });
     }
+  
+    function showResults() {
+      container.innerHTML = `
+        <h3>Spiel beendet!</h3>
+        <p>Du hast <strong>${correctCount} von ${quoteData.length}</strong> richtig beantwortet!</p>
+      `;
+    
+      const allSlides = document.querySelectorAll(".slide");
+      allSlides.forEach(slide => {
+        if (slide.textContent.includes("Wer hat das gesagt")) {
+          const restartBtn = slide.querySelector("button");
+          if (restartBtn) {
+            restartBtn.textContent = "Erneut spielen?";
+          }
+        }
+      });
+    }    
   }
+  
   
   let currentIndex = 0;
 

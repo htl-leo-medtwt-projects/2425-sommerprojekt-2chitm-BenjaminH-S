@@ -384,4 +384,13 @@ input[type="text"]:focus {
     right: 10px;
   }
   
-
+  .quote-option.correct {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .quote-option.incorrect {
+    background-color: #f44336;
+    color: white;
+  }
+  
