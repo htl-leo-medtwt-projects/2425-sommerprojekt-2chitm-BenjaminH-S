@@ -192,6 +192,27 @@ document.querySelectorAll('.flag-btn').forEach(button => {
   });
 });
 
+function startMemory() {
+  const mode = document.getElementById("memory-mode-select").value;
+  let baseCards;
+
+  switch (mode) {
+    case "easy":
+      baseCards = memoryCards_easy;
+      break;
+    case "medium":
+      baseCards = memoryCards_medium;
+      break;
+    case "hard":
+      baseCards = memoryCards_hard;
+      break;
+    default:
+      baseCards = memoryCards_medium;
+  }
+
+  const cards = shuffle([...baseCards, ...baseCards]); 
+  renderMemoryGame(cards);
+}
 
 
 function startMemoryGame() {
@@ -350,7 +371,7 @@ function startMemoryGame() {
 
   const extraQuizModes = {
     power: [
-      { question: "Wie stark ist Gojo Satoru (1–10)?", options: ["7", "8", "9", "10"], answer: "10" },
+      { question: "Wie stark ist Gojo Satoru?", options: ["7", "8", "9", "10"], answer: "10" },
       { question: "Wie stark ist Panda?", options: ["4", "6", "8", "5"], answer: "6" }
     ],
     technique: [
@@ -363,17 +384,87 @@ function startMemoryGame() {
   
   function getContextQuotes() {
     return currentLanguage === "de"
-      ? [{
-          quote: "Ich werde euch alle beschützen, selbst wenn es mein Leben kostet.",
-          options: ["Vor Turnier", "Beim Kampf gegen Mahito", "Nach dem Examen", "Beim Training"],
-          answer: "Beim Kampf gegen Mahito"
-        }]
-      : [{
-          quote: "I’ll protect you all — even if it costs my life.",
-          options: ["Before the tournament", "During the fight with Mahito", "After the exam", "During training"],
-          answer: "During the fight with Mahito"
-        }];
-  }  
+      ? getRandomSubset([
+          { quote: "Ich werde euch alle beschützen, selbst wenn es mein Leben kostet.", options: ["Vor Turnier", "Beim Kampf gegen Mahito", "Nach dem Examen", "Beim Training"], answer: "Beim Kampf gegen Mahito" },
+          { quote: "Ich werde euch zeigen, wie man wirklich kämpft.", options: ["Beim ersten Training", "Im Turnier", "Gegen Fluchgeist", "In Shibuya"], answer: "Im Turnier" },
+          { quote: "Ich bin kein Held, ich bin ein Zauberer.", options: ["Im Klassenzimmer", "Während einer Mission", "Gegen Mahito", "Im Krankenhaus"], answer: "Während einer Mission" },
+          { quote: "Wir müssen zusammenhalten, sonst verlieren wir.", options: ["Vor dem Turnier", "Vor Shibuya", "Nach dem Examen", "Im Krankenhaus"], answer: "Vor Shibuya" },
+          { quote: "Warum kämpfen wir überhaupt?", options: ["In Shibuya", "Während eines Gesprächs mit Gojo", "Nach dem Examen", "Beim Kampf gegen Kenjaku"], answer: "Während eines Gesprächs mit Gojo" },
+          { quote: "Ich habe keine Angst zu sterben.", options: ["Im Turnier", "Im Kampf gegen Fluch", "Bei Mahito", "Vor Shibuya"], answer: "Im Kampf gegen Fluch" },
+          { quote: "Cursed Energy kommt aus negativen Emotionen.", options: ["Unterricht von Gojo", "Im Kampf gegen Sukuna", "Nach Mahitos Angriff", "Im Krankenhaus"], answer: "Unterricht von Gojo" },
+          { quote: "Ich hasse es, wenn jemand über mein Leben bestimmt.", options: ["Nach dem Turnier", "Nach dem Kampf gegen Naoya", "Beim Training", "Vor dem Examen"], answer: "Nach dem Kampf gegen Naoya" },
+          { quote: "Verfluchte Energie ist nichts ohne Kontrolle.", options: ["Im Unterricht", "Im Kampf gegen Geto", "Vor Mahito", "In der Schule"], answer: "Im Unterricht" },
+          { quote: "Ich bin kein Spielzeug – ich bin Panda.", options: ["Vor einem Kampf", "Nach einem Spruch von Gojo", "In der Schule", "In Shibuya"], answer: "In der Schule" }
+        ], 10)
+      : getRandomSubset([
+          { quote: "I’ll protect you all — even if it costs my life.", options: ["Before the tournament", "During the fight with Mahito", "After the exam", "During training"], answer: "During the fight with Mahito" },
+          { quote: "I’ll show you how to fight properly.", options: ["First training", "In the tournament", "Against a curse", "In Shibuya"], answer: "In the tournament" },
+          { quote: "I'm not a hero. I'm a sorcerer.", options: ["In the classroom", "During a mission", "Against Mahito", "In the hospital"], answer: "During a mission" },
+          { quote: "We must stick together or we lose.", options: ["Before the tournament", "Before Shibuya", "After the exam", "In the hospital"], answer: "Before Shibuya" },
+          { quote: "Why do we even fight?", options: ["In Shibuya", "Talking to Gojo", "After the exam", "Fighting Kenjaku"], answer: "Talking to Gojo" },
+          { quote: "I'm not afraid to die.", options: ["In the tournament", "Fighting a curse", "With Mahito", "Before Shibuya"], answer: "Fighting a curse" },
+          { quote: "Cursed energy comes from negative emotions.", options: ["During Gojo’s lesson", "Fighting Sukuna", "After Mahito", "In hospital"], answer: "During Gojo’s lesson" },
+          { quote: "I hate when someone controls my life.", options: ["After the tournament", "After fighting Naoya", "During training", "Before the exam"], answer: "After fighting Naoya" },
+          { quote: "Cursed energy is nothing without control.", options: ["In class", "Fighting Geto", "Before Mahito", "At school"], answer: "In class" },
+          { quote: "I’m not a toy – I’m Panda.", options: ["Before a fight", "After Gojo’s joke", "At school", "In Shibuya"], answer: "At school" }
+        ], 10);
+  }
+
+  function getRankQuotes() {
+    return currentLanguage === "de"
+      ? getRandomSubset([
+          { quote: "Vertrauen ist nichts, was man einfach gibt – man verdient es.", options: ["Schüler", "1. Klasse", "Spezialrang", "Fluchgeist"], answer: "Spezialrang" },
+          { quote: "Ich bin kein Spielzeug.", options: ["Schüler", "Fluch", "Spezialrang", "1. Klasse"], answer: "Schüler" },
+          { quote: "Ich habe gesehen, wie die Welt stirbt.", options: ["Spezialrang", "1. Klasse", "Fluchgeist", "Schüler"], answer: "Fluchgeist" },
+          { quote: "Manchmal muss man tun, was man hasst.", options: ["1. Klasse", "Schüler", "2. Klasse", "Fluch"], answer: "1. Klasse" },
+          { quote: "Ich werde nie jemanden zurücklassen.", options: ["Schüler", "1. Klasse", "Spezialrang", "Unklassifiziert"], answer: "1. Klasse" },
+          { quote: "Was ist ein Fluch ohne Angst?", options: ["Fluchgeist", "Spezialrang", "Schüler", "Unbekannt"], answer: "Fluchgeist" },
+          { quote: "Stärke bedeutet Verantwortung.", options: ["Spezialrang", "1. Klasse", "2. Klasse", "Fluchgeist"], answer: "Spezialrang" },
+          { quote: "Die Wahrheit ist manchmal verflucht.", options: ["Fluchgeist", "1. Klasse", "Spezialrang", "Schüler"], answer: "Fluchgeist" },
+          { quote: "Ich bin nicht hier, um nett zu sein.", options: ["1. Klasse", "Spezialrang", "Schüler", "Fluchgeist"], answer: "1. Klasse" },
+          { quote: "Ich bin der Stärkste.", options: ["Spezialrang", "1. Klasse", "Schüler", "Unklassifiziert"], answer: "Spezialrang" }
+        ], 10)
+      : getRandomSubset([
+          { quote: "Trust isn’t something you give — it’s something you earn.", options: ["Student", "Grade 1", "Special Grade", "Cursed Spirit"], answer: "Special Grade" },
+          { quote: "I’m not a toy.", options: ["Student", "Curse", "Special Grade", "Grade 1"], answer: "Student" },
+          { quote: "I’ve seen the world die.", options: ["Special Grade", "Grade 1", "Cursed Spirit", "Student"], answer: "Cursed Spirit" },
+          { quote: "Sometimes you must do what you hate.", options: ["Grade 1", "Student", "Grade 2", "Curse"], answer: "Grade 1" },
+          { quote: "I will never leave anyone behind.", options: ["Student", "Grade 1", "Special Grade", "Unclassified"], answer: "Grade 1" },
+          { quote: "What is a curse without fear?", options: ["Cursed Spirit", "Special Grade", "Student", "Unknown"], answer: "Cursed Spirit" },
+          { quote: "Strength means responsibility.", options: ["Special Grade", "Grade 1", "Grade 2", "Cursed Spirit"], answer: "Special Grade" },
+          { quote: "Truth is sometimes cursed.", options: ["Cursed Spirit", "Grade 1", "Special Grade", "Student"], answer: "Cursed Spirit" },
+          { quote: "I’m not here to be nice.", options: ["Grade 1", "Special Grade", "Student", "Cursed Spirit"], answer: "Grade 1" },
+          { quote: "I am the strongest.", options: ["Special Grade", "Grade 1", "Student", "Unclassified"], answer: "Special Grade" }
+        ], 10);
+  }
+
+  function getRealOrFakeQuotes() {
+    return currentLanguage === "de"
+      ? getRandomSubset([
+          { quote: "Ein Jujuzist weint nicht – er zerlegt.", options: ["Echt", "Fan-Erfindung"], answer: "Fan-Erfindung" },
+          { quote: "Ich bin kein Held. Ich bin ein Zauberer.", options: ["Echt", "Fan-Erfindung"], answer: "Echt" },
+          { quote: "Verfluchte Liebe ist auch eine Form der Macht.", options: ["Echt", "Fan-Erfindung"], answer: "Fan-Erfindung" },
+          { quote: "Ich bin Panda. Das reicht.", options: ["Echt", "Fan-Erfindung"], answer: "Echt" },
+          { quote: "Nur Schwäche braucht Mitgefühl.", options: ["Echt", "Fan-Erfindung"], answer: "Fan-Erfindung" },
+          { quote: "Ich werde nicht sterben, bevor ich verstanden wurde.", options: ["Fan-Erfindung", "Echt"], answer: "Fan-Erfindung" },
+          { quote: "Ich hasse es zu verlieren.", options: ["Echt", "Fan-Erfindung"], answer: "Echt" },
+          { quote: "Der Tod ist nur ein weiteres Tor.", options: ["Fan-Erfindung", "Echt"], answer: "Fan-Erfindung" },
+          { quote: "Du bist schwach. Und das ist okay.", options: ["Fan-Erfindung", "Echt"], answer: "Fan-Erfindung" },
+          { quote: "Ich bin der stärkste.", options: ["Echt", "Fan-Erfindung"], answer: "Echt" }
+        ], 10)
+      : getRandomSubset([
+          { quote: "A sorcerer doesn’t cry – he breaks things.", options: ["Real", "Fan-Made"], answer: "Fan-Made" },
+          { quote: "I’m not a hero. I’m a sorcerer.", options: ["Real", "Fan-Made"], answer: "Real" },
+          { quote: "Cursed love is still power.", options: ["Real", "Fan-Made"], answer: "Fan-Made" },
+          { quote: "I’m Panda. That’s enough.", options: ["Real", "Fan-Made"], answer: "Real" },
+          { quote: "Only weakness needs compassion.", options: ["Real", "Fan-Made"], answer: "Fan-Made" },
+          { quote: "I won't die before being understood.", options: ["Fan-Made", "Real"], answer: "Fan-Made" },
+          { quote: "I hate to lose.", options: ["Real", "Fan-Made"], answer: "Real" },
+          { quote: "Death is just another door.", options: ["Fan-Made", "Real"], answer: "Fan-Made" },
+          { quote: "You’re weak. And that’s okay.", options: ["Fan-Made", "Real"], answer: "Fan-Made" },
+          { quote: "I am the strongest.", options: ["Real", "Fan-Made"], answer: "Real" }
+        ], 10);
+  }
   
   function getQuizQuestionsByMode(mode) {
     if (mode === "general") return getGeneralQuiz();
