@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const newContrast = contrastToggle.checked ? "light" : "dark";
       applyContrast(newContrast);
       setCookie("contrastMode", newContrast, 7);
+      document.body.classList.toggle("high-contrast", contrastToggle.checked);
     });
   }
 
@@ -247,6 +248,14 @@ function startMemoryGame() {
     document.getElementById("wheel-result").textContent = "";
   }
   
+  let currentLanguage = "de"; 
+
+  document.querySelectorAll('.flag-btn').forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentLanguage = btn.dataset.lang;
+    });
+  });
+  
   const quizData_de = [
     { question: "Was ist Gojo Satorus Technik?", options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"], answer: "Limitless" },
     { question: "Wer ist der Träger Sukunas?", options: ["Toji", "Yuji", "Megumi", "Nanami"], answer: "Yuji" },
@@ -269,181 +278,30 @@ function startMemoryGame() {
     { question: "Wer ist Yuta Okkotsu mit einer verfluchten Seele verbunden?", options: ["Rika", "Nobara", "Maki", "Panda"], answer: "Rika" },
     { question: "Was ist das Ziel des Fluchkönigs Sukuna?", options: ["Wiedergeburt", "Machtübernahme", "Rache", "Weltfrieden"], answer: "Wiedergeburt" }
   ];
-
+  
   const quizData_en = [
-    {
-      question: "What is Gojo Satoru’s technique?",
-      options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"],
-      answer: "Limitless"
-    },
-    {
-      question: "Who is Sukuna’s vessel?",
-      options: ["Toji", "Yuji", "Megumi", "Nanami"],
-      answer: "Yuji"
-    },
-    {
-      question: "How many fingers does Sukuna have in total?",
-      options: ["10", "15", "20", "5"],
-      answer: "20"
-    },
-    {
-      question: "What is the name of Megumi’s technique?",
-      options: ["Idle Transfiguration", "Ten Shadows", "Straw Doll", "Black Flash"],
-      answer: "Ten Shadows"
-    },
-    {
-      question: "Who uses 'Cursed Speech'?",
-      options: ["Toge", "Gojo", "Yuji", "Nobara"],
-      answer: "Toge"
-    },
-    {
-      question: "Who is Megumi’s father?",
-      options: ["Naobito", "Toji", "Gojo", "Geto"],
-      answer: "Toji"
-    },
-    {
-      question: "What is 'Black Flash'?",
-      options: ["Cursed attack", "Teleportation", "Gojo’s technique", "Cursed object"],
-      answer: "Cursed attack"
-    },
-    {
-      question: "What is Nobara’s weapon?",
-      options: ["Hammer and nails", "Sword", "Doll", "Dagger"],
-      answer: "Hammer and nails"
-    },
-    {
-      question: "Who was taken over by Kenjaku?",
-      options: ["Suguru Geto", "Nanami", "Yuta", "Mahito"],
-      answer: "Suguru Geto"
-    },
-    {
-      question: "Which student has a panda form?",
-      options: ["Yuta", "Panda", "Toge", "Ino"],
-      answer: "Panda"
-    },
-    {
-      question: "What is Gojo’s special ability?",
-      options: ["Infinite Void", "Idle Transfiguration", "Ten Shadows", "Straw Doll"],
-      answer: "Infinite Void"
-    },
-    {
-      question: "Who uses the technique 'Idle Transfiguration'?",
-      options: ["Mahito", "Kenjaku", "Toji", "Maki"],
-      answer: "Mahito"
-    },
-    {
-      question: "Who is a descendant of the Zenin Clan?",
-      options: ["Maki", "Nobara", "Yuji", "Gojo"],
-      answer: "Maki"
-    },
-    {
-      question: "What is the name of Maki’s cursed tool?",
-      options: ["Playful Cloud", "Black Rope", "Katana", "Hammer"],
-      answer: "Playful Cloud"
-    },
-    {
-      question: "What was Nanami’s profession?",
-      options: ["Office worker", "Doctor", "Teacher", "Student"],
-      answer: "Office worker"
-    },
-    {
-      question: "Who was Gojo’s best friend?",
-      options: ["Geto", "Nanami", "Yaga", "Toji"],
-      answer: "Geto"
-    },
-    {
-      question: "What is Yuji Itadori’s motivation?",
-      options: ["Saving people", "Getting rich", "Impressing Gojo", "Revenge"],
-      answer: "Saving people"
-    },
-    {
-      question: "Who is Mahito?",
-      options: ["Cursed spirit", "Sorcerer", "Teacher", "Curse hunter"],
-      answer: "Cursed spirit"
-    },
-    {
-      question: "Who is Yuta Okkotsu bound to through a cursed soul?",
-      options: ["Rika", "Nobara", "Maki", "Panda"],
-      answer: "Rika"
-    },
-    {
-      question: "What is the goal of the curse king Sukuna?",
-      options: ["Rebirth", "Take over power", "Revenge", "World peace"],
-      answer: "Rebirth"
-    }
+    { question: "What is Gojo Satoru’s technique?", options: ["Cursed Speech", "Ten Shadows", "Limitless", "Idle Transfiguration"], answer: "Limitless" },
+    { question: "Who is Sukuna’s vessel?", options: ["Toji", "Yuji", "Megumi", "Nanami"], answer: "Yuji" },
+    { question: "How many fingers does Sukuna have in total?",options: ["10", "15", "20", "5"], answer: "20" },
+    { question: "What is the name of Megumi’s technique?", options: ["Idle Transfiguration", "Ten Shadows", "Straw Doll", "Black Flash"], answer: "Ten Shadows" },
+    { question: "Who uses 'Cursed Speech'?", options: ["Toge", "Gojo", "Yuji", "Nobara"], answer: "Toge" },
+    { question: "Who is Megumi’s father?", options: ["Naobito", "Toji", "Gojo", "Geto"], answer: "Toji" },
+    { question: "What is 'Black Flash'?", options: ["Cursed attack", "Teleportation", "Gojo’s technique", "Cursed object"], answer: "Cursed attack" },
+    { question: "What is Nobara’s weapon?", options: ["Hammer and nails", "Sword", "Doll", "Dagger"], answer: "Hammer and nails" },
+    { question: "Who was taken over by Kenjaku?", options: ["Suguru Geto", "Nanami", "Yuta", "Mahito"], answer: "Suguru Geto" },
+    { question: "Which student has a panda form?", options: ["Yuta", "Panda", "Toge", "Ino"], answer: "Panda" },
+    { question: "What is Gojo’s special ability?", options: ["Infinite Void", "Idle Transfiguration", "Ten Shadows", "Straw Doll"], answer: "Infinite Void" },
+    { question: "Who uses the technique 'Idle Transfiguration'?", options: ["Mahito", "Kenjaku", "Toji", "Maki"], answer: "Mahito" },
+    { question: "Who is a descendant of the Zenin Clan?", options: ["Maki", "Nobara", "Yuji", "Gojo"], answer: "Maki" },
+    { question: "What is the name of Maki’s cursed tool?", options: ["Playful Cloud", "Black Rope", "Katana", "Hammer"], answer: "Playful Cloud" },
+    { question: "What was Nanami’s profession?", options: ["Office worker", "Doctor", "Teacher", "Student"], answer: "Office worker"},
+    { question: "Who was Gojo’s best friend?", options: ["Geto", "Nanami", "Yaga", "Toji"], answer: "Geto" },
+    { question: "What is Yuji Itadori’s motivation?", options: ["Saving people", "Getting rich", "Impressing Gojo", "Revenge"], answer: "Saving people" },
+    { question: "Who is Mahito?", options: ["Cursed spirit", "Sorcerer", "Teacher", "Curse hunter"], answer: "Cursed spirit"},
+    { question: "Who is Yuta Okkotsu bound to through a cursed soul?", options: ["Rika", "Nobara", "Maki", "Panda"], answer: "Rika" },
+    { question: "What is the goal of the curse king Sukuna?", options: ["Rebirth", "Take over power", "Revenge", "World peace"], answer: "Rebirth"}
   ];
-  
-  
-  
-  function startQuiz() {
-    const container = document.getElementById("quiz-game");
-    if (!container) return;
-  
-    const quizButton = document.querySelector(".slide:nth-child(3) button");
-    if (quizButton) quizButton.textContent = "Starten";
-  
-    container.classList.remove("hidden");
-    container.innerHTML = "";
-    let index = 0;
-    let correctCount = 0;
-  
-    const lang = getCookie("language") || "de";
-    const baseData = lang === "en" ? quizData_en : quizData_de;
-    const shuffled = [...baseData].sort(() => 0.5 - Math.random());    
-    const selectedQuestions = shuffled.slice(0, 5);
-  
-    showQuestion();
-  
-    function showQuestion() {
-      const q = selectedQuestions[index];
-      container.innerHTML = `<p>${q.question}</p>`;
-  
-      q.options.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "quiz-option";
-        btn.textContent = opt;
-        btn.onclick = () => {
-          const isCorrect = opt === q.answer;
-          if (isCorrect) correctCount++;
-  
-          container.querySelectorAll(".quiz-option").forEach(b => {
-            b.disabled = true;
-            if (b.textContent === q.answer) {
-              b.style.backgroundColor = "#4CAF50";
-              b.style.color = "white";
-            } else if (b.textContent === opt && !isCorrect) {
-              b.style.backgroundColor = "#f44336";
-              b.style.color = "white";
-            } else {
-              b.style.opacity = "0.6";
-            }
-          });
-  
-          setTimeout(() => {
-            index++;
-            if (index < selectedQuestions.length) {
-              showQuestion();
-            } else {
-              showResults();
-            }
-          }, 1500);
-        };
-        container.appendChild(btn);
-      });
-    }
-  
-    function showResults() {
-      container.innerHTML = `
-        <h3>Quiz beendet!</h3>
-        <p>Du hast <strong>${correctCount} von ${selectedQuestions.length}</strong> richtig beantwortet!</p>
-      `;
-  
-      if (quizButton) quizButton.textContent = "Erneut spielen?";
-    }
-  }
-  
-  
-  
+
   const quoteData_de = [
     { quote: "Ich bin der stärkste.", options: ["Gojo", "Sukuna", "Nanami", "Yuji"], answer: "Gojo" },
     { quote: "Jeder in meiner Familie hat eine Rolle. Ich war das Opfer.", options: ["Megumi", "Toji", "Yuji", "Geto"], answer: "Megumi" },
@@ -466,7 +324,7 @@ function startMemoryGame() {
     { quote: "Ich will, dass niemand stirbt.", options: ["Yuji", "Gojo", "Megumi", "Yuta"], answer: "Yuji" },
     { quote: "Die Schwachen haben keinen Platz in dieser Welt.", options: ["Naoya", "Toji", "Kenjaku", "Mahito"], answer: "Naoya" }
   ];
-  
+
   const quoteData_en = [
     { quote: "I am the strongest.", options: ["Gojo", "Sukuna", "Nanami", "Yuji"], answer: "Gojo" },
     { quote: "Everyone in my family had a role. I was the victim.", options: ["Megumi", "Toji", "Yuji", "Geto"], answer: "Megumi" },
@@ -489,78 +347,284 @@ function startMemoryGame() {
     { quote: "I don't want anyone to die.", options: ["Yuji", "Gojo", "Megumi", "Yuta"], answer: "Yuji" },
     { quote: "The weak have no place in this world.", options: ["Naoya", "Toji", "Kenjaku", "Mahito"], answer: "Naoya" }
   ];
+
+  const extraQuizModes = {
+    power: [
+      { question: "Wie stark ist Gojo Satoru (1–10)?", options: ["7", "8", "9", "10"], answer: "10" },
+      { question: "Wie stark ist Panda?", options: ["4", "6", "8", "5"], answer: "6" }
+    ],
+    technique: [
+      { question: "Welche Technik nutzt Megumi?", options: ["Zehn-Schattentechnik", "Unendlichkeit", "Flammenbeschwörung", "Domen-Einbruch"], answer: "Zehn-Schattentechnik" }
+    ],
+    facts: [
+      { question: "Yuji stammt aus der Zenin-Familie.", options: ["Wahr", "Falsch"], answer: "Falsch" }
+    ]
+  };
   
+  function getContextQuotes() {
+    return currentLanguage === "de"
+      ? [{
+          quote: "Ich werde euch alle beschützen, selbst wenn es mein Leben kostet.",
+          options: ["Vor Turnier", "Beim Kampf gegen Mahito", "Nach dem Examen", "Beim Training"],
+          answer: "Beim Kampf gegen Mahito"
+        }]
+      : [{
+          quote: "I’ll protect you all — even if it costs my life.",
+          options: ["Before the tournament", "During the fight with Mahito", "After the exam", "During training"],
+          answer: "During the fight with Mahito"
+        }];
+  }  
   
-  
-  
-  function startQuoteGame() {
-    const container = document.getElementById("quote-game");
-    if (!container) return;
-  
-    const quoteButton = document.querySelector(".slide:nth-child(4) button");
-    if (quoteButton) quoteButton.textContent = "Starten";
-  
-    container.classList.remove("hidden");
-    container.innerHTML = "";
-    let index = 0;
-    let correctCount = 0;
-  
-    const lang = getCookie("language") || "de";
-    const baseQuotes = lang === "en" ? quoteData_en : quoteData_de;
-    const shuffled = [...baseQuotes].sort(() => 0.5 - Math.random());    
-    const selectedQuotes = shuffled.slice(0, 5);
-  
-    showQuote();
-  
-    function showQuote() {
-      const q = selectedQuotes[index];
-      container.innerHTML = `<p>„${q.quote}“</p>`;
-  
-      q.options.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "quote-option";
-        btn.textContent = opt;
-        btn.onclick = () => {
-          const isCorrect = opt === q.answer;
-          if (isCorrect) correctCount++;
-  
-          container.querySelectorAll(".quote-option").forEach(b => {
-            b.disabled = true;
-            if (b.textContent === q.answer) {
-              b.style.backgroundColor = "#4CAF50";
-              b.style.color = "white";
-            } else if (b.textContent === opt && !isCorrect) {
-              b.style.backgroundColor = "#f44336";
-              b.style.color = "white";
-            } else {
-              b.style.opacity = "0.6";
-            }
-          });
-  
-          setTimeout(() => {
-            index++;
-            if (index < selectedQuotes.length) {
-              showQuote();
-            } else {
-              showResults();
-            }
-          }, 1500);
-        };
-        container.appendChild(btn);
-      });
-    }
-  
-    function showResults() {
-      container.innerHTML = `
-        <h3>Spiel beendet!</h3>
-        <p>Du hast <strong>${correctCount} von ${selectedQuotes.length}</strong> richtig beantwortet!</p>
-      `;
-  
-      if (quoteButton) quoteButton.textContent = "Erneut spielen?";
-    }
+  function getQuizQuestionsByMode(mode) {
+    if (mode === "general") return getGeneralQuiz();
+    if (mode === "power") return getPowerQuiz();
+    if (mode === "technique") return getTechniqueQuiz();
+    if (mode === "facts") return getFactsQuiz();
+    return [];
   }
   
+  function getQuoteQuestionsByMode(mode) {
+    const data = currentLanguage === "de" ? quoteData_de : quoteData_en;
   
+    if (mode === "classic") return getRandomSubset(data, 10);
+    if (mode === "rank") return getRankQuotes();
+    if (mode === "context") return getContextQuotes();
+    if (mode === "realorfake") return getRealOrFakeQuotes();
+  
+    return [];
+  }
+  
+  function startQuiz() {
+    const mode = document.getElementById("quiz-mode-select").value;
+    const questions = getQuizQuestionsByMode(mode);
+    showQuiz(questions, "quiz-game");
+  }
+  
+  function startQuoteGame() {
+    const mode = document.getElementById("quote-mode-select").value;
+    const questions = getQuoteQuestionsByMode(mode);
+    showQuiz(questions, "quote-game", true);
+  }
+
+  function getGeneralQuiz() {
+    const data = currentLanguage === "de" ? quizData_de : quizData_en;
+    return getRandomSubset(data, 10);
+  }
+  
+  const factsQuiz_de = [
+    { question: "Yuji stammt aus der Zenin-Familie.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Gojo trägt immer eine Sonnenbrille.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Sukuna war einst ein Mensch.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Megumi ist ein Schüler der ersten Klasse.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Nanami ist jünger als Yuji.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Yuta Okkotsu ist stärker als Gojo.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Maki kann verfluchte Energie sehen.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Toge kann normale Sprache verwenden.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Mahito manipuliert Seelen.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Geto war nie ein Verbündeter Gojos.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Panda ist ein echter Panda.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Gojo unterrichtet an der Jujutsu-Schule.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Die Technik 'Black Flash' ist extrem selten.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Kenjaku ist Mahitos Meister.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Yuji kann Domen beschwören.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Nobara benutzt ein Schwert.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Sukuna hat 20 Finger.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Jujutsu Kaisen spielt in einer Fantasiewelt.", options: ["Wahr", "Falsch"], answer: "Falsch" },
+    { question: "Yaga ist der Direktor der Schule.", options: ["Wahr", "Falsch"], answer: "Wahr" },
+    { question: "Gojo kann sich teleportieren.", options: ["Wahr", "Falsch"], answer: "Falsch" }
+  ];
+
+  const factsQuiz_en = [
+    { question: "Yuji is from the Zenin family.", options: ["True", "False"], answer: "False" },
+    { question: "Gojo always wears sunglasses.", options: ["True", "False"], answer: "False" },
+    { question: "Sukuna was once human.", options: ["True", "False"], answer: "True" },
+    { question: "Megumi is a first-grade student.", options: ["True", "False"], answer: "True" },
+    { question: "Nanami is younger than Yuji.", options: ["True", "False"], answer: "False" },
+    { question: "Yuta Okkotsu is stronger than Gojo.", options: ["True", "False"], answer: "False" },
+    { question: "Maki can see cursed energy.", options: ["True", "False"], answer: "False" },
+    { question: "Toge can speak normally.", options: ["True", "False"], answer: "False" },
+    { question: "Mahito manipulates souls.", options: ["True", "False"], answer: "True" },
+    { question: "Geto was never Gojo’s ally.", options: ["True", "False"], answer: "False" },
+    { question: "Panda is a real panda.", options: ["True", "False"], answer: "False" },
+    { question: "Gojo teaches at the Jujutsu school.", options: ["True", "False"], answer: "True" },
+    { question: "'Black Flash' is extremely rare.", options: ["True", "False"], answer: "True" },
+    { question: "Kenjaku is Mahito’s master.", options: ["True", "False"], answer: "True" },
+    { question: "Yuji can summon domains.", options: ["True", "False"], answer: "False" },
+    { question: "Nobara uses a sword.", options: ["True", "False"], answer: "False" },
+    { question: "Sukuna has 20 fingers.", options: ["True", "False"], answer: "True" },
+    { question: "Jujutsu Kaisen takes place in a fantasy world.", options: ["True", "False"], answer: "False" },
+    { question: "Yaga is the headmaster of the school.", options: ["True", "False"], answer: "True" },
+    { question: "Gojo can teleport.", options: ["True", "False"], answer: "False" }
+  ];
+  
+
+  function getFactsQuiz() {
+    return getRandomSubset(currentLanguage === "de" ? factsQuiz_de : factsQuiz_en, 10);
+  }
+  
+  const techniqueQuiz_de = [
+    { question: "Welche Technik nutzt Gojo?", options: ["Unendlichkeit", "Zehn-Schattentechnik", "Idle Transfiguration", "Cursed Speech"], answer: "Unendlichkeit" },
+    { question: "Was ist Gojos ultimative Technik?", options: ["Unendliche Leere", "Schwarzer Blitz", "Spielende Wolke", "Zerfall"], answer: "Unendliche Leere" },
+    { question: "Wer nutzt 'Cursed Speech'?", options: ["Toge", "Yuta", "Megumi", "Kenjaku"], answer: "Toge" },
+    { question: "Was benutzt Nobara als Waffe?", options: ["Hammer und Nägel", "Katana", "Dolch", "Puppe"], answer: "Hammer und Nägel" },
+    { question: "Was ist Mahitos Technik?", options: ["Idle Transfiguration", "Unendlichkeit", "Zehn Schatten", "Flammenruf"], answer: "Idle Transfiguration" },
+    { question: "Welche Technik nutzt Megumi?", options: ["Zehn-Schattentechnik", "Unendlichkeit", "Cursed Speech", "Idle Transfiguration"], answer: "Zehn-Schattentechnik" },
+    { question: "Was macht die Technik 'Idle Transfiguration'?", options: ["Verändert Seelen", "Verlangsamt Zeit", "Beschwört Schatten", "Stellt Heilung bereit"], answer: "Verändert Seelen" },
+    { question: "Welche Technik nutzt Sukuna?", options: ["Zerfall", "Schlitz und Brand", "Fluchflamme", "Blutgeißel"], answer: "Schlitz und Brand" },
+    { question: "Was ist Yutas Hauptfähigkeit?", options: ["Rika", "Zehn Schatten", "Unendliche Leere", "Red Reverse"], answer: "Rika" },
+    { question: "Welches Werkzeug nutzt Maki?", options: ["Spielende Wolke", "Black Rope", "Schwarzer Blitz", "Dolch"], answer: "Spielende Wolke" },
+    { question: "Was ist 'Black Flash'?", options: ["Ein verstärkter Schlag", "Teleportation", "Schattenangriff", "Heiltechnik"], answer: "Ein verstärkter Schlag" },
+    { question: "Wer kann keine verfluchte Energie nutzen?", options: ["Maki", "Yuji", "Gojo", "Nanami"], answer: "Maki" },
+    { question: "Was ist die Basis von Gojos Technik?", options: ["Raumverzerrung", "Zeitkontrolle", "Unendliche Distanz", "Flammen"], answer: "Unendliche Distanz" },
+    { question: "Was erzeugt Megumis Technik?", options: ["Shikigami", "Blitze", "Feuer", "Dome"], answer: "Shikigami" },
+    { question: "Welche Technik verhindert, dass man Gojo berühren kann?", options: ["Unendlichkeit", "Unendliche Leere", "Schattenfeld", "Barriere"], answer: "Unendlichkeit" },
+    { question: "Was macht 'Cursed Speech'?", options: ["Zwingt zum Gehorchen", "Lässt schweben", "Lässt Gegner schlafen", "Löscht Erinnerungen"], answer: "Zwingt zum Gehorchen" },
+    { question: "Welche Technik nutzt Naobito?", options: ["Projektionszauber", "Fluchsplitter", "Schockwelle", "Zeitfaltung"], answer: "Projektionszauber" },
+    { question: "Was macht 'Red Reverse'?", options: ["Zurückstoßen", "Heilen", "Beschleunigen", "Ziehen"], answer: "Zurückstoßen" },
+    { question: "Welche Technik ist selten und spontan?", options: ["Black Flash", "Unendliche Leere", "Shikigami", "Red Reverse"], answer: "Black Flash" },
+    { question: "Welcher Charakter nutzt keine Technik?", options: ["Toji", "Megumi", "Yuji", "Kenjaku"], answer: "Toji" }
+  ];
+
+  const techniqueQuiz_en = [
+    { question: "What is Gojo’s main technique?", options: ["Infinity", "Ten Shadows", "Idle Transfiguration", "Cursed Speech"], answer: "Infinity" },
+    { question: "What is Gojo’s ultimate move?", options: ["Infinite Void", "Black Flash", "Playful Cloud", "Decay"], answer: "Infinite Void" },
+    { question: "Who uses 'Cursed Speech'?", options: ["Toge", "Yuta", "Megumi", "Kenjaku"], answer: "Toge" },
+    { question: "What weapon does Nobara use?", options: ["Hammer and nails", "Katana", "Dagger", "Doll"], answer: "Hammer and nails" },
+    { question: "What is Mahito’s technique?", options: ["Idle Transfiguration", "Infinity", "Ten Shadows", "Flame Summon"], answer: "Idle Transfiguration" },
+    { question: "Which technique does Megumi use?", options: ["Ten Shadows Technique", "Infinity", "Cursed Speech", "Idle Transfiguration"], answer: "Ten Shadows Technique" },
+    { question: "What does 'Idle Transfiguration' do?", options: ["Manipulates souls", "Slows time", "Summons shadows", "Heals"], answer: "Manipulates souls" },
+    { question: "What technique does Sukuna use?", options: ["Decay", "Cleave and Dismantle", "Curse Flame", "Blood Scythe"], answer: "Cleave and Dismantle" },
+    { question: "What is Yuta’s main power?", options: ["Rika", "Ten Shadows", "Infinite Void", "Red Reverse"], answer: "Rika" },
+    { question: "What tool does Maki use?", options: ["Playful Cloud", "Black Rope", "Black Flash", "Dagger"], answer: "Playful Cloud" },
+    { question: "What is 'Black Flash'?", options: ["An enhanced strike", "Teleportation", "Shadow attack", "Healing"], answer: "An enhanced strike" },
+    { question: "Who cannot use cursed energy?", options: ["Maki", "Yuji", "Gojo", "Nanami"], answer: "Maki" },
+    { question: "What is the basis of Gojo’s technique?", options: ["Spatial distortion", "Time control", "Infinite distance", "Flames"], answer: "Infinite distance" },
+    { question: "What does Megumi’s technique summon?", options: ["Shikigami", "Lightning", "Fire", "Domain"], answer: "Shikigami" },
+    { question: "Which technique prevents touching Gojo?", options: ["Infinity", "Infinite Void", "Shadow Barrier", "Shield"], answer: "Infinity" },
+    { question: "What does 'Cursed Speech' do?", options: ["Forces obedience", "Levitation", "Sleep spell", "Memory wipe"], answer: "Forces obedience" },
+    { question: "What technique does Naobito use?", options: ["Projection Sorcery", "Curse Splinter", "Shockwave", "Time fold"], answer: "Projection Sorcery" },
+    { question: "What does 'Red Reverse' do?", options: ["Repels", "Heals", "Speeds up", "Pulls"], answer: "Repels" },
+    { question: "Which technique is rare and spontaneous?", options: ["Black Flash", "Infinite Void", "Shikigami", "Red Reverse"], answer: "Black Flash" },
+    { question: "Which character does not use techniques?", options: ["Toji", "Megumi", "Yuji", "Kenjaku"], answer: "Toji" }
+  ];
+
+  function getTechniqueQuiz() {
+    return getRandomSubset(currentLanguage === "de" ? techniqueQuiz_de : techniqueQuiz_en, 10);
+  }
+
+  const powerQuiz_de = [
+    { question: "Wie stark ist Gojo Satoru (1–10)?", options: ["7", "8", "9", "10"], answer: "10" },
+    { question: "Wie stark ist Panda?", options: ["4", "6", "8", "5"], answer: "6" },
+    { question: "Wie stark ist Sukuna in voller Form?", options: ["9", "10", "8", "7"], answer: "10" },
+    { question: "Wie stark ist Nobara im Nahkampf?", options: ["6", "7", "8", "5"], answer: "7" },
+    { question: "Wie stark ist Maki nach dem Zenin-Vorfall?", options: ["9", "7", "8", "10"], answer: "9" },
+    { question: "Wie stark ist Yuta Okkotsu?", options: ["8", "9", "10", "7"], answer: "9" },
+    { question: "Wie stark ist Mahito in seiner ersten Form?", options: ["6", "8", "9", "7"], answer: "7" },
+    { question: "Wie stark ist Toji Fushiguro ohne verfluchte Energie?", options: ["8", "9", "10", "6"], answer: "9" },
+    { question: "Wie stark ist Nanami im Vergleich zu Yuji?", options: ["gleich", "stärker", "schwächer", "unentschieden"], answer: "stärker" },
+    { question: "Wie stark ist Kenjaku?", options: ["10", "9", "8", "7"], answer: "9" },
+    { question: "Wie stark ist Toge bei vollem Einsatz?", options: ["7", "6", "8", "5"], answer: "7" },
+    { question: "Wie stark ist Geto in seinem Prime?", options: ["10", "9", "8", "7"], answer: "9" },
+    { question: "Wie stark ist Yuji am Anfang?", options: ["5", "4", "6", "3"], answer: "4" },
+    { question: "Wie stark ist Inumaki bei Schwächen?", options: ["5", "6", "4", "3"], answer: "5" },
+    { question: "Wie stark ist Shoko Ieiri im Kampf?", options: ["3", "4", "5", "6"], answer: "3" },
+    { question: "Wie stark ist Gojo ohne Binden?", options: ["10", "9", "8", "7"], answer: "10" },
+    { question: "Wie stark ist ein normaler Fluch der Klasse 1?", options: ["5", "6", "7", "8"], answer: "7" },
+    { question: "Wie stark ist ein Fluch der Klasse S?", options: ["8", "9", "10", "11"], answer: "10" },
+    { question: "Wie stark ist Rika als Fluchwesen?", options: ["9", "10", "8", "7"], answer: "10" },
+    { question: "Wie stark ist Gojo mit der Unendlichen Leere?", options: ["10", "11", "9", "8"], answer: "10" }
+  ];
+
+  const powerQuiz_en = [
+    { question: "How strong is Gojo Satoru (1–10)?", options: ["7", "8", "9", "10"], answer: "10" },
+    { question: "How strong is Panda?", options: ["4", "6", "8", "5"], answer: "6" },
+    { question: "How strong is Sukuna in full form?", options: ["9", "10", "8", "7"], answer: "10" },
+    { question: "How strong is Nobara in close combat?", options: ["6", "7", "8", "5"], answer: "7" },
+    { question: "How strong is Maki after the Zenin incident?", options: ["9", "7", "8", "10"], answer: "9" },
+    { question: "How strong is Yuta Okkotsu?", options: ["8", "9", "10", "7"], answer: "9" },
+    { question: "How strong is Mahito in his first form?", options: ["6", "8", "9", "7"], answer: "7" },
+    { question: "How strong is Toji Fushiguro without cursed energy?", options: ["8", "9", "10", "6"], answer: "9" },
+    { question: "How strong is Nanami compared to Yuji?", options: ["equal", "stronger", "weaker", "draw"], answer: "stronger" },
+    { question: "How strong is Kenjaku?", options: ["10", "9", "8", "7"], answer: "9" },
+    { question: "How strong is Toge at full power?", options: ["7", "6", "8", "5"], answer: "7" },
+    { question: "How strong is Geto in his prime?", options: ["10", "9", "8", "7"], answer: "9" },
+    { question: "How strong is Yuji at the beginning?", options: ["5", "4", "6", "3"], answer: "4" },
+    { question: "How strong is Inumaki when weakened?", options: ["5", "6", "4", "3"], answer: "5" },
+    { question: "How strong is Shoko Ieiri in combat?", options: ["3", "4", "5", "6"], answer: "3" },
+    { question: "How strong is Gojo without blindfold?", options: ["10", "9", "8", "7"], answer: "10" },
+    { question: "How strong is a standard Grade 1 curse?", options: ["5", "6", "7", "8"], answer: "7" },
+    { question: "How strong is a Special Grade curse?", options: ["8", "9", "10", "11"], answer: "10" },
+    { question: "How strong is Rika as a cursed spirit?", options: ["9", "10", "8", "7"], answer: "10" },
+    { question: "How strong is Gojo using Infinite Void?", options: ["10", "11", "9", "8"], answer: "10" }
+  ];
+  
+
+  function getPowerQuiz() {
+    return getRandomSubset(currentLanguage === "de" ? powerQuiz_de : powerQuiz_en, 10);
+  }
+
+  function getRandomSubset(array, count = 10) {
+    const shuffled = [...array].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  }
+  
+  function showQuiz(questions, containerId, isQuote = false) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    container.classList.remove("hidden");
+  
+    let current = 0;
+    let score = 0;
+    showNext();
+  
+    function showNext() {
+      if (current >= questions.length) {
+        showResults(score, questions.length, container);
+        return;
+      }
+  
+      const q = questions[current];
+      const qElem = document.createElement("div");
+      qElem.classList.add("question");
+  
+      qElem.innerHTML = `
+        <p>${isQuote ? `"${q.quote}"` : q.question}</p>
+        ${q.options.map(opt => `<button>${opt}</button>`).join("")}
+      `;
+  
+      const buttons = qElem.querySelectorAll("button");
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (btn.textContent === q.answer) {
+            btn.style.backgroundColor = "lightgreen";
+            score++;
+          } else {
+            btn.style.backgroundColor = "lightcoral";
+          }
+  
+          buttons.forEach(b => b.disabled = true);
+          setTimeout(() => {
+            current++;
+            showNext();
+          }, 800);
+        });
+      });
+  
+      container.innerHTML = "";
+      container.appendChild(qElem);
+    }
+  }
+  function showResults(score, total, container) {
+    container.innerHTML = `
+      <p>✅ ${score} von ${total} richtig!</p>
+      <button onclick="restartGame('${container.id}')">Erneut spielen</button>
+    `;
+  }
+  
+  function restartGame(containerId) {
+    if (containerId === "quiz-game") startQuiz();
+    else startQuoteGame();
+  }
   
   let currentIndex = 0;
 

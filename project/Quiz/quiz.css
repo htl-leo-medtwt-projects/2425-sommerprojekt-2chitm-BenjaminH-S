@@ -303,7 +303,7 @@ input[type="text"]:focus {
   button {
     padding: 10px 20px;
     background-color: #b82f10;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 8px;
     margin: 5px;
@@ -393,4 +393,86 @@ input[type="text"]:focus {
     background-color: #f44336;
     color: white;
   }
+
+.high-contrast .slide button {
+  background-color: black !important;
+  color: white !important;
+  border: 2px solid white;
+}
+
+.high-contrast .slider-btn {
+  background-color: black !important;
+  color: white !important;
+  border: 2px solid white;
+}
+
+.high-contrast .slide button,
+.high-contrast .slider-btn {
+  background-color: black !important;
+  color: white !important;
+  border: 2px solid white !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.high-contrast .slide button:hover,
+.high-contrast .slider-btn:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.high-contrast select {
+  background-color: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath fill='white' d='M7 10L0 0h14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.high-contrast select:hover,
+.high-contrast select:focus {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+  outline: none;
+}
+
+.high-contrast select option {
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+}
+
+select {
+  background-color: #b82f10;
+  color: #fff;
+  border: 2px solid #b82f10;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath fill='white' d='M7 10L0 0h14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+select:hover,
+select:focus {
+  background-color: #fff;
+  color: #b82f10;
+  border-color: #b82f10;
+  outline: none;
+}
+
+
   
