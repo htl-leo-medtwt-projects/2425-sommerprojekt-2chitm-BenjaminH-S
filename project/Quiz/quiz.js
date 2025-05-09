@@ -192,78 +192,311 @@ document.querySelectorAll('.flag-btn').forEach(button => {
   });
 });
 
-function startMemory() {
-  const mode = document.getElementById("memory-mode-select").value;
-  let baseCards;
+const memoryTimeLimits = {
+  easy: 60,    
+  medium: 30,
+  hard: 15
+};
 
-  switch (mode) {
-    case "easy":
-      baseCards = memoryCards_easy;
-      break;
-    case "medium":
-      baseCards = memoryCards_medium;
-      break;
-    case "hard":
-      baseCards = memoryCards_hard;
-      break;
-    default:
-      baseCards = memoryCards_medium;
-  }
+let memoryTimer;
+let memoryTimeLeft;
+
+function startMemoryTimer(duration) {
+  const timerDisplay = document.getElementById("memory-timer-display");
+  memoryTimeLeft = duration;
+  updateTimerDisplay();
+
+  memoryTimer = setInterval(() => {
+      memoryTimeLeft--;
+      updateTimerDisplay();
+      if (memoryTimeLeft <= 0) {
+          clearInterval(memoryTimer);
+          alert("Zeit ist abgelaufen!");
+          endMemoryGame();
+      }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const timerDisplay = document.getElementById("memory-timer-display");
+  timerDisplay.textContent = `Verbleibende Zeit: ${memoryTimeLeft} Sekunden`;
+}
+
+const memoryCards_easy = [
+  "gojo.png",
+  "yuji.png",
+  "nobara.png",
+  "megumi.png"
+];
+
+const memoryCards_medium = [
+  ...memoryCards_easy,
+  "toji.png",
+  "kenjaku.png"
+];
+
+const memoryCards_hard = [
+  ...memoryCards_medium,
+  "yuta.png",
+  "mahito.png"
+];
+
+function shuffle(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+function renderMemoryGame(cards) {
+  const container = document.getElementById("memory-game");
+  container.innerHTML = "";
+  container.classList.remove("hidden");
+  
+  container.className = "memory-container";
+
+  let flipped = [];
+  let matched = [];
+
+  cards.forEach((imageName, index) => {
+    const card = document.createElement("div");
+    card.className = "memory-card";
+    card.dataset.index = index;
+    card.dataset.symbol = imageName;
+
+    const inner = document.createElement("div");
+    inner.classList.add("memory-card-inner");
+    
+    const front = document.createElement("div");
+    front.classList.add("memory-front");
+    front.style.backgroundImage = `url("../Img/FunHub/${imageName}")`;
+    
+    const back = document.createElement("div");
+    back.classList.add("memory-back");
+    
+    inner.appendChild(front);
+    inner.appendChild(back);
+    card.appendChild(inner);
+
+    card.addEventListener("click", () => {
+      if (card.classList.contains("flipped") || flipped.length === 2 || matched.includes(index)) return;
+
+      card.classList.add("flipped");
+      flipped.push({ index, card });
+
+      if (flipped.length === 2) {
+        const [first, second] = flipped;
+        
+        if (first.card.dataset.symbol === second.card.dataset.symbol) {
+          matched.push(first.index, second.index);
+          flipped = [];
+          
+          if (matched.length === cards.length) {
+            clearInterval(memoryTimer);
+            setTimeout(() => {
+              alert("🎉 Du hast alle Paare gefunden!");
+            }, 500);
+          }
+        } else {
+          setTimeout(() => {
+            first.card.classList.remove("flipped");
+            second.card.classList.remove("flipped");
+            flipped = [];
+          }, 1000);
+        }
+      }
+    });
+
+    container.appendChild(card);
+  });
+  
+  const columnsCount = Math.ceil(Math.sqrt(cards.length));
+  container.style.gridTemplateColumns = `repeat(${columnsCount}, 100px)`;
+}
+
+function startMemoryGame() {
+  const mode = document.getElementById("memory-mode-select").value;
+  const timeLimit = memoryTimeLimits[mode];
+  startMemoryTimer(timeLimit);
+
+  let baseCards;
+  if (mode === "easy") baseCards = memoryCards_easy;
+  else if (mode === "hard") baseCards = memoryCards_hard;
+  else baseCards = memoryCards_medium;
 
   const cards = shuffle([...baseCards, ...baseCards]); 
   renderMemoryGame(cards);
 }
 
+function endMemoryGame() {
+  clearInterval(memoryTimer);
+  document.getElementById("memory-timer-display").textContent = "";
+}
 
-function startMemoryGame() {
-    const game = document.getElementById("memory-game");
-    game.innerHTML = ""; 
-    game.classList.remove("hidden");
+function replayMemoryGame() {
+  endMemoryGame();
+  startMemoryGame();
+}
   
-    const chars = ["gojo", "megumi", "nobara", "yuji", "sukuna", "kenjaku"];
-    const cards = [...chars, ...chars].sort(() => 0.5 - Math.random());
-    let flipped = [];
+function spinWheel() {
+  const result = document.getElementById("wheel-result");
   
-    cards.forEach(char => {
-      const card = document.createElement("div");
-      card.className = "memory-card";
-      card.innerHTML = `
-        <div class="memory-card-inner">
-          <div class="memory-front" style="background-image:url('../Img/FunHub/${char}.png')"></div>
-          <div class="memory-back"></div>
-        </div>`;
-      card.addEventListener("click", () => flipCard(card, char));
-      game.appendChild(card);
-    });
-  
-    function flipCard(card, char) {
-      if (card.classList.contains("flipped")) return;
-      card.classList.add("flipped");
-      flipped.push({ card, char });
-  
-      if (flipped.length === 2) {
-        const [a, b] = flipped;
-        if (a.char !== b.char) {
-          setTimeout(() => {
-            a.card.classList.remove("flipped");
-            b.card.classList.remove("flipped");
-          }, 1000);
-        }
-        flipped = [];
-      }
+  const techniques = [
+    {
+      name: "Hollow Purple",
+      info: "Eine von Gojo Satoru verwendete Technik...",
+      img: "../Img/FunHub/hollow_purple.png"
+    },
+    {
+      name: "Cursed Technique Reversal: Red",
+      info: "Gojo Satorus Technik, die die Kraft der Unendlichkeit umkehrt...",
+      img: "../Img/FunHub/red.png"
+    },
+    {
+      name: "Cursed Technique Lapse: Blue",
+      info: "Die Grundtechnik von Gojo Satoru...",
+      img: "../Img/FunHub/blue.png"
+    },
+    {
+      name: "Ten Shadows Technique",
+      info: "Fushiguro Megumis Technik mit zehn Shikigami...",
+      img: "../Img/FunHub/ten_shadows.png"
+    },
+    {
+      name: "Straw Doll Technique",
+      info: "Nobara nutzt Nägel und Puppen...",
+      img: "../Img/FunHub/straw_doll.png"
+    },
+    {
+      name: "Cursed Speech",
+      info: "Inumaki Toge gibt Befehle über Worte mit Fluchenergie...",
+      img: "../Img/FunHub/cursed_speech.png"
+    },
+    {
+      name: "Idle Transfiguration",
+      info: "Mahito manipuliert Seelen direkt...",
+      img: "../Img/FunHub/idle_transfiguration.png"
+    },
+    {
+      name: "Boogie Woogie",
+      info: "Aoi Todo kann durch Klatschen Plätze tauschen...",
+      img: "../Img/FunHub/boogie_woogie.png"
+    },
+    {
+      name: "Projection Sorcery",
+      info: "Naobito Zenin unterteilt Bewegungen in 24 Frames...",
+      img: "../Img/FunHub/projection_sorcery.png"
+    },
+    {
+      name: "Simple Domain",
+      info: "Neutralisiert gegnerische Domains kurzzeitig...",
+      img: "../Img/FunHub/simple_domain.png"
+    },
+    {
+      name: "Falling Blossom Emotion",
+      info: "Maki blockt starke Angriffe durch reaktive Bewegungen...",
+      img: "../Img/FunHub/falling_blossom.png"
+    },
+    {
+      name: "New Shadow Style",
+      info: "Zenin-Stil zur Vorhersage von Bewegungen...",
+      img: "../Img/FunHub/shadow_style.png"
+    },
+    {
+      name: "Disaster Flames",
+      info: "Jogo kontrolliert tödliche Lava-Flammen...",
+      img: "../Img/FunHub/disaster_flames.png"
+    },
+    {
+      name: "Disaster Plants",
+      info: "Hanami kontrolliert Pflanzen und Blumenflüche...",
+      img: "../Img/FunHub/disaster_plants.png"
+    },
+    {
+      name: "Disaster Water",
+      info: "Dagon manipuliert Wasser, vor allem in Domains...",
+      img: "../Img/FunHub/disaster_water.png"
+    },
+    {
+      name: "Black Flash",
+      info: "Treffer im perfekten Moment der Fluchenergie...",
+      img: "../Img/FunHub/black_flash.png"
+    },
+    {
+      name: "Piercing Blood",
+      info: "Choso feuert sein Blut wie Kugeln...",
+      img: "../Img/FunHub/piercing.png"
+    },
+    {
+      name: "Heavenly Restriction",
+      info: "Toji/Maki: Keine Fluchenergie, aber übermenschlich stark...",
+      img: "../Img/FunHub/heavenly_restriction.png"
+    },
+    {
+      name: "Copy Technique",
+      info: "Yuta kann andere Techniken replizieren...",
+      img: "../Img/FunHub/copy.png"
+    },
+    {
+      name: "Domain Amplification",
+      info: "Neutralisiert automatische Techniken wie Gojos Unendlichkeit...",
+      img: "../Img/FunHub/domain_amplification.png"
+    },
+    {
+      name: "Ratio Technique",
+      info: "Nanami trifft im Verhältnis 7:3 für maximalen Schaden...",
+      img: "../Img/FunHub/ratio.png"
+    },
+    {
+      name: "Over Time",
+      info: "Nanami wird nach 17 Uhr stärker...",
+      img: "../Img/FunHub/over_time.png"
+    },
+    {
+      name: "Construction",
+      info: "Miwa kann Objekte erschaffen mit Energie und Wissen...",
+      img: "../Img/FunHub/construction.png"
+    },
+    {
+      name: "Antigravity System",
+      info: "Lässt Benutzer schweben und Gewicht verändern...",
+      img: "../Img/FunHub/antigravity.png"
+    },
+    {
+      name: "Fire Arrow",
+      info: "Feuerpfeile mit Durchschlagskraft...",
+      img: "../Img/FunHub/fire_arrow.png"
+    },
+    {
+      name: "Ice Formation",
+      info: "Gefriert Umgebung, Angriffe, Verteidigung...",
+      img: "../Img/FunHub/ice.png"
+    },
+    {
+      name: "Soul Liberation Blade",
+      info: "Greift direkt die Seele an...",
+      img: "../Img/FunHub/soul_blade.png"
     }
-  }
+  ];  
   
-  function replayMemoryGame() {
-    startMemoryGame();
-  }
+  result.innerHTML = "<p>Drehe das Rad...</p>";
+  document.getElementById("wheel-button").disabled = true;
   
-  function spinWheel() {
-    const result = document.getElementById("wheel-result");
-    const techniques = ["Hollow Purple", "Ten Shadows", "Straw Doll", "Cursed Speech"];
+  setTimeout(() => {
     const selection = techniques[Math.floor(Math.random() * techniques.length)];
-    result.textContent = `Du hast: ${selection}`;
-  }
+    
+    result.style.opacity = 0;
+    
+    setTimeout(() => {
+      result.innerHTML = `
+  <div class="technique-result">
+    <img src="${selection.img}" alt="${selection.name}" class="technique-img">
+    <h4>${selection.name}</h4>
+    <p class="technique-description">${selection.info}</p>
+  </div>`;
+
+      result.style.opacity = 1;
+      document.getElementById("wheel-button").disabled = false;
+    }, 300);
+  }, 1000);
+}
   
   function resetWheel() {
     document.getElementById("wheel-result").textContent = "";

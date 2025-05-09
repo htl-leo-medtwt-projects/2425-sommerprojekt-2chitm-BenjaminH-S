@@ -299,6 +299,50 @@ input[type="text"]:focus {
   .memory-back {
     background-color: #222;
   }
+
+  #wheel-result {
+    margin-top: 20px;
+    min-height: 100px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(46, 56, 86, 0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: opacity 0.3s ease;
+  }
+  
+  .technique-result h4 {
+    color: #000000;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .technique-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #000000;
+  }
+  
+#wheel-button {
+  background-color: #b82f10;
+  color: black;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#wheel-button:hover {
+  background-color: black;
+  color: #b82f10;
+  border: 2px solid #000000;
+}
+  
+  #wheel-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
   
   button {
     padding: 10px 20px;
@@ -310,11 +354,13 @@ input[type="text"]:focus {
     cursor: pointer;
     font-family: 'Jost';
     font-size: 1rem;
+    border: #000000 solid 2px;
     transition: background-color 0.3s ease;
   }
   
   button:hover {
-    background-color: #932810;
+    background-color: black;
+    color: #b82f10;
   }
   
   .quiz-container, .quote-container {
@@ -323,18 +369,19 @@ input[type="text"]:focus {
   }
   
   .quiz-option, .quote-option {
+    font-family: 'Jost';
     margin: 10px auto;
     display: block;
     width: fit-content;
     padding: 10px 20px;
-    border: 2px solid white;
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 6px;
     cursor: pointer;
   }
   
   .quiz-option:hover, .quote-option:hover {
-    background-color: #fff;
-    color: #000;
+    background-color: black;
+    color: #b82f10;
   }
 
   .slider-container {
@@ -344,7 +391,7 @@ input[type="text"]:focus {
     margin: 40px auto;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #b82f10;
     backdrop-filter: blur(8px);
   }
   
@@ -451,9 +498,10 @@ input[type="text"]:focus {
 }
 
 select {
+  font-family: 'Jost';
+  color: black;
   background-color: #b82f10;
-  color: #fff;
-  border: 2px solid #b82f10;
+  border: 2px solid #000000;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 1rem;
@@ -468,11 +516,61 @@ select {
 
 select:hover,
 select:focus {
-  background-color: #fff;
+  background-color: black;
   color: #b82f10;
-  border-color: #b82f10;
+  border: 2px solid #000000;
   outline: none;
 }
 
+.high-contrast .slider-container {
+  background-color: #2c2828; 
+}
 
-  
+body.dark-mode .slide,
+body.dark-mode .technique-result {
+  color: white;
+}
+
+body.dark-mode #wheel-button {
+  background-color: white;
+  color: black;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode #wheel-button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+body.dark-mode #wheel-result h4,
+body.dark-mode #wheel-result p {
+  color: white;
+}
+
+#wheel-result {
+  transition: opacity 0.4s ease;
+}
+
+.technique-img {
+  width: 200px;
+  max-width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .technique-img {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+body.high-contrast .technique-result h4,
+body.high-contrast .technique-result p {
+  color: white;
+}

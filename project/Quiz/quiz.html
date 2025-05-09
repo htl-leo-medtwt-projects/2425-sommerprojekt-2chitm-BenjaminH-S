@@ -28,18 +28,26 @@
     <div id="box">
         <div class="slider-container">
             <div class="game-slider" id="game-slider">
+
               <div class="slide">
                 <h3 id="memory-title">Memory</h3>
                 <p id="memory-sub">Erkenne die Charaktere!</p>
-                <button id="memory-button" onclick="startMemoryGame()">Starten</button>
+
+                <select id="memory-mode-select">
+                    <option value="easy">Anfänger</option>
+                    <option value="medium" selected>Casual-Exorzist</option>
+                    <option value="hard">Spezial-Rang</option>
+                  </select>
+
+                <button id="memory-button" onclick="startMemoryGame()">Fang an!</button>
                 <div id="memory-game" class="memory-container hidden"></div>
+                <p id="memory-timer-display" style="font-family: 'Jost'; font-size: 1.2rem; margin-top: 10px;"></p>
               </div>
           
               <div class="slide">
-                <h3 id="wheel-title">Glücksrad</h3>
-                <p id="wheel-sub">Drehe das Rad der Techniken!</p>
-                <button id="wheel-button" onclick="spinWheel()">Drehen</button>
-                <button onclick="resetWheel()">Erneut spielen</button>
+                <h3 id="wheel-title">Technikrad</h3>
+                <p id="wheel-sub">Hol dir deine Technik!</p>
+                <button id="wheel-button" onclick="spinWheel()">Dreh los!</button>
                 <div id="wheel-result"></div>
               </div>
           
@@ -48,10 +56,10 @@
     <p id="quiz-sub">Teste dein Wissen!</p>
     
     <select id="quiz-mode-select">
-      <option value="general">Allgemeinwissen</option>
-      <option value="power">Power-Level Quiz</option>
-      <option value="technique">Technik-Matching</option>
-      <option value="facts">Fakten-Feuer</option>
+      <option value="general">Allgemeinwissen!</option>
+      <option value="power">Power-Ranking!</option>
+      <option value="technique">Technik-Matching!</option>
+      <option value="facts">Fakten-Fluch!</option>
     </select>
   
     <button id="quiz-button" onclick="startQuiz()">Starten</button>
@@ -64,12 +72,12 @@
   
     <select id="quote-mode-select">
       <option value="classic">Klassisch</option>
-      <option value="rank">Rangraten</option>
-      <option value="context">Kontext erkennen</option>
-      <option value="realorfake">Echt oder Fan-Erfindung</option>
+      <option value="rank">Rang-Guesses!</option>
+      <option value="context">Arc-Erkenner!</option>
+      <option value="realorfake">Echt oder Humbug?!</option>
     </select>
   
-    <button id="quote-button" onclick="startQuoteGame()">Starten</button>
+    <button id="quote-button" onclick="startQuoteGame()">Leg Los!</button>
     <div id="quote-game" class="quote-container hidden"></div>
     </div>
     </div>
