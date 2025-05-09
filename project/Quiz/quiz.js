@@ -1,3 +1,8 @@
+  AOS.init({
+    duration: 800,
+    once: true,
+  });
+
 function setCookie(name, value, days) {
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -950,15 +955,23 @@ function spinWheel() {
     else startQuoteGame();
   }
   
-  let currentIndex = 0;
+let currentIndex = 0;
 
   function slide(direction) {
       const slider = document.getElementById("game-slider");
       const totalSlides = slider.children.length;
-  
+
       currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      AOS.refreshHard();
   }
-  
+
+  document.addEventListener("DOMContentLoaded", function () {
+    AOS.init({
+      duration: 800,
+      once: false, 
+    });
+  });
   
   

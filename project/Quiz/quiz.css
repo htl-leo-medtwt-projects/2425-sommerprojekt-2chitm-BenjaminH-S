@@ -402,11 +402,14 @@ input[type="text"]:focus {
   
   
   .slide {
-    min-width: 100%;
     padding: 40px;
     box-sizing: border-box;
     color: white;
     font-family: 'Jost', sans-serif;
+     width: 100%;
+  flex-shrink: 0;
+  padding: 1rem;
+  box-sizing: border-box;
   }
   
   .slider-btn {
