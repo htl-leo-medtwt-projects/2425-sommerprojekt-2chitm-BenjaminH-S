@@ -26,4 +26,5 @@ besitzt.
 ![Code-Additions](image6.png)
 
 ## Ziele bis zum nächsten Sprint 
-- [] Media Unterseite einbinden und noch dazu die Main Seite
+- [] Media Unterseite einbinden und noch dazu die Main Seite ergänzen
+- [] Suchleiste links oben passende JS-Funktion vergeben
