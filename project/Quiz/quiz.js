@@ -222,12 +222,12 @@ function startMemoryTimer(limitInSeconds) {
     remaining--;
 
     if (remaining >= 0) {
-      display.textContent = `Verbleibende Zeit: ${remaining} Sekunden`;
+      display.textContent = `Dir verbleiben noch: ${remaining} Sekunden!"`;
     }
 
     if (remaining <= 0) {
       clearInterval(memoryTimerInterval);
-      display.textContent = "⏰ Zeit abgelaufen!";
+      display.textContent = "Die Zeit ist abgelaufen Jujuzist!";
     }
   }, 1000);
 }
