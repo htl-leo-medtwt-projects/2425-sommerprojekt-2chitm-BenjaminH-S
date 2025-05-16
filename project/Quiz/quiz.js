@@ -1,7 +1,10 @@
-  AOS.init({
-    duration: 800,
-    once: true,
-  });
+let memoryElapsedSeconds = 0;
+let memoryTimerInterval;
+
+AOS.init({
+  duration: 800,
+  once: true,
+});
 
 function setCookie(name, value, days) {
   const date = new Date();
@@ -206,21 +209,29 @@ const memoryTimeLimits = {
 let memoryTimer;
 let memoryTimeLeft;
 
-function startMemoryTimer(duration) {
-  const timerDisplay = document.getElementById("memory-timer-display");
-  memoryTimeLeft = duration;
-  updateTimerDisplay();
+function startMemoryTimer(limitInSeconds) {
+  memoryElapsedSeconds = 0;
 
-  memoryTimer = setInterval(() => {
-      memoryTimeLeft--;
-      updateTimerDisplay();
-      if (memoryTimeLeft <= 0) {
-          clearInterval(memoryTimer);
-          alert("Zeit ist abgelaufen!");
-          endMemoryGame();
-      }
+  const display = document.getElementById("memory-timer-display");
+  display.textContent = `Verbleibende Zeit: ${limitInSeconds} Sekunden`;
+
+  let remaining = limitInSeconds;
+
+  memoryTimerInterval = setInterval(() => {
+    memoryElapsedSeconds++;
+    remaining--;
+
+    if (remaining >= 0) {
+      display.textContent = `Verbleibende Zeit: ${remaining} Sekunden`;
+    }
+
+    if (remaining <= 0) {
+      clearInterval(memoryTimerInterval);
+      display.textContent = "⏰ Zeit abgelaufen!";
+    }
   }, 1000);
 }
+
 
 function updateTimerDisplay() {
   const timerDisplay = document.getElementById("memory-timer-display");
@@ -249,6 +260,30 @@ const memoryCards_hard = [
 function shuffle(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
+
+function showMemoryResult() {
+  const resultWrapper = document.getElementById("memory-result-wrapper");
+  const resultDisplay = document.getElementById("memory-result-display");
+
+  const mode = document.getElementById("memory-mode-select").value;
+  const totalTime = memoryTimeLimits[mode];
+
+  const timeText = document.getElementById("memory-timer-display").textContent;
+  let used = 0;
+
+  if (timeText.includes(":")) {
+    const [min, sec] = timeText.split(":").map(Number);
+    used = totalTime - (min * 60 + sec);
+  }
+
+  const minutes = Math.floor(used / 60);
+  const seconds = used % 60;
+
+  resultDisplay.textContent = `Du hast alle Paare in ${minutes}:${seconds < 10 ? '0' + seconds : seconds} Minuten gefunden!`;
+
+  resultWrapper.classList.remove("hidden");
+}
+
 
 function renderMemoryGame(cards) {
   const container = document.getElementById("memory-game");
@@ -296,7 +331,7 @@ function renderMemoryGame(cards) {
           if (matched.length === cards.length) {
             clearInterval(memoryTimer);
             setTimeout(() => {
-              alert("🎉 Du hast alle Paare gefunden!");
+            showMemoryResult();
             }, 500);
           }
         } else {
@@ -317,6 +352,8 @@ function renderMemoryGame(cards) {
 }
 
 function startMemoryGame() {
+  document.getElementById("memory-result-wrapper").classList.add("hidden");
+  document.getElementById("memory-result-display").textContent = "";
   const mode = document.getElementById("memory-mode-select").value;
   const timeLimit = memoryTimeLimits[mode];
   startMemoryTimer(timeLimit);
@@ -331,7 +368,7 @@ function startMemoryGame() {
 }
 
 function endMemoryGame() {
-  clearInterval(memoryTimer);
+  clearInterval(memoryTimerInterval);
   document.getElementById("memory-timer-display").textContent = "";
 }
 
@@ -346,138 +383,165 @@ function spinWheel() {
   const techniques = [
     {
       name: "Hollow Purple",
-      info: "Eine von Gojo Satoru verwendete Technik...",
-      img: "../Img/FunHub/hollow_purple.png"
+      info: "Die Technik von Gojo Satoru, die die Anziehungskraft und Abstoßungskraft kombiniert",
+      img: "../Img/FunHub/hollow_purple.png",
+      user: "Gojo Satoru"
     },
     {
       name: "Cursed Technique Reversal: Red",
-      info: "Gojo Satorus Technik, die die Kraft der Unendlichkeit umkehrt...",
-      img: "../Img/FunHub/red.png"
+      info: "Die Grundtechnik zur Erzeugung von Abstoßungskraft",
+      img: "../Img/FunHub/red.png",
+      user: "Gojo Satoru"
     },
     {
       name: "Cursed Technique Lapse: Blue",
-      info: "Die Grundtechnik von Gojo Satoru...",
-      img: "../Img/FunHub/blue.png"
+      info: "Die Grundtechnik zur Erzeugung von Anziehungskraft",
+      img: "../Img/FunHub/blue.png",
+      user: "Gojo Satoru"
     },
     {
       name: "Ten Shadows Technique",
-      info: "Fushiguro Megumis Technik mit zehn Shikigami...",
-      img: "../Img/FunHub/ten_shadows.png"
+      info: "Beschwörungstechnik von 10 Shikigami mit verschiedenen Fähigkeiten",
+      img: "../Img/FunHub/ten_shadows.png",
+      user: "Megumi Fushiguro"
     },
     {
       name: "Straw Doll Technique",
-      info: "Nobara nutzt Nägel und Puppen...",
-      img: "../Img/FunHub/straw_doll.png"
+      info: "Fast wie Stamm-Rituale nur mit Nägel und Puppen gedacht für Menschen",
+      img: "../Img/FunHub/straw_doll.png",
+      user: "Kugisaki Nobara"
     },
     {
       name: "Cursed Speech",
-      info: "Inumaki Toge gibt Befehle über Worte mit Fluchenergie...",
-      img: "../Img/FunHub/cursed_speech.png"
+      info: "Befehlangabe über Worte mit Fluchenergie, welche aber großen Schaden beim Nutzer anrichten können",
+      img: "../Img/FunHub/cursed_speech.png",
+      user: "Toge Inumaki, Yuta Okkotsu"
     },
     {
       name: "Idle Transfiguration",
-      info: "Mahito manipuliert Seelen direkt...",
-      img: "../Img/FunHub/idle_transfiguration.png"
+      info: "Direkte und unausweichliche Seelenmanipulation des Zieles",
+      img: "../Img/FunHub/idle_transfiguration.png",
+      user: "Mahito"
     },
     {
       name: "Boogie Woogie",
-      info: "Aoi Todo kann durch Klatschen Plätze tauschen...",
-      img: "../Img/FunHub/boogie_woogie.png"
+      info: "Durch Klatschen die Plätze zweier Ziele tauschen",
+      img: "../Img/FunHub/boogie_woogie.png",
+      user: "Aoi Todo"
     },
     {
       name: "Projection Sorcery",
-      info: "Naobito Zenin unterteilt Bewegungen in 24 Frames...",
-      img: "../Img/FunHub/projection_sorcery.png"
+      info: "Unterteilungen von Bewegungen in 24 FPS (Frames per Second)",
+      img: "../Img/FunHub/projection_sorcery.png",
+      user: "Naoya Zenin"
     },
     {
       name: "Simple Domain",
-      info: "Neutralisiert gegnerische Domains kurzzeitig...",
-      img: "../Img/FunHub/simple_domain.png"
+      info: "Neutralisiert die Domäne von den Gegnern kurzzeitig",
+      img: "../Img/FunHub/simple_domain.png",
+      user: "Kasumi Miwa"
     },
     {
       name: "Falling Blossom Emotion",
-      info: "Maki blockt starke Angriffe durch reaktive Bewegungen...",
-      img: "../Img/FunHub/falling_blossom.png"
+      info: "Blockierung von starken Angriffen durch reaktive Bewegungen",
+      img: "../Img/FunHub/falling_blossom.png",
+      user: "Gojo Satoru"
     },
     {
       name: "New Shadow Style",
-      info: "Zenin-Stil zur Vorhersage von Bewegungen...",
-      img: "../Img/FunHub/shadow_style.png"
+      info: "Zenin-Stil zur Vorhersage von Bewegungen des Gegners",
+      img: "../Img/FunHub/shadow_style.png",
+      user: "Kusakabe Shinichi"
     },
     {
       name: "Disaster Flames",
-      info: "Jogo kontrolliert tödliche Lava-Flammen...",
-      img: "../Img/FunHub/disaster_flames.png"
+      info: "Kontrolle über tödliche Flammenattacken, die nur Zerstörung bringen",
+      img: "../Img/FunHub/disaster_flames.png",
+      user: "Jogo"
     },
     {
       name: "Disaster Plants",
-      info: "Hanami kontrolliert Pflanzen und Blumenflüche...",
-      img: "../Img/FunHub/disaster_plants.png"
+      info: "Kontrolle von Mutternatur, wo das Grüne um uns herum genutzt werden kann",
+      img: "../Img/FunHub/disaster_plants.png",
+      user: "Hanami"
     },
     {
       name: "Disaster Water",
-      info: "Dagon manipuliert Wasser, vor allem in Domains...",
-      img: "../Img/FunHub/disaster_water.png"
+      info: "Wassermanipulation, vor allem in Dagons Domäne auftretend",
+      img: "../Img/FunHub/disaster_water.png",
+      user: "Dagon"
     },
     {
       name: "Black Flash",
-      info: "Treffer im perfekten Moment der Fluchenergie...",
-      img: "../Img/FunHub/black_flash.png"
+      info: "Treffer im perfekten Moment der Fluchenergie, der je nach Zufälligkeit auftreten kann",
+      img: "../Img/FunHub/black_flash.png",
+      user: "Gojo Satoru, Yuji Itadori"
     },
     {
       name: "Piercing Blood",
-      info: "Choso feuert sein Blut wie Kugeln...",
-      img: "../Img/FunHub/piercing.png"
+      info: "Eine Technik meistens benutzt von Choso, lässt einen blutroten Strahl aus und kann bei längeranhaltender Anwendung tödlich sein.",
+      img: "../Img/FunHub/piercing.png",
+      user: "Choso"
     },
     {
       name: "Heavenly Restriction",
-      info: "Toji/Maki: Keine Fluchenergie, aber übermenschlich stark...",
-      img: "../Img/FunHub/heavenly_restriction.png"
+      info: "Haben keine Fluchenergie sind, aber übermenschlich stark",
+      img: "../Img/FunHub/heavenly_restriction.png",
+      user: "Toji Fushiguro, Maki Zenin"
     },
     {
       name: "Copy Technique",
-      info: "Yuta kann andere Techniken replizieren...",
-      img: "../Img/FunHub/copy.png"
+      info: "Replikation von anderen Techniken replizieren",
+      img: "../Img/FunHub/copy.png",
+      user: "Yuta Okkotsu"
     },
     {
       name: "Domain Amplification",
-      info: "Neutralisiert automatische Techniken wie Gojos Unendlichkeit...",
-      img: "../Img/FunHub/domain_amplification.png"
+      info: "Neutralisiert automatische Techniken wie Gojos Unendlichkeit",
+      img: "../Img/FunHub/domain_amplification.png",
+      user: "Gojo Satoru"
     },
     {
       name: "Ratio Technique",
-      info: "Nanami trifft im Verhältnis 7:3 für maximalen Schaden...",
-      img: "../Img/FunHub/ratio.png"
+      info: "Nanami trifft im Verhältnis 7:3 für maximalen Schaden",
+      img: "../Img/FunHub/ratio.png",
+      user: "Nanami Kento"
     },
     {
       name: "Over Time",
-      info: "Nanami wird nach 17 Uhr stärker...",
-      img: "../Img/FunHub/over_time.png"
+      info: "Ähnlich wie ein Power-Up, nur dass dieser nach 17 Uhr auftritt",
+      img: "../Img/FunHub/over_time.png",
+      user: "Nanami Kento"
     },
     {
       name: "Construction",
-      info: "Miwa kann Objekte erschaffen mit Energie und Wissen...",
-      img: "../Img/FunHub/construction.png"
+      info: "Man kann damit Objekte erschaffen mit Energie und Wissen",
+      img: "../Img/FunHub/construction.png",
+      user: "Kinji Hakari"
     },
     {
       name: "Antigravity System",
-      info: "Lässt Benutzer schweben und Gewicht verändern...",
-      img: "../Img/FunHub/antigravity.png"
+      info: "Die Technik lässt den Benutzer schweben und sein Gewicht verändern",
+      img: "../Img/FunHub/antigravity.png",
+      user: "Kenjaku"
     },
     {
       name: "Fire Arrow",
-      info: "Feuerpfeile mit Durchschlagskraft...",
-      img: "../Img/FunHub/fire_arrow.png"
+      info: "Feuerpfeile mit zermürbender und explodierender Durchschlagskraft, lässt nur Asche zurück",
+      img: "../Img/FunHub/fire_arrow.png",
+      user: "Ryoumen Sukuna"
     },
     {
       name: "Ice Formation",
-      info: "Gefriert Umgebung, Angriffe, Verteidigung...",
-      img: "../Img/FunHub/ice.png"
+      info: "Gefriert Umgebung die Umgebung, kann nach Wunsch des Benutzers verändert werden",
+      img: "../Img/FunHub/ice.png",
+      user: "Uraume"
     },
     {
       name: "Soul Liberation Blade",
-      info: "Greift direkt die Seele an...",
-      img: "../Img/FunHub/soul_blade.png"
+      info: "Greift direkt die Seele an, nachdem man das Ziel getroffen hat",
+      img: "../Img/FunHub/soul_blade.png",
+      user: "Maki Zenin"
     }
   ];  
   
@@ -495,6 +559,7 @@ function spinWheel() {
     <img src="${selection.img}" alt="${selection.name}" class="technique-img">
     <h4>${selection.name}</h4>
     <p class="technique-description">${selection.info}</p>
+    <p class="technique-description">Bekannte Nutzer: ${selection.user}</p>
   </div>`;
 
       result.style.opacity = 1;

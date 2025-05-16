@@ -577,3 +577,22 @@ body.high-contrast .technique-result h4,
 body.high-contrast .technique-result p {
   color: white;
 }
+
+.result-text {
+  font-family: 'Jost';
+  font-size: 1.2rem;
+  margin-top: 15px;
+  color: #ffffff;
+  text-align: center;
+}
+
+#memory-result-wrapper {
+  margin-top: 10px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
