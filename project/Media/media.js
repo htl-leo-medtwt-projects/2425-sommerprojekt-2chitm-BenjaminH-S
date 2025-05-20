@@ -1,3 +1,5 @@
+let mediaPreview;
+
 document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("popup");
     const contrastToggle = document.getElementById("contrast-toggle");
@@ -280,3 +282,18 @@ function attachClickEvents() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    mediaPreview = document.getElementById("media-preview");
+
+    document.querySelectorAll('.menu-item').forEach(button => {
+        button.addEventListener("click", () => {
+            const section = button.getAttribute("data-section");
+            if (section === "episodes") {
+                renderEpisodes();
+            } else if (section === "movie") {
+                renderMovies();
+            }
+        });
+    });
+});
