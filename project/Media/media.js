@@ -191,3 +191,92 @@ document.querySelectorAll('.flag-btn').forEach(button => {
         button.classList.add('selected');
     });
 });
+
+const episodeData = {
+    "Season 1": [
+        {
+            title: "Ep 1 – Ryomen Sukuna",
+            description: "Yuji Itadori trifft auf ein verfluchtes Objekt.",
+            video: "https://www.youtube.com/embed/example1"
+        },
+        {
+            title: "Ep 2 – For Myself",
+            description: "Yuji beginnt seine Ausbildung bei Jujutsu Tech.",
+            video: "https://www.youtube.com/embed/example2"
+        }
+    ],
+    "Season 2": [
+        {
+            title: "Ep 1 – Hidden Inventory",
+            description: "Gojo und Geto auf einer Mission in der Vergangenheit.",
+            video: "https://www.youtube.com/embed/example3"
+        }
+    ]
+};
+
+const movieData = [
+    {
+        title: "Jujutsu Kaisen 0 – The Movie",
+        description: "Die Geschichte von Yuta Okkotsu vor den Hauptevents.",
+        video: "https://www.youtube.com/embed/example4"
+    }
+];
+
+function renderDetail(item) {
+    const detail = document.getElementById("media-detail");
+    detail.innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe src="${item.video}" 
+                    frameborder="0" 
+                    allowfullscreen 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            </iframe>
+        </div>
+    `;
+    detail.classList.remove("hidden");
+}
+
+function renderEpisodes() {
+    let html = '<h2>Seasons</h2>';
+    for (const season in episodeData) {
+        html += `<h3>${season}</h3><ul>`;
+        episodeData[season].forEach((ep, index) => {
+            html += `<li class="clickable" data-type="episode" data-season="${season}" data-index="${index}">${ep.title}</li>`;
+        });
+        html += '</ul>';
+    }
+    mediaPreview.innerHTML = html;
+    mediaPreview.classList.remove("hidden");
+    document.getElementById("media-detail").classList.add("hidden");
+    attachClickEvents();
+}
+
+function renderMovies() {
+    let html = '<h2>Movies</h2><ul>';
+    movieData.forEach((movie, index) => {
+        html += `<li class="clickable" data-type="movie" data-index="${index}">${movie.title}</li>`;
+    });
+    html += '</ul>';
+    mediaPreview.innerHTML = html;
+    mediaPreview.classList.remove("hidden");
+    document.getElementById("media-detail").classList.add("hidden");
+    attachClickEvents();
+}
+
+function attachClickEvents() {
+    document.querySelectorAll('.clickable').forEach(item => {
+        item.addEventListener("click", () => {
+            const type = item.getAttribute("data-type");
+            if (type === "episode") {
+                const season = item.getAttribute("data-season");
+                const index = item.getAttribute("data-index");
+                renderDetail(episodeData[season][index]);
+            } else if (type === "movie") {
+                const index = item.getAttribute("data-index");
+                renderDetail(movieData[index]);
+            }
+        });
+    });
+}
