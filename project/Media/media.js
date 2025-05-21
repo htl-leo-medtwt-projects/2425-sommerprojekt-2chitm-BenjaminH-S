@@ -62,6 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
         document.documentElement.lang = lang;
     }
 
+    const langFromCookie = getCookie("language");
+    if (langFromCookie) {
+        currentLanguage = langFromCookie;
+    }
+
     function applyContrast(mode) {
         const navBar = document.querySelector("ul");
         const navItems = document.querySelectorAll("ul li");
@@ -188,12 +193,39 @@ document.addEventListener("DOMContentLoaded", function () {
     loadSettings();
 });
 
-document.querySelectorAll('.flag-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
+document.querySelectorAll('.flag-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const selectedLang = btn.getAttribute('data-lang');
+        currentLanguage = selectedLang; 
+        setCookie("language", selectedLang, 7);
+
+        const activeSection = document.querySelector('.menu-item.active');
+        if (activeSection) {
+            const section = activeSection.getAttribute('data-section');
+            renderContent(section); 
+        }
     });
 });
+
+function renderContent(section) {
+    if (section === "episodes") {
+        renderEpisodes();
+    } else if (section === "movie") {
+        renderMovies();
+    }
+}
+
+
+document.querySelectorAll('.menu-item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const section = btn.getAttribute('data-section');
+        renderContent(section);
+    });
+});
+
 
 const episodeData = {
     "Season 1": [
@@ -600,7 +632,7 @@ const movieData = [
 
 
 function renderEpisodes() {
-    mediaPreview.innerHTML = '<h2>Seasons</h2>';
+    mediaPreview.innerHTML = `<h2>${currentLanguage === "de" ? "Staffeln" : "Seasons"}</h2>`;
     for (const season in episodeData) {
         mediaPreview.innerHTML += `<h3>${season}</h3><ul>`;
         episodeData[season].forEach((ep, index) => {
@@ -615,7 +647,7 @@ function renderEpisodes() {
 }
 
 function renderMovies() {
-    mediaPreview.innerHTML = '<h2>Movies</h2><ul>';
+    mediaPreview.innerHTML = `<h2>${currentLanguage === "de" ? "Filme" : "Movies"}</h2><ul>`;
     movieData.forEach((movie, index) => {
         const title = movie.title[currentLanguage];
         mediaPreview.innerHTML += `<li class="clickable" data-type="movie" data-index="${index}">${title}</li>`;
