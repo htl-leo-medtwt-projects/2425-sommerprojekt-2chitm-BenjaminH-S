@@ -237,8 +237,168 @@ const episodeData = {
             },
             video: "https://www.youtube.com/embed/5"
         },
-
+        {
+            title: { de: "Der unheilvolle Fluchschloss, Teil 2", en: "The ominous cursed castle, Part 2" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Nach dem Regen", en: "After the rain" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Überfall", en: "Raid" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Langeweile", en: "Boredom" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Kleingetier und Umkehrvergeltung", en: "Small animals and retaliation" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Ruhender Wandel", en: "Resting change" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Starrsinn", en: "Stubbornness" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "An dein zukünftiges Ich", en: "To the future me" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Bis morgen", en: "Until tomorrow" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Austausch mit der Kyoto Schwesterschule Wettkampf 0", en: "Kyoto Sister School Exchange Event Battle 0" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Austausch mit der Kyoto Schwesterschule Wettkampf 1", en: "Kyoto Sister School Exchange Event Battle 1" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Austausch mit der Kyoto Schwesterschule Wettkampf 2", en: "Kyoto Sister School Exchange Event Battle 2" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Austausch mit der Kyoto Schwesterschule Wettkampf 3", en: "Kyoto Sister School Exchange Event Battle 3" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Weiser", en: "Wiser" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Schwarzer Blitz", en: "Black Flash" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Nonstandard", en: "Non-Standard" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Jujutsu Koshien", en: "Jujutsu Koshien" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Der Ursprung des blinden Gehorsams", en: "The origin of blind obedience" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Der Ursprung des blinden Gehorsams 2", en: "The origin of blind obedience 2" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
+        {
+            title: { de: "Mittäterschaft", en: "Complicity" },
+            description: {
+                de: "Yuji trifft eine schwere Entscheidung.",
+                en: "Yuji makes a hard choice."
+            },
+            video: "https://www.youtube.com/embed/5"
+        },
     ],
+
     "Season 2": [
         {
             title: { de: "Der versteckte Schatz, Teil 1", en: "The Hidden Treasure, Part 1" },
