@@ -198,7 +198,7 @@ document.querySelectorAll('.flag-btn').forEach(button => {
 const episodeData = {
     "Season 1": [
         {
-            title: { de: "Ep 1 – Ryomen Sukuna", en: "Ep 1 – Ryomen Sukuna" },
+            title: { de: "Ryomen Sukuna", en: " Ryomen Sukuna" },
             description: {
                 de: "Yuji Itadori trifft auf ein verfluchtes Objekt.",
                 en: "Yuji Itadori encounters a cursed object."
@@ -206,7 +206,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/1"
         },
         {
-            title: { de: "Ep 2 – Für mich selbst", en: "Ep 2 – For Myself" },
+            title: { de: "Für mich selbst", en: "For Myself" },
             description: {
                 de: "Yuji beginnt seine Ausbildung bei der Jujutsu-Schule.",
                 en: "Yuji begins his training at Jujutsu High."
@@ -214,7 +214,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/2"
         },
         {
-            title: { de: "Ep 3 – Mädchen aus Stahl", en: "Ep 3 – Girl of Steel" },
+            title: { de: "Mädchen aus Stahl", en: "Girl of Steel" },
             description: {
                 de: "Kugisaki Nobara zeigt ihr Können.",
                 en: "Nobara Kugisaki shows her skills."
@@ -222,7 +222,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/3"
         },
         {
-            title: { de: "Ep 4 – Verfluchte Womb", en: "Ep 4 – Cursed Womb" },
+            title: { de: "Der unheilvolle Fluchschloss", en: "The ominous cursed castle" },
             description: {
                 de: "Ein gefährlicher Fluch taucht auf.",
                 en: "A dangerous curse emerges."
@@ -230,7 +230,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/4"
         },
         {
-            title: { de: "Ep 5 – Rückblick", en: "Ep 5 – Detention" },
+            title: { de: "Der unheilvolle Fluchschloss, Teil 2", en: "The ominous cursed castle, Part 2" },
             description: {
                 de: "Yuji trifft eine schwere Entscheidung.",
                 en: "Yuji makes a hard choice."
@@ -241,7 +241,7 @@ const episodeData = {
     ],
     "Season 2": [
         {
-            title: { de: "Ep 1 – Geheimes Inventar", en: "Ep 1 – Hidden Inventory" },
+            title: { de: "Der versteckte Schatz, Teil 1", en: "The Hidden Treasure, Part 1" },
             description: {
                 de: "Gojo und Geto auf einer Mission in der Vergangenheit.",
                 en: "Gojo and Geto go on a mission in the past."
@@ -249,7 +249,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/21"
         },
         {
-            title: { de: "Ep 2 – Früher Tod", en: "Ep 2 – Premature Death" },
+            title: { de: "Der versteckte Schatz, Teil 2", en: "The Hidden Treasure, Part 2" },
             description: {
                 de: "Ein tragisches Ereignis verändert alles.",
                 en: "A tragic event changes everything."
@@ -257,14 +257,173 @@ const episodeData = {
             video: "https://www.youtube.com/embed/22"
         },
         {
-            title: { de: "Ep 3 – Shibuya Vorfall", en: "Ep 3 – Shibuya Incident" },
+            title: { de: "Der versteckte Schatz, Teil 3", en: "The Hidden Treasure, Part 3" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Der versteckte Schatz, Teil 4", en: "The Hidden Treasure, Part 4" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Verfrühter Tod", en: "Premature Death" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Es ist so", en: "It's like that" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Abendsfest", en: "Evening Festival" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Der Shibuya Vorfall", en: "The Shibuya Incident" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Shibuya Vorfall - Tor öffne", en: "Shibuya Incident - Gate open" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Pandemonium", en: "Schwankungen" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Seance", en: "Seance" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Unverblümtes Messer", en: "Blunt Knife" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Rote Skala", en: "Red Scale" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Schwankungen", en: "Fluctuations" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Schwankungen Teil 2", en: "Fluctuations, Part 2 " },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Donnerschlag", en: "Thunderclap" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Donnerschlag Teil 2", en: "Thunderclap Part 2" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Richtig und Falsch", en: "Right And Wrong" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Richtig und Falsch Teil 2", en: "Right And Wrong Part 2" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Richtig und Falsch Teil 3", en: "Right And Wrong Part 3" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Metamorphosis", en: "Metamorphosis" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Metamorphosis Teil 2", en: "Metamorphosis Part 2" },
+            description: {
+                de: "Der Shibuya-Bogen beginnt.",
+                en: "The Shibuya arc begins."
+            },
+            video: "https://www.youtube.com/embed/23"
+        },
+        {
+            title: { de: "Shibuya Vorfall: Tor geschlossen", en: "Shibuya Incident: Gate closed" },
             description: {
                 de: "Der Shibuya-Bogen beginnt.",
                 en: "The Shibuya arc begins."
             },
             video: "https://www.youtube.com/embed/23"
         }
-
     ]
 };
 
