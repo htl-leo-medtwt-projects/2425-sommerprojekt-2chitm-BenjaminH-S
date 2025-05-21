@@ -230,7 +230,7 @@ const episodeData = {
             video: "https://www.youtube.com/embed/4"
         },
         {
-            title: { de: "Der unheilvolle Fluchschloss, Teil 2", en: "The ominous cursed castle, Part 2" },
+            title: { de: "Der unheilvolle Fluchschloss, Teil 1", en: "The ominous cursed castle, Part 1" },
             description: {
                 de: "Yuji trifft eine schwere Entscheidung.",
                 en: "Yuji makes a hard choice."
