@@ -332,8 +332,14 @@ input[type="text"]:focus {
 }
 
 #media-preview li:hover {
-    background-color: rgba(184, 47, 16, 0.15);
+    background-color: #000000;
+    color: #b82f10;
 }
+
+#media-preview > div:first-child {
+    display: none;
+}
+
 
 #media-detail {
     margin-top: 30px;
