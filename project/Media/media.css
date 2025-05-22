@@ -285,25 +285,54 @@ input[type="text"]:focus {
 }
 
 #media-preview {
-    margin-top: 50px;
+    max-width: 650px;     
+    margin: 40px auto 20px auto;
     padding: 20px;
-    font-family: 'Jost', sans-serif;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+    font-family: 'Jost', sans-serif;
+    color: white;
     text-align: left;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
 
 #media-preview ul {
-    list-style-type: square;
-    padding-left: 20px;
+    counter-reset: episode-counter;
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 #media-preview li {
-    margin-bottom: 5px;
+    counter-increment: episode-counter;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 6px 12px 6px 48px;
+    border-radius: 6px;
+    font-size: 0.95vw;
+    color: var(--text-color);
+    font-family: 'Jost', sans-serif;
+    border-left: 3px solid #b82f10;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+}
+
+#media-preview li::before {
+    content: counter(episode-counter) ".";
+    position: absolute;
+    left: 16px;
+    color: #b82f10;
+    font-weight: 600;
+    font-size: 0.85vw;
+}
+
+#media-preview li:hover {
+    background-color: rgba(184, 47, 16, 0.15);
 }
 
 #media-detail {
@@ -316,4 +345,38 @@ input[type="text"]:focus {
     margin-right: auto;
     color: white;
     font-family: 'Jost', sans-serif;
+}
+
+@media (max-width: 768px) {
+    ul {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #side-menu {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .menu-item {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    input[type="text"] {
+        width: 80%;
+        left: 10%;
+    }
+
+     #media-preview ul {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    #media-preview li {
+        font-size: 3.5vw;
+        padding: 10px;
+    }
 }
