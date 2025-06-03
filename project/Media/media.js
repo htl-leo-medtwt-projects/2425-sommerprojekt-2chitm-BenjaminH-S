@@ -634,12 +634,11 @@ const movieData = [
 function renderEpisodes() {
     mediaPreview.innerHTML = `<h2>${currentLanguage === "de" ? "Staffeln" : "Seasons"}</h2>`;
     for (const season in episodeData) {
-        mediaPreview.innerHTML += `<h3>${season}</h3><ul>`;
+        mediaPreview.innerHTML += `<h3>${season}</h3>`;
         episodeData[season].forEach((ep, index) => {
             const title = ep.title[currentLanguage];
             mediaPreview.innerHTML += `<li class="clickable" data-type="episode" data-season="${season}" data-index="${index}">${title}</li>`;
         });
-        mediaPreview.innerHTML += '</ul>';
     }
     mediaPreview.classList.remove("hidden");
     document.getElementById("media-detail").classList.add("hidden");
@@ -647,12 +646,11 @@ function renderEpisodes() {
 }
 
 function renderMovies() {
-    mediaPreview.innerHTML = `<h2>${currentLanguage === "de" ? "Filme" : "Movies"}</h2><ul>`;
+    mediaPreview.innerHTML = `<h2>${currentLanguage === "de" ? "Filme" : "Movies"}</h2>`;
     movieData.forEach((movie, index) => {
         const title = movie.title[currentLanguage];
         mediaPreview.innerHTML += `<li class="clickable" data-type="movie" data-index="${index}">${title}</li>`;
     });
-    mediaPreview.innerHTML += '</ul>';
     mediaPreview.classList.remove("hidden");
     document.getElementById("media-detail").classList.add("hidden");
     attachClickEvents();
@@ -705,5 +703,74 @@ document.addEventListener("DOMContentLoaded", () => {
                 renderMovies();
             }
         });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector('input[type="text"]');
+    const suggestionsBox = document.getElementById("suggestions");
+
+    const pages = [
+        { label: "Mediales", url: "../Media/media.html" },
+        { label: "Welt", url: "../World/world.html" },
+        { label: "FunHub", url: "../Quiz/quiz.html" },
+        { label: "Geschichte", url: "../Story/story.html" },
+        { label: "Aoi Todo", url: "../World/world.html#aoi" },
+        { label: "Aoi Todo/Geschichte", url: "../Story/story.html#aoi" }
+    ];
+
+    searchInput.addEventListener("input", function () {
+        const query = searchInput.value.toLowerCase().trim();
+        suggestionsBox.innerHTML = "";
+
+        if (!query) {
+            suggestionsBox.classList.add("hidden");
+            return;
+        }
+
+        const matches = pages.filter(page =>
+            page.label.toLowerCase().includes(query)
+        );
+
+        if (matches.length > 0) {
+            suggestionsBox.classList.remove("hidden");
+            matches.forEach(match => {
+                const item = document.createElement("div");
+                item.textContent = match.label;
+                item.addEventListener("click", () => {
+                    window.location.href = match.url;
+                });
+                suggestionsBox.appendChild(item);
+            });
+        } else {
+            suggestionsBox.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+            suggestionsBox.classList.add("hidden");
+        }
+    });
+
+    searchInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            const query = searchInput.value.toLowerCase().trim();
+            const match = pages.find(page =>
+                page.label.toLowerCase().includes(query)
+            );
+            if (match) {
+                window.location.href = match.url;
+            } else {
+                alert("Keine passende Seite gefunden.");
+            }
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('contrast-toggle');
+    toggle.addEventListener('change', function () {
+        document.body.classList.toggle('light-mode', toggle.checked);
     });
 });

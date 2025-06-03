@@ -257,3 +257,53 @@ input[type="text"]:focus {
     outline: none; 
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4); 
 }
+
+#suggestions {
+    position: fixed;
+    top: 50px;
+    left: 10px;
+    width: 230px; 
+    background-color: #932810;
+    border-top: 3px solid black;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+    z-index: 1001;
+    font-family: 'Jost', sans-serif;
+    color: black;
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 5px 0;
+}
+
+#suggestions div {
+    padding: 14px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: left;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#suggestions div:hover {
+    background-color: black; 
+    color: #b82f10;
+    font-weight: bold;
+}
+
+.light-mode #suggestions {
+    background-color: white;
+    border-top: 3px solid black;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    color: black;
+}
+
+.light-mode #suggestions div {
+    background-color: transparent;
+    color: black;
+}
+
+.light-mode #suggestions div:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}

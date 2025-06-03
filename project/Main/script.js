@@ -187,3 +187,66 @@ document.querySelectorAll('.flag-btn').forEach(button => {
         button.classList.add('selected');
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector('input[type="text"]');
+    const suggestionsBox = document.getElementById("suggestions");
+
+    const pages = [
+        { label: "Mediales", url: "../Media/media.html" },
+        { label: "Welt", url: "../World/world.html" },
+        { label: "FunHub", url: "../Quiz/quiz.html" },
+        { label: "Geschichte", url: "../Story/story.html" },
+        { label: "Aoi Todo", url: "../World/world.html#aoi" },
+        { label: "Aoi Todo/Geschichte", url: "../Story/story.html#aoi" }
+    ];
+
+    searchInput.addEventListener("input", function () {
+        const query = searchInput.value.toLowerCase().trim();
+        suggestionsBox.innerHTML = "";
+
+        if (!query) {
+            suggestionsBox.classList.add("hidden");
+            return;
+        }
+
+        const matches = pages.filter(page =>
+            page.label.toLowerCase().includes(query)
+        );
+
+        if (matches.length > 0) {
+            suggestionsBox.classList.remove("hidden");
+            matches.forEach(match => {
+                const item = document.createElement("div");
+                item.textContent = match.label;
+                item.addEventListener("click", () => {
+                    window.location.href = match.url;
+                });
+                suggestionsBox.appendChild(item);
+            });
+        } else {
+            suggestionsBox.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+            suggestionsBox.classList.add("hidden");
+        }
+    });
+
+    searchInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            const query = searchInput.value.toLowerCase().trim();
+            const match = pages.find(page =>
+                page.label.toLowerCase().includes(query)
+            );
+            if (match) {
+                window.location.href = match.url;
+            } else {
+                alert("Keine passende Seite gefunden.");
+            }
+        }
+    });
+});
+
