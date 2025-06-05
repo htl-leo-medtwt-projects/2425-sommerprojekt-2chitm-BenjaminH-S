@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             if (secondarySearch) {
                 secondarySearch.style.backgroundColor = "#111";
-                secondarySearch.style.color = "white"; // ✅ nur Schriftfarbe
+                secondarySearch.style.color = "white"; 
                 secondarySearch.style.border = "1px solid white";
                 secondarySearch.style.caretColor = "white";
                 secondarySearch.classList.add("light-search");
