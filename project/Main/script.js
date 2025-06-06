@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Sprache",
                 "mediales": "Mediales",
                 "welt": "Welt",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Geschichte"
             },
             "en": {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Language",
                 "mediales": "Media",
                 "welt": "World",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Story"
             }
         };
@@ -56,90 +56,107 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function applyContrast(mode) {
-        const navBar = document.querySelector("ul");
-        const navItems = document.querySelectorAll("ul li");
-        const settingsIcon = document.getElementById("rad");
-        const settingsBox = document.getElementById("popup");
-        const searchBar = document.querySelector('input[type="text"]');
-        const MainPage = window.location.pathname.includes("Main/main.html");
-    
-        if (mode === "light") {
-            document.body.classList.add("light-mode");
-            if (contrastToggle) contrastToggle.checked = true;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "black";
-                navBar.style.color = "white";
-            }
-    
-            if (navItems) {
-                navItems.forEach((item, index) => {
-                    item.style.borderRight = "4px solid white";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid white";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
-                });
-            }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "white";
-            }
-    
-            if (searchBar) {
-                searchBar.style.backgroundColor = "white";
-            }
-    
-            if (MainPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Main_Light.png')";
-            }
-    
-        } else {
-            document.body.classList.remove("light-mode");
-            if (contrastToggle) contrastToggle.checked = false;
-    
-            if (navBar) {
-                navBar.style.backgroundColor = "#b82f10";
-                navBar.style.color = "black";
-            }
-    
-            if (navItems) {
-                navItems.forEach((item, index) => {
-                    item.style.borderRight = "4px solid black";
-                    if (index === 0) {
-                        item.style.borderLeft = "4px solid black";
-                    } else {
-                        item.style.borderLeft = "none";
-                    }
-                });
-            }
-    
-            if (settingsIcon) {
-                settingsIcon.style.borderLeft = "none";
-                settingsIcon.style.borderRight = "none";
-            }
-    
-            if (settingsBox) {
-                settingsBox.style.backgroundColor = "#b82f10";
-                settingsBox.style.color = "black";
-            }
-    
-            if (searchBar) {
-                searchBar.style.backgroundColor = "#932810";
-                searchBar.style.color = "black";
-            }
-    
-            if (MainPage) {
-                document.body.style.backgroundImage = "url('../Img/Backgrounds/Main_Dark.jpg')";
-            }
+    const navBar = document.querySelector("ul");
+    const navItems = document.querySelectorAll("ul li");
+    const settingsIcon = document.getElementById("rad");
+    const settingsBox = document.getElementById("popup");
+    const searchBar = document.querySelector('input[type="text"]');
+    const MainPage = window.location.pathname.includes("Main/main.html");
+    const cards = document.querySelectorAll(".card"); // Füge dies hinzu
+
+    if (mode === "light") {
+        document.body.classList.add("light-mode");
+        if (contrastToggle) contrastToggle.checked = true;
+
+        if (navBar) {
+            navBar.style.backgroundColor = "black";
+            navBar.style.color = "white";
+        }
+
+        if (navItems) {
+            navItems.forEach((item, index) => {
+                item.style.borderRight = "4px solid white";
+                if (index === 0) {
+                    item.style.borderLeft = "4px solid white";
+                } else {
+                    item.style.borderLeft = "none";
+                }
+            });
+        }
+
+        if (settingsIcon) {
+            settingsIcon.style.borderLeft = "none";
+            settingsIcon.style.borderRight = "none";
+        }
+
+        if (settingsBox) {
+            settingsBox.style.backgroundColor = "white";
+        }
+
+        if (searchBar) {
+            searchBar.style.backgroundColor = "white";
+        }
+
+        if (MainPage) {
+            document.body.style.backgroundImage = "url('../Img/Backgrounds/Main_Light.png')";
+        }
+
+        // Boxen weiß im Light-Mode
+        if (cards) {
+            cards.forEach(card => {
+                card.style.backgroundColor = "white";
+                card.style.color = "black";
+            });
+        }
+
+    } else {
+        document.body.classList.remove("light-mode");
+        if (contrastToggle) contrastToggle.checked = false;
+
+        if (navBar) {
+            navBar.style.backgroundColor = "#b82f10";
+            navBar.style.color = "black";
+        }
+
+        if (navItems) {
+            navItems.forEach((item, index) => {
+                item.style.borderRight = "4px solid black";
+                if (index === 0) {
+                    item.style.borderLeft = "4px solid black";
+                } else {
+                    item.style.borderLeft = "none";
+                }
+            });
+        }
+
+        if (settingsIcon) {
+            settingsIcon.style.borderLeft = "none";
+            settingsIcon.style.borderRight = "none";
+        }
+
+        if (settingsBox) {
+            settingsBox.style.backgroundColor = "#b82f10";
+            settingsBox.style.color = "black";
+        }
+
+        if (searchBar) {
+            searchBar.style.backgroundColor = "#932810";
+            searchBar.style.color = "black";
+        }
+
+        if (MainPage) {
+            document.body.style.backgroundImage = "url('../Img/Backgrounds/Main_Dark.jpg')";
+        }
+
+        // Boxen orange im Dark-Mode
+        if (cards) {
+            cards.forEach(card => {
+                card.style.backgroundColor = "#ff6600";
+                card.style.color = "black";
+            });
         }
     }
+}
 
     langButtons.forEach(button => {
         button.addEventListener("click", function () {

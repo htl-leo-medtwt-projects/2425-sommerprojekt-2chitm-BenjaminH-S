@@ -645,3 +645,396 @@ body.high-contrast .technique-result p {
     color: white;
     font-weight: bold;
 }
+
+.draggable-quote, .drag-btn {
+  cursor: grab;
+  background: #fff;
+  color: #932810;
+  padding: 1rem 2.2rem;
+  margin: 0.7rem 1.2rem 0.7rem 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(147,40,16,0.13);
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  font-size: 1.25rem;
+  border: 2.5px solid #932810;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.drag-btn:active, .draggable-quote:active {
+  cursor: grabbing;
+  background: #b82f10;
+  color: #fff;
+  border-color: #000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.22);
+}
+
+#drop-zone, .drop-box {
+  background: #fff7f3;
+  color: #932810;
+  border: 3px dashed #932810;
+  border-radius: 18px;
+  min-height: 80px;
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  margin: 1.5rem auto 2rem auto;
+  width: 90%;
+  max-width: 520px;
+  text-align: center;
+  font-size: 1.18rem;
+  font-family: 'Jost', sans-serif;
+  font-weight: bold;
+  transition: background 0.18s, border-color 0.18s;
+  box-shadow: 0 4px 18px rgba(147,40,16,0.10);
+}
+
+#drop-zone.dragover, .drop-box.dragover {
+  background: #ffe5e0;
+  border-color: #b82f10;
+}
+
+#drag-options {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+
+.drag-btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #eee;
+  color: #888;
+  border-color: #ccc;
+}
+
+/* --- Responsive Drag & Drop Quiz-Design für höchste Detailtreue --- */
+@media (max-width: 900px) {
+  .slider-container {
+    width: 100vw;
+    min-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .slide {
+    padding: 2vw 1vw 1vw 1vw;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .slider-container {
+    width: 100vw;
+    min-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .slide {
+    padding: 2vw 1vw 1vw 1vw;
+    font-size: 0.97rem;
+  }
+  #drop-zone, .drop-box {
+    width: 96vw;
+    min-width: unset;
+    max-width: 98vw;
+    font-size: 0.97rem;
+    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    margin: 1rem auto 1.2rem auto;
+    border-radius: 12px;
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+  .draggable-quote, .drag-btn {
+    font-size: 0.97rem;
+    padding: 0.6rem 0.7rem;
+    margin: 0.4rem 0.3rem 0.4rem 0;
+    border-radius: 9px;
+    min-width: 90px;
+    max-width: 90vw;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+  #drag-options {
+    gap: 8px;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .quiz-option, .quote-option, button {
+    font-size: 0.97rem;
+    padding: 0.7rem 0.7rem;
+    margin: 0.4rem auto;
+    min-width: 100px;
+    max-width: 90vw;
+    border-radius: 9px;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+  .slider-btn {
+    font-size: 1.3rem;
+    padding: 6px;
+    top: unset;
+    bottom: 10px;
+    transform: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider-btn.left {
+    left: 10px;
+    right: unset;
+  }
+  .slider-btn.right {
+    right: 10px;
+    left: unset;
+  }
+  input[type="text"] {
+    width: 90vw;
+    left: 5vw;
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  #drop-zone, .drop-box {
+    font-size: 0.91rem;
+    padding: 0.4rem 0.1rem 0.4rem 0.1rem;
+    border-radius: 7px;
+  }
+  .draggable-quote, .drag-btn {
+    font-size: 0.91rem;
+    padding: 0.3rem 0.3rem;
+    border-radius: 6px;
+    min-width: 60px;
+  }
+  .quiz-option, .quote-option, button {
+    font-size: 0.91rem;
+    padding: 0.4rem 0.3rem;
+    border-radius: 6px;
+    min-width: 60px;
+  }
+  input[type="text"] {
+    width: 92vw;
+    left: 4vw;
+    font-size: 0.97rem;
+    padding: 7px 7px;
+  }
+}
+
+/* --- Touch-Optimierung --- */
+@media (pointer: coarse) {
+  .draggable-quote, .drag-btn {
+    min-width: 100px;
+    font-size: 1.03rem;
+    padding: 0.8rem 1rem;
+    touch-action: manipulation;
+  }
+  #drop-zone, .drop-box {
+    min-height: 50px;
+    font-size: 1.03rem;
+    padding: 1rem 0.4rem;
+  }
+}
+
+/* --- Allgemeine Verbesserungen für Drag & Drop Quiz --- */
+#drop-zone, .drop-box {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.draggable-quote, .drag-btn {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  white-space: normal;
+  text-align: center;
+  min-width: 100px;
+  max-width: 95vw;
+}
+
+#drag-options {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 1.1rem;
+}
+
+.quiz-option, .quote-option, button {
+  box-sizing: border-box;
+  white-space: normal;
+  text-align: center;
+  min-width: 100px;
+  max-width: 95vw;
+}
+
+#drop-zone:focus, .drop-box:focus {
+  outline: 3px solid #b82f10;
+  outline-offset: 2px;
+}
+
+.drag-btn:focus {
+  outline: 2px solid #b82f10;
+  outline-offset: 1px;
+}
+
+@media (max-width: 900px) {
+  /* Suchleiste */
+  input[type="text"] {
+    position: fixed;
+    top: 4px;
+    left: 1vw;
+    width: 18vw;
+    min-width: 48px;
+    max-width: 70px;
+    font-size: 0.68rem;
+    padding: 2px 5px;
+    border-radius: 3px;
+    height: 16px;
+    z-index: 1002;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+  }
+  /* Zahnrad */
+  #rad {
+    top: 2px !important;
+    right: 1vw !important;
+    transform: none !important;
+    width: 13px !important;
+    height: 13px !important;
+    z-index: 1002;
+  }
+  #rad svg, #rad img {
+    width: 11px !important;
+    height: 11px !important;
+  }
+  /* Menüleiste */
+  ul {
+    height: 18px !important;
+    font-size: 0.62rem !important;
+    min-height: 18px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  li a {
+    padding: 2px 2px;
+    font-size: 0.62rem;
+  }
+  #header {
+    font-size: 0.62rem !important;
+    padding: 0 1px !important;
+  }
+  .slider-container {
+    width: 90vw;
+    min-width: 100px;
+    max-width: 320px;
+    margin: 10px auto 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    padding: 0;
+    min-height: 60px;
+    height: auto;
+    max-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .slide {
+    padding: 0.12rem 0.01rem 0.08rem 0.01rem;
+    font-size: 0.62rem;
+    min-height: 0;
+  }
+  .slide h1,
+  .slide h2,
+  .slide h3,
+  .slide h4,
+  .slide h5 {
+    font-size: 0.95em !important;
+    margin: 0.15em 0 !important;
+  }
+  .slide p,
+  .slide label,
+  .slide span {
+    font-size: 0.65em !important;
+    margin: 0.1em 0 !important;
+  }
+  button, .quiz-option, .quote-option {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    border-radius: 2px;
+    min-width: 20px;
+    max-width: 40vw;
+    margin: 0.04rem auto;
+  }
+  select {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    border-radius: 2px;
+    min-width: 20px;
+    max-width: 40vw;
+  }
+  #drop-zone, .drop-box {
+    width: 30vw;
+    min-width: 40px;
+    max-width: 80px;
+    font-size: 0.62rem;
+    padding: 0.05rem 0.01rem 0.05rem 0.01rem;
+    margin: 0.1rem auto 0.15rem auto;
+    border-radius: 2px;
+  }
+  .draggable-quote, .drag-btn {
+    font-size: 0.6rem;
+    padding: 0.05rem 0.08rem;
+    margin: 0.02rem 0.02rem 0.02rem 0;
+    border-radius: 2px;
+    min-width: 10px;
+    max-width: 40vw;
+  }
+  #drag-options {
+    gap: 1px;
+    margin-bottom: 0.08rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .slider-btn {
+    font-size: 0.5rem;
+    padding: 1px;
+    top: unset;
+    bottom: 1px;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider-btn.left {
+    left: 1px;
+    right: unset;
+  }
+  .slider-btn.right {
+    right: 1px;
+    left: unset;
+  }
+  /* Memory-Grid und Karten */
+  .memory-container {
+    grid-template-columns: repeat(2, 60px);
+    gap: 3px;
+    margin-top: 10px;
+  }
+  .memory-card {
+    width: 30px;
+    height: 30px;
+  }
+}

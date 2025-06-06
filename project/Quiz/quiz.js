@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "language-label": "Sprache",
         "mediales": "Mediales",
         "welt": "Welt",
-        "quiz": "Quiz",
+        "quiz": "FunHub",
         "geschichte": "Geschichte",
         "memory-title": "Memory",
         "memory-sub": "Erkenne die Charaktere!",
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "language-label": "Language",
         "mediales": "Media",
         "welt": "World",
-        "quiz": "Quiz",
+        "quiz": "FunHub",
         "geschichte": "Story",
         "memory-title": "Memory",
         "memory-sub": "Recognize the characters!",
@@ -222,12 +222,12 @@ function startMemoryTimer(limitInSeconds) {
     remaining--;
 
     if (remaining >= 0) {
-      display.textContent = `Dir verbleiben noch: ${remaining} Sekunden!"`;
+      display.textContent = `Dir verbleiben noch: ${remaining} Sekunden!`;
     }
 
     if (remaining <= 0) {
       clearInterval(memoryTimerInterval);
-      display.textContent = "Die Zeit ist abgelaufen Jujuzist!";
+      display.textContent = `Die Zeit ist abgelaufen Jujuzist!`;
     }
   }, 1000);
 }
@@ -264,23 +264,21 @@ function shuffle(arr) {
 function showMemoryResult() {
   const resultWrapper = document.getElementById("memory-result-wrapper");
   const resultDisplay = document.getElementById("memory-result-display");
+  const timerDisplay = document.getElementById("memory-timer-display");
+
+  clearInterval(memoryTimerInterval);
+  if (timerDisplay) timerDisplay.textContent = "";
 
   const mode = document.getElementById("memory-mode-select").value;
   const totalTime = memoryTimeLimits[mode];
 
-  const timeText = document.getElementById("memory-timer-display").textContent;
-  let used = 0;
-
-  if (timeText.includes(":")) {
-    const [min, sec] = timeText.split(":").map(Number);
-    used = totalTime - (min * 60 + sec);
-  }
+  let used = memoryElapsedSeconds;
+  if (used > totalTime) used = totalTime;
 
   const minutes = Math.floor(used / 60);
   const seconds = used % 60;
 
-  resultDisplay.textContent = `Du hast alle Paare in ${minutes}:${seconds < 10 ? '0' + seconds : seconds} Minuten gefunden!`;
-
+  resultDisplay.textContent = `Du hast alle Paare in ${minutes}:${seconds < 10 ? '0' + seconds : seconds} Sekunden gefunden!`;
   resultWrapper.classList.remove("hidden");
 }
 
@@ -966,30 +964,81 @@ function spinWheel() {
     return shuffled.slice(0, count);
   }
   
-  function showQuiz(questions, containerId, isQuote = false) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-    container.classList.remove("hidden");
-  
-    let current = 0;
-    let score = 0;
-    showNext();
-  
-    function showNext() {
-      if (current >= questions.length) {
-        showResults(score, questions.length, container);
-        return;
-      }
-  
-      const q = questions[current];
-      const qElem = document.createElement("div");
-      qElem.classList.add("question");
-  
+
+function showQuiz(questions, containerId, isQuote = false) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  container.classList.remove("hidden");
+
+  let current = 0;
+  let score = 0;
+  showNext();
+
+  function showNext() {
+    if (current >= questions.length) {
+      showResults(score, questions.length, container);
+      return;
+    }
+
+    const q = questions[current];
+    const qElem = document.createElement("div");
+    qElem.classList.add("question");
+
+    if (isQuote) {
       qElem.innerHTML = `
-        <p>${isQuote ? `"${q.quote}"` : q.question}</p>
+        <div id="drop-zone" style="border:2px dashed #b82f10; padding:30px; margin-bottom:20px; min-height:40px;">
+          <p style="font-style:italic;">"${q.quote}"</p>
+          <div style="color:black; font-size:0.9em;">Ziehe die richtige Antwort hierher!</div>
+        </div>
+        <div id="drag-options" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+          ${q.options.map(opt => `<button draggable="true" class="drag-btn" style="cursor:grab;">${opt}</button>`).join("")}
+        </div>
+      `;
+
+      const dropZone = qElem.querySelector("#drop-zone");
+      const dragBtns = qElem.querySelectorAll(".drag-btn");
+
+      dropZone.addEventListener("dragover", e => {
+        e.preventDefault();
+        dropZone.style.background = "#ffe5e0";
+      });
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.style.background = "";
+      });
+
+      dragBtns.forEach(btn => {
+        btn.addEventListener("dragstart", e => {
+          e.dataTransfer.setData("text/plain", btn.textContent);
+          setTimeout(() => btn.style.visibility = "hidden", 0);
+        });
+        btn.addEventListener("dragend", e => {
+          btn.style.visibility = "";
+        });
+      });
+
+      dropZone.addEventListener("drop", e => {
+        e.preventDefault();
+        dropZone.style.background = "";
+        const answer = e.dataTransfer.getData("text/plain");
+        dragBtns.forEach(b => b.disabled = true);
+
+        if (answer === q.answer) {
+          dropZone.innerHTML += `<div style="color:green; font-weight:bold;">✅ Richtig!</div>`;
+          score++;
+        } else {
+          dropZone.innerHTML += `<div style="color:red; font-weight:bold;">❌ Falsch! (${q.answer})</div>`;
+        }
+        setTimeout(() => {
+          current++;
+          showNext();
+        }, 1200);
+      });
+    } else {
+      qElem.innerHTML = `
+        <p>${q.question}</p>
         ${q.options.map(opt => `<button>${opt}</button>`).join("")}
       `;
-  
+
       const buttons = qElem.querySelectorAll("button");
       buttons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -999,7 +1048,7 @@ function spinWheel() {
           } else {
             btn.style.backgroundColor = "lightcoral";
           }
-  
+
           buttons.forEach(b => b.disabled = true);
           setTimeout(() => {
             current++;
@@ -1007,11 +1056,13 @@ function spinWheel() {
           }, 800);
         });
       });
-  
-      container.innerHTML = "";
-      container.appendChild(qElem);
     }
+
+    container.innerHTML = "";
+    container.appendChild(qElem);
   }
+}
+
   function showResults(score, total, container) {
     container.innerHTML = `
       <p>✅ ${score} von ${total} richtig!</p>
@@ -1047,14 +1098,17 @@ let currentIndex = 0;
     const searchInput = document.querySelector('input[type="text"]');
     const suggestionsBox = document.getElementById("suggestions");
 
-    const pages = [
-        { label: "Mediales", url: "../Media/media.html" },
+        const pages = [
+        { label: "Main", url: "../Main/main.html" },
+        { label: "Jujutsu Kognien", url: "../Main/main.html" },
         { label: "Welt", url: "../World/world.html" },
-        { label: "FunHub", url: "../Quiz/quiz.html" },
         { label: "Geschichte", url: "../Story/story.html" },
-        { label: "Aoi Todo", url: "../World/world.html#aoi" },
-        { label: "Aoi Todo/Geschichte", url: "../Story/story.html#aoi" }
+        { label: "Media", url: "../Media/media.html" },
+        { label: "Mediales", url: "../Media/media.html" },
+        { label: "World", url: "../World/world.html" },
+        { label: "Story", url: "../Story/story.html" }
     ];
+
 
     searchInput.addEventListener("input", function () {
         const query = searchInput.value.toLowerCase().trim();

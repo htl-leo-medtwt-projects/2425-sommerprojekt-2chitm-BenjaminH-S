@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Sprache",
                 "mediales": "Mediales",
                 "welt": "Welt",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Geschichte",
                 "clans": "Clans",
                 "curses": "Flüche",
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Language",
                 "mediales": "Media",
                 "welt": "World",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Story",
                 "clans": "Clans",
                 "curses": "Curses",
@@ -854,13 +854,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector('input[type="text"]');
     const suggestionsBox = document.getElementById("suggestions");
 
-    const pages = [
-        { label: "Mediales", url: "../Media/media.html" },
+        const pages = [
+        { label: "Main", url: "../Main/main.html" },
+        { label: "Jujutsu Kognien", url: "../Main/main.html" },
         { label: "Welt", url: "../World/world.html" },
-        { label: "FunHub", url: "../Quiz/quiz.html" },
         { label: "Geschichte", url: "../Story/story.html" },
-        { label: "Aoi Todo", url: "../World/world.html#aoi" },
-        { label: "Aoi Todo/Geschichte", url: "../Story/story.html#aoi" }
+        { label: "Media", url: "../Media/media.html" },
+        { label: "Mediales", url: "../Media/media.html" },
+        { label: "World", url: "../World/world.html" },
+        { label: "Story", url: "../Story/story.html" }
     ];
 
     searchInput.addEventListener("input", function () {

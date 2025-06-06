@@ -427,3 +427,34 @@ input[type="text"]:focus {
     font-weight: bold;
 }
 
+@media (max-width: 900px) {
+    input[type="text"] {
+        width: 70px;
+        font-size: 9px;
+        padding: 3px 5px;
+        top: 9px;
+        left: 10px;
+    }
+    #suggestions {
+        top: 20px;
+        left: 4px;
+        width: 80px;
+        font-size: 10px;
+    }
+
+    #wheel {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    #rad {
+        top: 15px !important;
+        right: 15px !important;
+    }
+
+    .label {
+        font-size: 2.2vw;
+    }
+    .desc {
+        font-size: 2vw;
+    }
+}

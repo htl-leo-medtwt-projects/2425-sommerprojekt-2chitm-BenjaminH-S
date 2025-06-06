@@ -876,5 +876,101 @@ hr {
     font-weight: bold;
 }
 
+@media (max-width: 900px) {
+    input[type="text"] {
+        width: 70px;
+        font-size: 9px;
+        padding: 3px 5px;
+        top: 9px;
+        left: 10px;
+    }
+
+        #search-bar {
+        width: 70px;
+        font-size: 9px;
+        padding: 3px 5px;
+        top: 9px;
+        left: 10px;
+    }
+    #suggestions {
+        top: 20px;
+        left: 4px;
+        width: 80px;
+        font-size: 10px;
+    }
+
+    #wheel {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    #rad {
+        top: 15px !important;
+        right: 15px !important;
+    }
+
+    #side-menu {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2vw;
+        margin-right: 5vw;
+        left: 0;
+    }
+
+    .menu-item {
+        font-size: 2.5vw;
+        padding: 4px 10px;
+        min-width: 40px;
+        width: 60px;
+        margin-bottom: 8px;
+    }
+
+    #clan_name, #curses_header, #characters_header {
+        font-size: 5vw;
+    }
+
+#six-eyes {
+    width: 14vw;           /* noch schmaler */
+    margin-top: 1vw;       /* weniger Abstand oben */
+    font-size: 1vw;        /* kleinere Schrift */
+    padding: 0.2vw 0;      /* noch engerer Innenabstand */
+    margin-bottom: 0.5vw;  /* weniger Abstand unten */
+}
+
+    #clan-description,
+    #clan_highlight,
+    #six-eyes,
+    #blood_tech,
+    #zenin_tech {
+        font-size: 2.8vw;
+        width: 90vw;
+    }
+
+    .curse-title {
+        font-size: 4vw;
+    }
+
+    .curse-highlight {
+        font-size: 2.5vw;
+    }
+
+    #curse-description {
+        font-size: 2.2vw;
+        padding: 10px 10px;
+        max-width: 95vw;
+    }
+
+    .character-card p {
+        font-size: 3vw;
+    }
+
+    .character-info h3 {
+        font-size: 3vw;
+    }
+
+    .character-info p {
+        font-size: 2vw;
+    }
+}
 
 

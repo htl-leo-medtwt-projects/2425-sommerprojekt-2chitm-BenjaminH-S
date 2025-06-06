@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Sprache",
                 "mediales": "Mediales",
                 "welt": "Welt",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Geschichte",
                 "episodes" : "Episoden",
                 "movie" : "Film"
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "language-label": "Language",
                 "mediales": "Media",
                 "welt": "World",
-                "quiz": "Quiz",
+                "quiz": "FunHub",
                 "geschichte": "Story",
                 "episodes" : "Episodes",
                 "movie" : "Movie"
@@ -235,7 +235,7 @@ const episodeData = {
                 de: "Yuji Itadori trifft auf ein verfluchtes Objekt.",
                 en: "Yuji Itadori encounters a cursed object."
             },
-            video: "https://www.youtube.com/embed/1"
+            video: "https://www.youtube.com/watch?v=LTjH5JdxtOA"
         },
         {
             title: { de: "Für mich selbst", en: "For Myself" },
@@ -626,7 +626,7 @@ const movieData = [
             de: "Die Geschichte von Yuta Okkotsu vor der Hauptserie.",
             en: "The story of Yuta Okkotsu before the main series."
         },
-        video: "https://www.youtube.com/embed/99"
+        video: "https://www.youtube.com/watch?v=V6tZVo6JoPA"
     }
 ];
 
@@ -711,12 +711,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const suggestionsBox = document.getElementById("suggestions");
 
     const pages = [
-        { label: "Mediales", url: "../Media/media.html" },
+        { label: "Main", url: "../Main/main.html" },
+        { label: "Jujutsu Kognien", url: "../Main/main.html" },
         { label: "Welt", url: "../World/world.html" },
         { label: "FunHub", url: "../Quiz/quiz.html" },
         { label: "Geschichte", url: "../Story/story.html" },
-        { label: "Aoi Todo", url: "../World/world.html#aoi" },
-        { label: "Aoi Todo/Geschichte", url: "../Story/story.html#aoi" }
+        { label: "Media", url: "../Media/media.html" },
+        { label: "World", url: "../World/world.html" },
+        { label: "Story", url: "../Story/story.html" }
     ];
 
     searchInput.addEventListener("input", function () {
